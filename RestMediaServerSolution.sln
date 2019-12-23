@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestMediaServer", "RestMediaServer\RestMediaServer.csproj", "{37644A57-7F1F-4033-8089-CC3A364F767C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlDAL", "SqlDAL\SqlDAL.csproj", "{F8E4808D-B8F5-4C1B-A094-141905D80768}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{37644A57-7F1F-4033-8089-CC3A364F767C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37644A57-7F1F-4033-8089-CC3A364F767C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37644A57-7F1F-4033-8089-CC3A364F767C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8E4808D-B8F5-4C1B-A094-141905D80768}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8E4808D-B8F5-4C1B-A094-141905D80768}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8E4808D-B8F5-4C1B-A094-141905D80768}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8E4808D-B8F5-4C1B-A094-141905D80768}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
