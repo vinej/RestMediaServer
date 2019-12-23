@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SqlDAL.Domain
 {
@@ -6,12 +7,14 @@ namespace SqlDAL.Domain
     {
         public int Id { get; set; }
 
-        public string FirstName { get; set; }
+        public string Email { get; set; }
 
-        public string LastName { get; set; }
-
+        public string Alias { get; set; }
+                
         public DateTime Dob { get; set; }
 
         public bool IsActive { get; set; }
+
+        public List<User> Friends { get; set; }
     }
 }

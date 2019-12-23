@@ -44,6 +44,11 @@
   <ItemGroup>
     <Compile Include="DAL\BaseDal.cs" />
     <Compile Include="DAL\UserDal.cs" />
+    <Compile Include="Domain\Video.cs" />
+    <Compile Include="Domain\Advertiser.cs" />
+    <Compile Include="Domain\Opinion.cs" />
+    <Compile Include="Domain\Topic.cs" />
+    <Compile Include="Domain\Like.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\SqlHelper.cs" />
