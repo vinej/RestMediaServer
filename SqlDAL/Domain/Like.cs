@@ -6,7 +6,7 @@ namespace SqlDAL.Domain
     {
         public int Id { get; set; }
 
-        public User User { get; set; }
+        public Member User { get; set; }
 
         public Opinion Opinion { get; set; }
 

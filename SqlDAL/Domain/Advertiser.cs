@@ -6,7 +6,7 @@ namespace SqlDAL.Domain
     public class Advertiser
     {
         public int Id { get; set; }
-        public User User { get; set; }
+        public Member User { get; set; }
         public string Name { get; set; }
         public string Message { get; set; }
         public string Email { get; set; }

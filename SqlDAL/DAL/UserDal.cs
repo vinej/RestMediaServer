@@ -11,8 +11,8 @@ namespace SqlDAL.DAL
         public int Insert(User user)
         {
             var parameters = new List<SqlParameter>();
-            parameters.Add(sqlHelper.CreateParameter("@FirstName", 50, user.FirstName, DbType.String));
-            parameters.Add(sqlHelper.CreateParameter("@LastName", user.LastName, DbType.String));
+            parameters.Add(sqlHelper.CreateParameter("@Email", 50, user.Email, DbType.String));
+            parameters.Add(sqlHelper.CreateParameter("@Alias", user.Alias, DbType.String));
             parameters.Add(sqlHelper.CreateParameter("@Dob", user.Dob, DbType.DateTime));
             parameters.Add(sqlHelper.CreateParameter("@IsActive", 50, user.IsActive, DbType.Boolean));
 
@@ -26,8 +26,8 @@ namespace SqlDAL.DAL
         {
             var parameters = new List<SqlParameter>();
             parameters.Add(sqlHelper.CreateParameter("@Id", user.Id, DbType.Int32));
-            parameters.Add(sqlHelper.CreateParameter("@FirstName", 50, user.FirstName, DbType.String));
-            parameters.Add(sqlHelper.CreateParameter("@LastName", user.LastName, DbType.String));
+            parameters.Add(sqlHelper.CreateParameter("@Email", 50, user.Email, DbType.String));
+            parameters.Add(sqlHelper.CreateParameter("@Alias", user.Alias, DbType.String));
             parameters.Add(sqlHelper.CreateParameter("@Dob", user.Dob, DbType.DateTime));
 
             sqlHelper.Update("DAH_User_Update", CommandType.StoredProcedure, parameters.ToArray());
@@ -53,8 +53,8 @@ namespace SqlDAL.DAL
                 var user = new User();
                 while (dataReader.Read())
                 {
-                    user.FirstName = dataReader["FirstName"].ToString();
-                    user.LastName = dataReader["LastName"].ToString();
+                    user.Email = dataReader["Email"].ToString();
+                    user.Alias = dataReader["Allias"].ToString();
                 }
 
                 return user;
@@ -81,8 +81,8 @@ namespace SqlDAL.DAL
                 while (dataReader.Read())
                 {
                     var user = new User();
-                    user.FirstName = dataReader["FirstName"].ToString();
-                    user.LastName = dataReader["LastName"].ToString();
+                    user.Email = dataReader["Email"].ToString();
+                    user.Alias = dataReader["Alias"].ToString();
 
                     users.Add(user);
                 }
@@ -108,8 +108,8 @@ namespace SqlDAL.DAL
             foreach (DataRow row in userDataTable.Rows)
             {
                 var user = new User();
-                user.FirstName = row["FirstName"].ToString();
-                user.LastName = row["LastName"].ToString();
+                user.Email = row["Email"].ToString();
+                user.Alias = row["Alias"].ToString();
 
                 users.Add(user);
             }
