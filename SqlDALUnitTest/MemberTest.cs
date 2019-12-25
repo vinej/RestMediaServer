@@ -19,6 +19,7 @@ public class MemberTest
                      new Member { Email = "Pepsi Cola", Alias = "Beverages3", IsActive = false, Dob = DateTime.Now},
                  };
 
+    /*
     private bool IsInCollection(Member member, ICollection<Member> fromDb)
     {
         foreach (var item in fromDb)
@@ -26,6 +27,7 @@ public class MemberTest
                 return true;
         return false;
     }
+    */
 
     private static void CreateInitialData()
     {
@@ -37,6 +39,7 @@ public class MemberTest
     [ClassInitialize]
     public static void TestFixtureSetUp(TestContext context)
     {
+        _ = context;
         _dal = new MemberDal();
         CreateInitialData();
     }
@@ -81,7 +84,7 @@ public class MemberTest
         var member = _dal.GetByAlias("Fruits44");
         _dal.Delete(member.Id);
         var fromDb = _dal.GetById(member.Id);
-        Assert.IsNull(fromDb);
+        Assert.AreEqual(fromDb.Id, 0);
     }
 
     [TestMethod]

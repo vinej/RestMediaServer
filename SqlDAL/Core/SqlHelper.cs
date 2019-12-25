@@ -42,12 +42,14 @@ namespace SqlDAL.Core
 
         public IDataReader GetDataReader(string commandText, CommandType commandType, SqlParameter[] parameters, out SqlConnection connection)
         {
-            IDataReader reader = null;
+            IDataReader reader;
             connection = new SqlConnection(ConnectionString);
             connection.Open();
 
-            var command = new SqlCommand(commandText, connection);
-            command.CommandType = commandType;
+            var command = new SqlCommand(commandText, connection)
+            {
+                CommandType = commandType
+            };
             if (parameters != null)
             {
                 foreach (var parameter in parameters)
@@ -159,7 +161,7 @@ namespace SqlDAL.Core
 
         public void InsertWithTransaction(string commandText, CommandType commandType, SqlParameter[] parameters)
         {
-            SqlTransaction transactionScope = null;
+            SqlTransaction transactionScope;
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
@@ -195,7 +197,7 @@ namespace SqlDAL.Core
 
         public void InsertWithTransaction(string commandText, CommandType commandType, IsolationLevel isolationLevel, SqlParameter[] parameters)
         {
-            SqlTransaction transactionScope = null;
+            SqlTransaction transactionScope;
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
@@ -253,7 +255,7 @@ namespace SqlDAL.Core
 
         public void UpdateWithTransaction(string commandText, CommandType commandType, SqlParameter[] parameters)
         {
-            SqlTransaction transactionScope = null;
+            SqlTransaction transactionScope;
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
@@ -289,7 +291,7 @@ namespace SqlDAL.Core
 
         public void UpdateWithTransaction(string commandText, CommandType commandType, IsolationLevel isolationLevel, SqlParameter[] parameters)
         {
-            SqlTransaction transactionScope = null;
+            SqlTransaction transactionScope;
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();

@@ -72,7 +72,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\BaseDal.cs" />
+    <Compile Include="DAL\FriendDal.cs" />
     <Compile Include="DAL\MemberDal.cs" />
+    <Compile Include="Domain\Friend.cs" />
     <Compile Include="Domain\Video.cs" />
     <Compile Include="Domain\Advertiser.cs" />
     <Compile Include="Domain\Opinion.cs" />
