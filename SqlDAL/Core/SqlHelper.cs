@@ -40,58 +40,6 @@ namespace SqlDAL.Core
             };
         }
 
-        public DataTable GetDataTable(string commandText, CommandType commandType, SqlParameter[] parameters = null)
-        {
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-
-                using (var command = new SqlCommand(commandText, connection))
-                {
-                    command.CommandType = commandType;
-                    if (parameters != null)
-                    {
-                        foreach (var parameter in parameters)
-                        {
-                            command.Parameters.Add(parameter);
-                        }
-                    }
-
-                    var dataset = new DataSet();
-                    var dataAdaper = new SqlDataAdapter(command);
-                    dataAdaper.Fill(dataset);
-
-                    return dataset.Tables[0];
-                }
-            }
-        }
-
-        public DataSet GetDataSet(string commandText, CommandType commandType, SqlParameter[] parameters = null)
-        {
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-
-                using (var command = new SqlCommand(commandText, connection))
-                {
-                    command.CommandType = commandType;
-                    if (parameters != null)
-                    {
-                        foreach (var parameter in parameters)
-                        {
-                            command.Parameters.Add(parameter);
-                        }
-                    }
-
-                    var dataset = new DataSet();
-                    var dataAdaper = new SqlDataAdapter(command);
-                    dataAdaper.Fill(dataset);
-
-                    return dataset;
-                }
-            }
-        }
-
         public IDataReader GetDataReader(string commandText, CommandType commandType, SqlParameter[] parameters, out SqlConnection connection)
         {
             IDataReader reader = null;

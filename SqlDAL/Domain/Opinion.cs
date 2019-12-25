@@ -7,8 +7,8 @@ namespace SqlDAL.Domain
     {
         public int Id { get; set; }
         public Topic Topic { get; set; }
-        public string TheOpinion { get; set; }
-        public Member User { get; set; }
+        public Member Member { get; set; }
+        public string Comment { get; set; }
         public DateTime Dob { get; set; }
     }
 }
