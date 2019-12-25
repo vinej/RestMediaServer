@@ -5,8 +5,7 @@ namespace SqlDAL.Domain
     public class Friend
     {
         public virtual int Id { get; set; }
-
-        public virtual int MemberId { get; set; }
+        public virtual Member Member { get; set; }
 
         public virtual Member TFriend { get; set; }
 

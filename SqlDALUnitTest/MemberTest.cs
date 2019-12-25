@@ -84,7 +84,7 @@ public class MemberTest
         var member = _dal.GetByAlias("Fruits44");
         _dal.Delete(member.Id);
         var fromDb = _dal.GetById(member.Id);
-        Assert.AreEqual(fromDb.Id, 0);
+        Assert.AreEqual(fromDb.Id, -1);
     }
 
     [TestMethod]

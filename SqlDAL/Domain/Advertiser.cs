@@ -10,6 +10,6 @@ namespace SqlDAL.Domain
         public string Email { get; set; }
         public bool IsAccepted { get; set; }
         public DateTime Dob { get; set; }
-        public List<Video> Videos { get; set; }
+        public IEnumerable<Video> Videos { get; set; }
     }
 }

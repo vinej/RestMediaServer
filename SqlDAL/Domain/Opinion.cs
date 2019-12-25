@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SqlDAL.Domain
 {
@@ -10,5 +11,7 @@ namespace SqlDAL.Domain
         public Member Member { get; set; }
         public string Comment { get; set; }
         public DateTime Dob { get; set; }
+        public virtual IEnumerable<Like> Likes { get; set; } = new List<Like>();
+
     }
 }

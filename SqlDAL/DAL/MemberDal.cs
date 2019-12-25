@@ -20,7 +20,10 @@ namespace SqlDAL.DAL
 
         private Member ReadMember(IDataReader dataReader)
         {
-            var member = new Member();
+            var member = new Member
+            {
+                Id = -1
+            };
             var isData = dataReader.Read();
             if (isData)
             {
@@ -163,6 +166,13 @@ namespace SqlDAL.DAL
         {
             var member = GetByAlias(alias);
             member.Friends = new FriendDal().GetByMember(alias);
+            return member;
+        }
+
+        public Member GetMemberWithFriendAndTopic(string alias, int topicId)
+        {
+            var member = GetByAlias(alias);
+            member.Friends = new FriendDal().GetByMemberForTopic(alias, topicId);
             return member;
         }
 
