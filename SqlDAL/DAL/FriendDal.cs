@@ -3,6 +3,7 @@ using System.Data;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using SqlDAL.Domain;
+using System.Threading.Tasks;
 
 namespace SqlDAL.DAL
 {
@@ -101,14 +102,16 @@ namespace SqlDAL.DAL
             }
         }
 
-        public IEnumerable<Friend> GetByMemberAlias(string alias)
+        public async Task<IEnumerable<Friend>> GetByMemberAlias(string alias)
         {
             var parameters = new List<SqlParameter>
             {
                 sqlHelper.CreateParameter("@Alias", alias, DbType.String)
             };
+            connection = new SqlConnection(sqlHelper.ConnectionString);
+            connection.Open();
 
-            var dataReader = sqlHelper.GetDataReader("DAH_Friend_GetByMemberAlias", CommandType.StoredProcedure, parameters.ToArray(), out connection);
+            var dataReader = await sqlHelper.GetDataReaderAsync("DAH_Friend_GetByMemberAlias", CommandType.StoredProcedure, parameters.ToArray(), connection);
             try
             {
                 return ReadManyFriend(dataReader);

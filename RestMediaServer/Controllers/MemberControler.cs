@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using SqlDAL.Domain;
-using SqlDAL.DAL;
+using SqlDAL.Service;
 
 namespace RestMediaServer.Controllers
 {
@@ -14,13 +10,13 @@ namespace RestMediaServer.Controllers
         // GET api/member
         public IEnumerable<Member> Get()
         {
-            return new MemberDal().GetAll();
+            return new MemberService().GetAll();
         }
 
         // GET api/member/id
         public Member Get(string id)
         {
-            return new MemberDal().GetById(int.Parse(id));
+            return new MemberService().GetById(int.Parse(id));
         }
 
         // GET api/member/id/type
@@ -31,11 +27,11 @@ namespace RestMediaServer.Controllers
                 case "alias":
                     // id = alias
                     var list = new List<Member>();
-                    list.Add(new MemberDal().GetByAlias(id));
+                    list.Add(new MemberService().GetByAlias(id));
                     return list;
                 case "isactive":
                     // id = true|false
-                    return new MemberDal().GetByIsActive(bool.Parse(id));
+                    return new MemberService().GetByIsActive(bool.Parse(id));
                 default:
                     return new List<Member>();
 

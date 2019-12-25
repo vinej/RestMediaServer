@@ -1,20 +1,26 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
+using System.Web;
 
 namespace SqlDAL.Core
 {
     public class SqlHelper
     {
-        private string ConnectionString { get; set; }
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+        public string ConnectionString { get; set; }
 
         public SqlHelper(string connectionString)
         {
+            logger.Info($"Opening connection by {HttpContext.Current.User.Identity.Name}");
             ConnectionString = connectionString;
         }
 
         public void CloseConnection(SqlConnection connection)
         {
+            logger.Info("Closing connection");
             connection.Close();
         }
 
@@ -40,6 +46,29 @@ namespace SqlDAL.Core
             };
         }
 
+        public async Task<IDataReader> GetDataReaderAsync(string commandText, CommandType commandType, SqlParameter[] parameters, SqlConnection connection)
+        {
+            IDataReader reader;
+            var command = new SqlCommand(commandText, connection)
+            {
+                CommandType = commandType
+            };
+            logger.Info($"SQL START: {commandText}");
+            if (parameters != null)
+            {
+                foreach (var parameter in parameters)
+                {
+                    logger.Info($"    Parameter: {parameter.ParameterName} : {parameter.Value} : {parameter.SqlDbType.ToString()}");
+                    command.Parameters.Add(parameter);
+                }
+            }
+
+            logger.Info($"SQL END: {commandText}");
+            reader = await command.ExecuteReaderAsync();
+            
+            return reader;
+        }
+
         public IDataReader GetDataReader(string commandText, CommandType commandType, SqlParameter[] parameters, out SqlConnection connection)
         {
             IDataReader reader;
@@ -50,16 +79,19 @@ namespace SqlDAL.Core
             {
                 CommandType = commandType
             };
+            logger.Info($"SQL START: {commandText}");
             if (parameters != null)
             {
                 foreach (var parameter in parameters)
                 {
+                    logger.Info($"    Parameter: {parameter.ParameterName} : {parameter.Value} : {parameter.SqlDbType.ToString()}");
                     command.Parameters.Add(parameter);
                 }
             }
 
+            logger.Info($"SQL END: {commandText}");
             reader = command.ExecuteReader();
-            
+
             return reader;
         }
 
@@ -71,15 +103,18 @@ namespace SqlDAL.Core
 
                 using (var command = new SqlCommand(commandText, connection))
                 {
+                    logger.Info($"SQL START: {commandText}");
                     command.CommandType = commandType;
                     if (parameters != null)
                     {
                         foreach (var parameter in parameters)
                         {
+                            logger.Info($"    Parameter: {parameter.ParameterName} : {parameter.Value} : {parameter.SqlDbType.ToString()}");
                             command.Parameters.Add(parameter);
                         }
                     }
 
+                    logger.Info($"SQL END: {commandText}");
                     command.ExecuteNonQuery();
                 }
             }
@@ -93,15 +128,18 @@ namespace SqlDAL.Core
 
                 using (var command = new SqlCommand(commandText, connection))
                 {
+                    logger.Info($"SQL START: {commandText}");
                     command.CommandType = commandType;
                     if (parameters != null)
                     {
                         foreach (var parameter in parameters)
                         {
+                            logger.Info($"    Parameter: {parameter.ParameterName} : {parameter.Value} : {parameter.SqlDbType.ToString()}");
                             command.Parameters.Add(parameter);
                         }
                     }
 
+                    logger.Info($"SQL END: {commandText}");
                     command.ExecuteNonQuery();
                 }
             }
@@ -116,14 +154,17 @@ namespace SqlDAL.Core
 
                 using (var command = new SqlCommand(commandText, connection))
                 {
+                    logger.Info($"SQL START: {commandText}");
                     command.CommandType = commandType;
                     if (parameters != null)
                     {
                         foreach (var parameter in parameters)
                         {
+                            logger.Info($"    Parameter: {parameter.ParameterName} : {parameter.Value} : {parameter.SqlDbType.ToString()}");
                             command.Parameters.Add(parameter);
                         }
                     }
+                    logger.Info($"SQL END: {commandText}");
 
                     object newId = command.ExecuteScalar();
                     lastId = Convert.ToInt32(newId);
@@ -142,14 +183,17 @@ namespace SqlDAL.Core
 
                 using (var command = new SqlCommand(commandText, connection))
                 {
+                    logger.Info($"SQL START: {commandText}");
                     command.CommandType = commandType;
                     if (parameters != null)
                     {
                         foreach (var parameter in parameters)
                         {
+                            logger.Info($"    Parameter: {parameter.ParameterName} : {parameter.Value} : {parameter.SqlDbType.ToString()}");
                             command.Parameters.Add(parameter);
                         }
                     }
+                    logger.Info($"SQL END: {commandText}");
 
                     object newId = command.ExecuteScalar();
                     lastId = Convert.ToInt64(newId);
@@ -169,14 +213,17 @@ namespace SqlDAL.Core
 
                 using (var command = new SqlCommand(commandText, connection))
                 {
+                    logger.Info($"SQL START: {commandText}");
                     command.CommandType = commandType;
                     if (parameters != null)
                     {
                         foreach (var parameter in parameters)
                         {
+                            logger.Info($"    Parameter: {parameter.ParameterName} : {parameter.Value} : {parameter.SqlDbType.ToString()}");
                             command.Parameters.Add(parameter);
                         }
                     }
+                    logger.Info($"SQL END: {commandText}");
 
                     try
                     {
@@ -205,14 +252,17 @@ namespace SqlDAL.Core
 
                 using (var command = new SqlCommand(commandText, connection))
                 {
+                    logger.Info($"SQL START: {commandText}");
                     command.CommandType = commandType;
                     if (parameters != null)
                     {
                         foreach (var parameter in parameters)
                         {
+                            logger.Info($"    Parameter: {parameter.ParameterName} : {parameter.Value} : {parameter.SqlDbType.ToString()}");
                             command.Parameters.Add(parameter);
                         }
                     }
+                    logger.Info($"SQL END: {commandText}");
 
                     try
                     {
@@ -239,14 +289,17 @@ namespace SqlDAL.Core
 
                 using (var command = new SqlCommand(commandText, connection))
                 {
+                    logger.Info($"SQL START: {commandText}");
                     command.CommandType = commandType;
                     if (parameters != null)
                     {
                         foreach (var parameter in parameters)
                         {
+                            logger.Info($"    Parameter: {parameter.ParameterName} : {parameter.Value} : {parameter.SqlDbType.ToString()}");
                             command.Parameters.Add(parameter);
                         }
                     }
+                    logger.Info($"SQL END: {commandText}");
 
                     command.ExecuteNonQuery();
                 }
@@ -263,14 +316,17 @@ namespace SqlDAL.Core
 
                 using (var command = new SqlCommand(commandText, connection))
                 {
+                    logger.Info($"SQL START: {commandText}");
                     command.CommandType = commandType;
                     if (parameters != null)
                     {
                         foreach (var parameter in parameters)
                         {
+                            logger.Info($"    Parameter: {parameter.ParameterName} : {parameter.Value} : {parameter.SqlDbType.ToString()}");
                             command.Parameters.Add(parameter);
                         }
                     }
+                    logger.Info($"SQL END: {commandText}");
 
                     try
                     {
@@ -299,14 +355,17 @@ namespace SqlDAL.Core
 
                 using (var command = new SqlCommand(commandText, connection))
                 {
+                    logger.Info($"SQL START: {commandText}");
                     command.CommandType = commandType;
                     if (parameters != null)
                     {
                         foreach (var parameter in parameters)
                         {
+                            logger.Info($"    Parameter: {parameter.ParameterName} : {parameter.Value} : {parameter.SqlDbType.ToString()}");
                             command.Parameters.Add(parameter);
                         }
                     }
+                    logger.Info($"SQL END: {commandText}");
 
                     try
                     {
@@ -333,14 +392,17 @@ namespace SqlDAL.Core
 
                 using (var command = new SqlCommand(commandText, connection))
                 {
+                    logger.Info($"SQL START: {commandText}");
                     command.CommandType = commandType;
                     if (parameters != null)
                     {
                         foreach (var parameter in parameters)
                         {
+                            logger.Info($"    Parameter: {parameter.ParameterName} : {parameter.Value} : {parameter.SqlDbType.ToString()}");
                             command.Parameters.Add(parameter);
                         }
                     }
+                    logger.Info($"SQL END: {commandText}");
 
                     return command.ExecuteScalar();
                 }
