@@ -13,7 +13,9 @@ namespace SqlDAL.DAL
             var members = new List<Member>();
             while (dataReader.Read())
             {
-                members.Add(ReadMember(dataReader));
+                var member = new Member();
+                ReadBaseMember(member, dataReader);
+                members.Add(member);
             }
             return members;
         }
@@ -27,13 +29,18 @@ namespace SqlDAL.DAL
             var isData = dataReader.Read();
             if (isData)
             {
-                member.Id = (int)dataReader["Id"];
-                member.Email = dataReader["Email"].ToString();
-                member.Alias = dataReader["Alias"].ToString();
-                member.IsActive = (bool)dataReader["IsActive"];
-                member.Dob = DateTime.Parse(dataReader["Dob"].ToString());
+                ReadBaseMember(member, dataReader);
             }
             return member;
+        }
+
+        private void ReadBaseMember(Member member,IDataReader dataReader)
+        {
+            member.Id = (int)dataReader["Id"];
+            member.Email = dataReader["Email"].ToString();
+            member.Alias = dataReader["Alias"].ToString();
+            member.IsActive = (bool)dataReader["IsActive"];
+            member.Dob = DateTime.Parse(dataReader["Dob"].ToString());
         }
 
         private void CreateParameter(Member member, List<SqlParameter> parameters)
@@ -143,7 +150,7 @@ namespace SqlDAL.DAL
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@IsActriveAlias", isActive, DbType.Boolean)
+                sqlHelper.CreateParameter("@IsActive", isActive, DbType.Boolean)
             };
             var dataReader = sqlHelper.GetDataReader("DAH_Member_GetByIsActive", CommandType.StoredProcedure, parameters.ToArray(), out connection);
 
@@ -160,20 +167,6 @@ namespace SqlDAL.DAL
                 dataReader.Close();
                 CloseConnection();
             }
-        }
-
-        public Member GetMemberWithFriends(string alias)
-        {
-            var member = GetByAlias(alias);
-            member.Friends = new FriendDal().GetByMember(alias);
-            return member;
-        }
-
-        public Member GetMemberWithFriendAndTopic(string alias, int topicId)
-        {
-            var member = GetByAlias(alias);
-            member.Friends = new FriendDal().GetByMemberForTopic(alias, topicId);
-            return member;
         }
 
         public int GetScalarValue()

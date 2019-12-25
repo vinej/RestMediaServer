@@ -11,7 +11,6 @@ namespace SqlDAL.Domain
         public Member Member { get; set; }
         public string Comment { get; set; }
         public DateTime Dob { get; set; }
-        public virtual IEnumerable<Like> Likes { get; set; } = new List<Like>();
-
+        public int LikesCount { get; set; }
     }
 }

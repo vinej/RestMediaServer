@@ -13,35 +13,28 @@ namespace SqlDAL.DAL
             var friends = new List<Friend>();
             while (dataReader.Read())
             {
-                friends.Add(ReadFriend(dataReader));
+                var friend = new Friend();
+                ReadBaseFriend(friend, dataReader);
+                friends.Add(friend);
             }
             return friends;
         }
 
-        private IEnumerable<Friend> ReadManyFullFriend(IDataReader dataReader)
-        {
-            var friends = new List<Friend>();
-            while (dataReader.Read())
-            {
-                friends.Add(ReadFullFriend(dataReader));
-            }
-            return friends;
-        }
         private void ReadBaseFriend(Friend friend, IDataReader dataReader)
         {
             friend.Id = (int)dataReader["Id"];
-            friend.Member = new Member()
-            {
-                Id = (int)dataReader["MemberId"]
-
-            };
+            friend.MemberId = (int)dataReader["MemberId"];
 
             friend.TFriend = new Member()
             {
-                Id = (int)dataReader["FriendId"]
+                Id = (int)dataReader["FriendId"],
+                Email = (string)dataReader["FEmail"],
+                Alias = (string)dataReader["FAlias"],
+                IsActive = (bool)dataReader["FIsActive"],
+                Dob = (DateTime)dataReader["FDob"]
             };
 
-            friend.Dob = DateTime.Parse(dataReader["FDob"].ToString());
+            friend.Dob = (DateTime)dataReader["FDob"];
         }
 
         private Friend ReadFriend(IDataReader dataReader)
@@ -58,26 +51,9 @@ namespace SqlDAL.DAL
             return friend;
         }
 
-        private Friend ReadFullFriend(IDataReader dataReader)
-        {
-            var friend = new Friend();
-            var isData = dataReader.Read();
-            if (isData)
-            {
-                ReadBaseFriend(friend, dataReader);
-                friend.TFriend.Email = dataReader["FEmail"].ToString();
-                friend.TFriend.Alias = dataReader["FAlias"].ToString();
-                friend.TFriend.Dob = DateTime.Parse(dataReader["FDob"].ToString());
-                friend.Member.Email = dataReader["MEmail"].ToString();
-                friend.Member.Alias = dataReader["MAlias"].ToString();
-                friend.Member.Dob = DateTime.Parse(dataReader["MDob"].ToString());
-            }
-            return friend;
-        }
-
         private void CreateParameter(Friend friend, List<SqlParameter> parameters)
         {
-            parameters.Add(sqlHelper.CreateParameter("@MemberId", friend.Member.Id, DbType.Int32));
+            parameters.Add(sqlHelper.CreateParameter("@MemberId", friend.MemberId, DbType.Int32));
             parameters.Add(sqlHelper.CreateParameter("@FriendId", friend.TFriend.Id, DbType.Int32));
             parameters.Add(sqlHelper.CreateParameter("@Dob", friend.Dob, DbType.DateTime));
         }
@@ -90,16 +66,6 @@ namespace SqlDAL.DAL
             sqlHelper.Insert("DAH_Friend_Insert", CommandType.StoredProcedure, parameters.ToArray(), out int lastId);
             friend.Id = lastId;
             return lastId;
-        }
-
-        public void Update(Friend friend)
-        {
-            var parameters = new List<SqlParameter>
-            {
-                sqlHelper.CreateParameter("@Id", friend.Id, DbType.Int32)
-            };
-            CreateParameter(friend, parameters);
-            sqlHelper.Update("DAH_Friend_Update", CommandType.StoredProcedure, parameters.ToArray());
         }
 
         public void Delete(int id)
@@ -135,17 +101,17 @@ namespace SqlDAL.DAL
             }
         }
 
-        public IEnumerable<Friend> GetByMember(string alias)
+        public IEnumerable<Friend> GetByMemberAlias(string alias)
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@MemberId", alias, DbType.Int32)
+                sqlHelper.CreateParameter("@Alias", alias, DbType.String)
             };
 
-            var dataReader = sqlHelper.GetDataReader("DAH_Friend_GetByMember", CommandType.StoredProcedure, parameters.ToArray(), out connection);
+            var dataReader = sqlHelper.GetDataReader("DAH_Friend_GetByMemberAlias", CommandType.StoredProcedure, parameters.ToArray(), out connection);
             try
             {
-                return ReadManyFullFriend(dataReader);
+                return ReadManyFriend(dataReader);
             }
             catch (Exception ex)
             {
@@ -158,18 +124,17 @@ namespace SqlDAL.DAL
             }
         }
 
-        public IEnumerable<Friend> GetByMemberForTopic(string alias, int topicId)
+        public IEnumerable<Friend> GetByMemberId(int id)
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@MemberId", alias, DbType.Int32),
-                sqlHelper.CreateParameter("@TopicId", topicId, DbType.Int32)
+                sqlHelper.CreateParameter("@Id", id, DbType.Int32)
             };
 
-            var dataReader = sqlHelper.GetDataReader("DAH_Friend_GetByMemberForTopic", CommandType.StoredProcedure, parameters.ToArray(), out connection);
+            var dataReader = sqlHelper.GetDataReader("DAH_Friend_GetByMemberId", CommandType.StoredProcedure, parameters.ToArray(), out connection);
             try
             {
-                return ReadManyFullFriend(dataReader);
+                return ReadManyFriend(dataReader);
             }
             catch (Exception ex)
             {

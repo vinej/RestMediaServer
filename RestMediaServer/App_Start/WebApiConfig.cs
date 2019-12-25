@@ -16,6 +16,9 @@ namespace RestMediaServer
                 routeTemplate: "api/{controller}/{id}/{type}",
                 defaults: new { id = RouteParameter.Optional, type = RouteParameter.Optional }
             );
+
+            config.Formatters.Remove(GlobalConfiguration.Configuration.Formatters.XmlFormatter);
+            config.Formatters.Add(GlobalConfiguration.Configuration.Formatters.JsonFormatter);
         }
     }
 }

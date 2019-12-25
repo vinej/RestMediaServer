@@ -285,6 +285,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\FriendsControler.cs" />
+    <Compile Include="Controllers\MemberControler.cs" />
     <Compile Include="Controllers\VideoController.cs" />
     <Compile Include="Controllers\ImgController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -377,6 +379,12 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SqlDAL\SqlDAL.csproj">
+      <Project>{f8e4808d-b8f5-4c1b-a094-141905d80768}</Project>
+      <Name>SqlDAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

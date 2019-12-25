@@ -10,17 +10,15 @@ namespace SqlDAL.DAL
     {
         private Video ReadVideo(IDataReader dataReader)
         {
-            var video = new Video();
-            var isData = dataReader.Read();
-            if (isData)
+            var video = new Video
             {
-                video.Id = (int)dataReader["VId"];
-                video.Url = dataReader["VUrl"].ToString();
-                video.Advertiser = new Advertiser
+                Id = (int)dataReader["VId"],
+                Url = dataReader["VUrl"].ToString(),
+                Advertiser = new Advertiser
                 {
                     Id = (int)dataReader["VAdvertiserId"]
-                };
-            }
+                }
+            };
             return video;
         }
 
@@ -231,9 +229,34 @@ namespace SqlDAL.DAL
 
         public Advertiser GetByIdWithVideo(int id)
         {
-            Advertiser advertiser = GetById(id);
-            advertiser.Videos = new VideoDal().GetAllByAdvertiser(advertiser.Id);
-            return advertiser;
+            var parameters = new List<SqlParameter>
+            {
+                sqlHelper.CreateParameter("@Id", id, DbType.Int32)
+            };
+
+            var dataReader = sqlHelper.GetDataReader("DAH_Advertiser_GetByIdWithVideo", CommandType.StoredProcedure, parameters.ToArray(), out connection);
+
+            try
+            {
+                var advertisers = ReadManyFullAdvertiserWithVideo(dataReader);
+                if (((List<Advertiser>)advertisers).Count == 0)
+                {
+                    return new Advertiser() { Id = -1 };
+                }
+                else
+                {
+                    return ((List<Advertiser>)advertisers)[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                dataReader.Close();
+                CloseConnection();
+            }
         }
     }
 }
