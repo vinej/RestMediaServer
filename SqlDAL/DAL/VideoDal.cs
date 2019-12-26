@@ -72,10 +72,10 @@ namespace SqlDAL.DAL
 
         private void ReadBaseVideo(Video video,IDataReader dataReader)
         {
-            video.Id = (int)dataReader["Id"];
+            video.Id = (long)dataReader["Id"];
             video.Advertiser = new Advertiser
             {
-                Id = (int)dataReader["AdvertiseId"]
+                Id = (long)dataReader["AdvertiseId"]
             };
             video.Url = dataReader["Url"].ToString();
             video.Dob = DateTime.Parse(dataReader["Dob"].ToString());

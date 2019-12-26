@@ -55,14 +55,14 @@ namespace SqlDAL.DAL
         }
         private void ReadBaseOpinion(Opinion opinion,IDataReader dataReader)
         {
-            opinion.Id = (int)dataReader["Id"];
+            opinion.Id = (long)dataReader["Id"];
             opinion.Member = new Member
             {
-                Id = (int)dataReader["MemberId"]
+                Id = (long)dataReader["MemberId"]
             };
             opinion.Topic = new Topic
             {
-                Id = (int)dataReader["TopicId"]
+                Id = (long)dataReader["TopicId"]
             };
             opinion.Comment = dataReader["Comment"].ToString();
             opinion.Dob = DateTime.Parse(dataReader["Dob"].ToString());
@@ -72,11 +72,11 @@ namespace SqlDAL.DAL
         {
             if (opinion.Id != -1)
             {
-                opinion.Member.Id = (int)dataReader["MemberId"];
+                opinion.Member.Id = (long)dataReader["MemberId"];
                 opinion.Member.Alias = dataReader["MName"].ToString();
                 opinion.Member.Email = dataReader["MEmail"].ToString();
                 opinion.Member.Dob = DateTime.Parse(dataReader["MDob"].ToString());
-                opinion.Topic.Id = (int)dataReader["TopicId"];
+                opinion.Topic.Id = (long)dataReader["TopicId"];
                 opinion.Topic.Description = dataReader["TDescription"].ToString();
                 opinion.Topic.Dob = DateTime.Parse(dataReader["TDob"].ToString());
             }

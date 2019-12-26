@@ -23,18 +23,8 @@ namespace SqlDAL.DAL
 
         private void ReadBaseFriend(Friend friend, IDataReader dataReader)
         {
-            friend.Id = (int)dataReader["Id"];
-            friend.MemberId = (int)dataReader["MemberId"];
-
-            friend.TFriend = new Member()
-            {
-                Id = (int)dataReader["FriendId"],
-                Email = (string)dataReader["FEmail"],
-                Alias = (string)dataReader["FAlias"],
-                IsActive = (bool)dataReader["FIsActive"],
-                Dob = (DateTime)dataReader["FDob"]
-            };
-
+            friend.Id = (long)dataReader["Id"];
+            friend.MemberId = (long)dataReader["MemberId"];
             friend.Dob = (DateTime)dataReader["FDob"];
         }
 

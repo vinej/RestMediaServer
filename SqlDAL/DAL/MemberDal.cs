@@ -37,7 +37,7 @@ namespace SqlDAL.DAL
 
         private void ReadBaseMember(Member member,IDataReader dataReader)
         {
-            member.Id = (int)dataReader["Id"];
+            member.Id = (long)dataReader["Id"];
             member.Email = dataReader["Email"].ToString();
             member.Alias = dataReader["Alias"].ToString();
             member.IsActive = (bool)dataReader["IsActive"];
@@ -54,7 +54,6 @@ namespace SqlDAL.DAL
 
         public async Task<long> Insert(Member member)
         {
-
             var parameters = new List<SqlParameter>();
             CreateParameter(member, parameters);
 
@@ -90,7 +89,7 @@ namespace SqlDAL.DAL
             {
                 sqlHelper.CreateParameter("@Id", id, DbType.Int64)
             };
-            return await ReadSingleFunc("DAH_Member_GetById", parameters, ReadMember); ;
+            return await ReadSingleFunc("DAH_Member_GetById", parameters, ReadMember);
         }
 
         public async Task<Member> GetByAlias(string alias)

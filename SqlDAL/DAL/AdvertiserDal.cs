@@ -40,7 +40,7 @@ namespace SqlDAL.DAL
 
         private void ReadBaseAdvertiser(Advertiser advertiser, IDataReader dataReader)
         {
-            advertiser.Id = (int)dataReader["Id"];
+            advertiser.Id = (long)dataReader["Id"];
             advertiser.Email = dataReader["Email"].ToString();
             advertiser.Name = dataReader["Name"].ToString();
             advertiser.IsAccepted = (bool)dataReader["IsAccepted"];

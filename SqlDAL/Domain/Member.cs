@@ -1,18 +1,19 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 
 namespace SqlDAL.Domain
 {
     public class Member
     {
-        public virtual long Id { get; set; }
+        public long Id { get; set; }
 
-        public virtual string Email { get; set; }
+        public string Email { get; set; }
 
-        public virtual string Alias { get; set; }
+        public string Alias { get; set; }
 
-        public virtual DateTime Dob { get; set; }
+        public DateTime Dob { get; set; }
 
-        public virtual bool IsActive { get; set; }
+        public bool IsActive { get; set; }
     }
 }

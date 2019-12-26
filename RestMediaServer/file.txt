@@ -388,3 +388,88 @@
 2019-12-26 13:56:39.8039|INFO|WaitToFinishMemoryCache`1|Cache : SqlDAL.Domain.Member
 2019-12-26 13:56:40.8091|INFO|WaitToFinishMemoryCache`1|Cache : SqlDAL.Domain.Member
 2019-12-26 13:56:41.4922|INFO|WaitToFinishMemoryCache`1|Cache : SqlDAL.Domain.Member
+2019-12-26 15:06:58.5290|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-26 15:06:58.5670|INFO|SqlDAL.Core.SqlHelper|SQL START: DAH_Member_GetById
+2019-12-26 15:06:58.5760|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Id : 1 : BigInt
+2019-12-26 15:06:58.5760|INFO|SqlDAL.Core.SqlHelper|SQL END: DAH_Member_GetById
+2019-12-26 15:06:58.6049|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-26 15:08:36.6160|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-26 15:08:36.6369|INFO|SqlDAL.Core.SqlHelper|SQL START: DAH_Member_GetById
+2019-12-26 15:08:36.6369|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Id : 1 : BigInt
+2019-12-26 15:08:36.6529|INFO|SqlDAL.Core.SqlHelper|SQL END: DAH_Member_GetById
+2019-12-26 15:08:36.6529|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-26 15:11:32.0636|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-26 15:11:32.0636|INFO|SqlDAL.Core.SqlHelper|SQL START: DAH_Member_GetById
+2019-12-26 15:11:32.0776|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Id : 1 : BigInt
+2019-12-26 15:11:32.0776|INFO|SqlDAL.Core.SqlHelper|SQL END: DAH_Member_GetById
+2019-12-26 15:11:32.0926|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-26 15:15:43.4227|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-26 15:15:58.0581|INFO|SqlDAL.Core.SqlHelper|SQL START: DAH_Member_GetById
+2019-12-26 15:16:01.9782|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Id : 1 : BigInt
+2019-12-26 15:16:05.8633|INFO|SqlDAL.Core.SqlHelper|SQL END: DAH_Member_GetById
+2019-12-26 15:20:19.8948|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-26 15:20:19.9538|INFO|SqlDAL.Core.SqlHelper|SQL START: DAH_Member_GetById
+2019-12-26 15:20:19.9538|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Id : 1 : BigInt
+2019-12-26 15:20:19.9678|INFO|SqlDAL.Core.SqlHelper|SQL END: DAH_Member_GetById
+2019-12-26 15:20:19.9848|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-26 15:21:56.5014|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-26 15:21:56.5014|INFO|SqlDAL.Core.SqlHelper|SQL START: DAH_Member_GetById
+2019-12-26 15:21:56.5154|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Id : 1 : BigInt
+2019-12-26 15:21:56.5154|INFO|SqlDAL.Core.SqlHelper|SQL END: DAH_Member_GetById
+2019-12-26 15:21:56.5294|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-26 15:21:58.1892|INFO|WaitToFinishMemoryCache`1|Cache : SqlDAL.Domain.Member
+2019-12-26 15:25:22.1153|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-26 15:25:22.1233|INFO|SqlDAL.Core.SqlHelper|SQL START: DAH_Member_GetById
+2019-12-26 15:25:22.1233|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Id : 1 : BigInt
+2019-12-26 15:25:22.1453|INFO|SqlDAL.Core.SqlHelper|SQL END: DAH_Member_GetById
+2019-12-26 15:25:22.1543|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-26 16:22:27.6929|INFO|SqlDAL.Core.SqlHelper|SQL START: DAH_Member_Insert
+2019-12-26 16:22:27.7228|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Email :  : NVarChar
+2019-12-26 16:22:27.7308|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Alias :  : NVarChar
+2019-12-26 16:22:27.7308|INFO|SqlDAL.Core.SqlHelper|    Parameter: @IsActive : False : Bit
+2019-12-26 16:22:27.7308|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Dob : 1/1/0001 12:00:00 AM : DateTime
+2019-12-26 16:22:27.7498|INFO|SqlDAL.Core.SqlHelper|SQL END: DAH_Member_Insert
+2019-12-26 16:24:59.9518|INFO|SqlDAL.Core.SqlHelper|SQL START: DAH_Member_Insert
+2019-12-26 16:25:07.9083|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Email :  : NVarChar
+2019-12-26 16:25:07.9182|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Alias :  : NVarChar
+2019-12-26 16:25:07.9352|INFO|SqlDAL.Core.SqlHelper|    Parameter: @IsActive : False : Bit
+2019-12-26 16:25:07.9352|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Dob : 1/1/0001 12:00:00 AM : DateTime
+2019-12-26 16:25:07.9582|INFO|SqlDAL.Core.SqlHelper|SQL END: DAH_Member_Insert
+2019-12-26 16:26:47.1324|INFO|SqlDAL.Core.SqlHelper|SQL START: DAH_Member_Insert
+2019-12-26 16:26:47.1604|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Email :  : NVarChar
+2019-12-26 16:26:47.1684|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Alias :  : NVarChar
+2019-12-26 16:26:47.1684|INFO|SqlDAL.Core.SqlHelper|    Parameter: @IsActive : False : Bit
+2019-12-26 16:26:47.1684|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Dob : 1/1/0001 12:00:00 AM : DateTime
+2019-12-26 16:26:47.1884|INFO|SqlDAL.Core.SqlHelper|SQL END: DAH_Member_Insert
+2019-12-26 16:42:31.8677|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-26 16:42:32.0185|INFO|SqlDAL.Core.SqlHelper|SQL START: DAH_Member_GetById
+2019-12-26 16:42:32.0185|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Id : 1 : BigInt
+2019-12-26 16:42:32.0355|INFO|SqlDAL.Core.SqlHelper|SQL END: DAH_Member_GetById
+2019-12-26 16:42:32.0605|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-26 16:44:04.1784|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-26 16:44:04.1934|INFO|SqlDAL.Core.SqlHelper|SQL START: DAH_Member_GetById
+2019-12-26 16:44:04.2054|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Id : 1 : BigInt
+2019-12-26 16:44:04.2054|INFO|SqlDAL.Core.SqlHelper|SQL END: DAH_Member_GetById
+2019-12-26 16:44:04.2253|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-26 16:45:08.3728|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-26 16:45:08.4367|INFO|SqlDAL.Core.SqlHelper|SQL START: DAH_Member_GetById
+2019-12-26 16:45:08.4367|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Id : 1 : BigInt
+2019-12-26 16:45:08.4517|INFO|SqlDAL.Core.SqlHelper|SQL END: DAH_Member_GetById
+2019-12-26 16:45:08.4707|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-26 16:45:48.0132|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-26 16:45:48.0482|INFO|SqlDAL.Core.SqlHelper|SQL START: DAH_Member_GetById
+2019-12-26 16:45:48.0482|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Id : 1 : BigInt
+2019-12-26 16:45:48.0612|INFO|SqlDAL.Core.SqlHelper|SQL END: DAH_Member_GetById
+2019-12-26 16:45:48.0781|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-26 16:46:40.5810|INFO|SqlDAL.Core.SqlHelper|SQL START: DAH_Member_Insert
+2019-12-26 16:46:40.5810|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Email : jyyvinet@hotmail.ca : NVarChar
+2019-12-26 16:46:40.5959|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Alias : vinej : NVarChar
+2019-12-26 16:46:40.5959|INFO|SqlDAL.Core.SqlHelper|    Parameter: @IsActive : True : Bit
+2019-12-26 16:46:40.6099|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Dob : 12/12/2012 12:00:00 AM : DateTime
+2019-12-26 16:46:40.6099|INFO|SqlDAL.Core.SqlHelper|SQL END: DAH_Member_Insert
+2019-12-26 16:47:30.7508|INFO|SqlDAL.Core.SqlHelper|SQL START: DAH_Member_Insert
+2019-12-26 16:47:30.7508|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Email : jyyvinet@hotmail.ca2 : NVarChar
+2019-12-26 16:47:30.7638|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Alias : vinej2 : NVarChar
+2019-12-26 16:47:30.7638|INFO|SqlDAL.Core.SqlHelper|    Parameter: @IsActive : True : Bit
+2019-12-26 16:47:30.7788|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Dob : 12/12/2012 12:00:00 AM : DateTime
+2019-12-26 16:47:30.7788|INFO|SqlDAL.Core.SqlHelper|SQL END: DAH_Member_Insert

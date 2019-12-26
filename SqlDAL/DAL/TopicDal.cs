@@ -39,7 +39,7 @@ namespace SqlDAL.DAL
 
         private void ReadBaseTopic(Topic topic,IDataReader dataReader)
         {
-            topic.Id = (int)dataReader["Id"];
+            topic.Id = (long)dataReader["Id"];
             topic.Description = dataReader["Description"].ToString();
             topic.Dob = DateTime.Parse(dataReader["Dob"].ToString());
         }

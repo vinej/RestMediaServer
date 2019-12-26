@@ -69,7 +69,7 @@ namespace SqlDAL.Core
             {
                 await connection.OpenAsync();
                 using (var transactionScope = connection.BeginTransaction(isolationLevel))
-                using (var command = new SqlCommand(commandText, connection))
+                using (var command = new SqlCommand(commandText, connection, transactionScope))
                 {
                     logger.Info($"SQL START: {commandText}");
                     command.CommandType = commandType;

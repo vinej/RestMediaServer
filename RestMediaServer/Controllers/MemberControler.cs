@@ -40,5 +40,24 @@ namespace RestMediaServer.Controllers
 
             }
         }
+
+        public async Task<long> Post([FromBody]Member member)
+        {
+            return await new MemberService().Insert(member);
+           
+        }
+
+        // PUT api/values/5
+        public async Task<long> Put([FromBody]Member member)
+        {
+            return await new MemberService().Update(member);
+        }
+
+        // DELETE api/values/5
+        public async Task<long> Delete(long id)
+        {
+            return await new MemberService().Delete(id);
+        }
+
     }
 }

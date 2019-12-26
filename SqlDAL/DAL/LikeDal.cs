@@ -56,14 +56,14 @@ namespace SqlDAL.DAL
         }
         private void ReadBaseLike(Like Like,IDataReader dataReader)
         {
-            Like.Id = (int)dataReader["Id"];
+            Like.Id = (long)dataReader["Id"];
             Like.Member = new Member
             {
-                Id = (int)dataReader["MemberId"]
+                Id = (long)dataReader["MemberId"]
             };
             Like.Opinion = new Opinion
             {
-                Id = (int)dataReader["OpinionId"]
+                Id = (long)dataReader["OpinionId"]
             };
             Like.Dob = DateTime.Parse(dataReader["Dob"].ToString());
         }
@@ -72,11 +72,11 @@ namespace SqlDAL.DAL
         {
             if (Like.Id != -1)
             {
-                Like.Member.Id = (int)dataReader["MemberId"];
+                Like.Member.Id = (long)dataReader["MemberId"];
                 Like.Member.Alias = dataReader["MName"].ToString();
                 Like.Member.Email = dataReader["MEmail"].ToString();
                 Like.Member.Dob = DateTime.Parse(dataReader["MDob"].ToString());
-                Like.Opinion.Id = (int)dataReader["OpinionId"];
+                Like.Opinion.Id = (long)dataReader["OpinionId"];
                 Like.Opinion.Comment = dataReader["OComment"].ToString();
                 Like.Opinion.Dob = DateTime.Parse(dataReader["ODob"].ToString());
             }
