@@ -49,10 +49,10 @@ namespace SqlDAL.DAL
 
         private void CreateParameter(Advertiser advertiser, List<SqlParameter> parameters)
         {
-            parameters.Add(sqlHelper.CreateParameter("@Email", 255, advertiser.Email, DbType.String));
-            parameters.Add(sqlHelper.CreateParameter("@Name", 255, advertiser.Name, DbType.String));
-            parameters.Add(sqlHelper.CreateParameter("@IsAccepted", advertiser.IsAccepted, DbType.Boolean));
-            parameters.Add(sqlHelper.CreateParameter("@Dob", advertiser.Dob, DbType.DateTime));
+            parameters.Add(CreateParameter("@Email", 255, advertiser.Email, DbType.String));
+            parameters.Add(CreateParameter("@Name", 255, advertiser.Name, DbType.String));
+            parameters.Add(CreateParameter("@IsAccepted", advertiser.IsAccepted, DbType.Boolean));
+            parameters.Add(CreateParameter("@Dob", advertiser.Dob, DbType.DateTime));
         }
 
         public async Task<long> Insert(Advertiser advertiser)
@@ -60,7 +60,7 @@ namespace SqlDAL.DAL
             var parameters = new List<SqlParameter>();
             CreateParameter(advertiser, parameters);
 
-            var lastId = await sqlHelper.InsertAsync("DAH_Advertiser_Insert", CommandType.StoredProcedure, parameters.ToArray());
+            var lastId = await InsertAsync("DAH_Advertiser_Insert", CommandType.StoredProcedure, parameters.ToArray());
             advertiser.Id = lastId;
             return lastId;
         }
@@ -69,27 +69,27 @@ namespace SqlDAL.DAL
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", advertiser.Id, DbType.Int64)
+                CreateParameter("@Id", advertiser.Id, DbType.Int64)
             };
             CreateParameter(advertiser, parameters);
-            return await sqlHelper.UpdateAsync("DAH_Advertiser_Update", CommandType.StoredProcedure, parameters.ToArray());
+            return await UpdateAsync("DAH_Advertiser_Update", CommandType.StoredProcedure, parameters.ToArray());
         }
 
         public async Task<long> Delete(int id)
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", id, DbType.Int64)
+                CreateParameter("@Id", id, DbType.Int64)
             };
 
-            return await sqlHelper.DeleteAsync("DAH_Advertiser_Delete", CommandType.StoredProcedure, parameters.ToArray());
+            return await DeleteAsync("DAH_Advertiser_Delete", CommandType.StoredProcedure, parameters.ToArray());
         }
 
         public async Task<Advertiser> GetById(int id)
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", id, DbType.Int64)
+                CreateParameter("@Id", id, DbType.Int64)
             };
             return await ReadSingleFunc("DAH_Advertiser_GetById", parameters, ReadAdvertiser);
         }
@@ -98,7 +98,7 @@ namespace SqlDAL.DAL
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Email", email, DbType.String)
+                CreateParameter("@Email", email, DbType.String)
             };
             return await ReadSingleFunc("DAH_Advertiser_GetByEmail", parameters, ReadAdvertiser);
         }
@@ -112,7 +112,7 @@ namespace SqlDAL.DAL
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@IsAccepted", isAccepted, DbType.Boolean)
+                CreateParameter("@IsAccepted", isAccepted, DbType.Boolean)
             };
             return await ReadManyFunc("DAH_Advertiser_GetByIsAccepted", parameters, ReadManyAdvertiser);
         }

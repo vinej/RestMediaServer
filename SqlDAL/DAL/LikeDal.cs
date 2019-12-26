@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using SqlDAL.Domain;
 using System.Threading.Tasks;
-using SqlDAL.Core;
 
 namespace SqlDAL.DAL
 {
@@ -84,9 +83,9 @@ namespace SqlDAL.DAL
 
         private void CreateParameter(Like Like, List<SqlParameter> parameters)
         {
-            parameters.Add(sqlHelper.CreateParameter("@MemberId", Like.Member.Id, DbType.Int64));
-            parameters.Add(sqlHelper.CreateParameter("@TopicId", Like.Opinion.Id, DbType.Int64));
-            parameters.Add(sqlHelper.CreateParameter("@Dob", Like.Dob, DbType.DateTime));
+            parameters.Add(CreateParameter("@MemberId", Like.Member.Id, DbType.Int64));
+            parameters.Add(CreateParameter("@TopicId", Like.Opinion.Id, DbType.Int64));
+            parameters.Add(CreateParameter("@Dob", Like.Dob, DbType.DateTime));
         }
 
         public async Task<long> Insert(Like Like)
@@ -94,7 +93,7 @@ namespace SqlDAL.DAL
             var parameters = new List<SqlParameter>();
             CreateParameter(Like, parameters);
 
-            var lastId = await sqlHelper.InsertAsync("DAH_Like_Insert", CommandType.StoredProcedure, parameters.ToArray());
+            var lastId = await InsertAsync("DAH_Like_Insert", CommandType.StoredProcedure, parameters.ToArray());
             Like.Id = lastId;
             return lastId;
         }
@@ -103,27 +102,27 @@ namespace SqlDAL.DAL
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", Like.Id, DbType.Int64)
+                CreateParameter("@Id", Like.Id, DbType.Int64)
             };
             CreateParameter(Like, parameters);
-            return await sqlHelper.UpdateAsync("DAH_Like_Update", CommandType.StoredProcedure, parameters.ToArray());
+            return await UpdateAsync("DAH_Like_Update", CommandType.StoredProcedure, parameters.ToArray());
         }
 
         public async Task<long> Delete(int id)
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", id, DbType.Int64)
+                CreateParameter("@Id", id, DbType.Int64)
             };
 
-            return await sqlHelper.DeleteAsync("DAH_Like_Delete", CommandType.StoredProcedure, parameters.ToArray());
+            return await DeleteAsync("DAH_Like_Delete", CommandType.StoredProcedure, parameters.ToArray());
         }
 
         public async Task<Like> GetById(int id)
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", id, DbType.Int64)
+                CreateParameter("@Id", id, DbType.Int64)
             };
             return await ReadSingleFunc("DAH_Like_GetById", parameters, ReadLike);
         }

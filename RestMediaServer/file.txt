@@ -473,3 +473,143 @@
 2019-12-26 16:47:30.7638|INFO|SqlDAL.Core.SqlHelper|    Parameter: @IsActive : True : Bit
 2019-12-26 16:47:30.7788|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Dob : 12/12/2012 12:00:00 AM : DateTime
 2019-12-26 16:47:30.7788|INFO|SqlDAL.Core.SqlHelper|SQL END: DAH_Member_Insert
+2019-12-26 17:09:10.0694|INFO|SqlDAL.Core.SqlHelper|SQL START: DAH_Member_Insert
+2019-12-26 17:09:10.0973|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Email : jyyvinet@hotmail.ca2 : NVarChar
+2019-12-26 17:09:10.0973|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Alias : vinej2 : NVarChar
+2019-12-26 17:09:10.1123|INFO|SqlDAL.Core.SqlHelper|    Parameter: @IsActive : True : Bit
+2019-12-26 17:09:10.1123|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Dob : 12/12/2012 12:00:00 AM : DateTime
+2019-12-26 17:09:10.1293|INFO|SqlDAL.Core.SqlHelper|SQL END: DAH_Member_Insert
+2019-12-26 17:09:12.0869|INFO|SqlDAL.Core.SqlHelper|SQL START: DAH_Member_Insert
+2019-12-26 17:09:12.0959|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Email : jyyvinet@hotmail.ca2 : NVarChar
+2019-12-26 17:09:12.0959|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Alias : vinej2 : NVarChar
+2019-12-26 17:09:12.1119|INFO|SqlDAL.Core.SqlHelper|    Parameter: @IsActive : True : Bit
+2019-12-26 17:09:12.1119|INFO|SqlDAL.Core.SqlHelper|    Parameter: @Dob : 12/12/2012 12:00:00 AM : DateTime
+2019-12-26 17:09:12.1259|INFO|SqlDAL.Core.SqlHelper|SQL END: DAH_Member_Insert
+2019-12-26 17:42:01.1535|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_Insert
+2019-12-26 17:42:01.1835|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Email : jyyvinet@hotmail.ca2 : NVarChar
+2019-12-26 17:42:01.1905|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Alias : vinej2 : NVarChar
+2019-12-26 17:42:01.1905|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @IsActive : True : Bit
+2019-12-26 17:42:01.2075|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Dob : 12/12/2012 12:00:00 AM : DateTime
+2019-12-26 17:42:01.2075|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_Insert
+2019-12-26 17:42:01.2334|ERROR|SqlDAL.DAL.BaseDal`1|SQL Exception: Violation of UNIQUE KEY constraint 'UQ__Member__70F4A9E006600AD7'. Cannot insert duplicate key in object 'dbo.Member'. The duplicate key value is (vinej2).
+The statement has been terminated.
+2019-12-26 17:43:36.6790|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_Insert
+2019-12-26 17:43:36.7120|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Email : jyyvinet@hotmail.ca2 : NVarChar
+2019-12-26 17:43:36.7210|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Alias : vinej2 : NVarChar
+2019-12-26 17:43:36.7210|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @IsActive : True : Bit
+2019-12-26 17:43:36.7389|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Dob : 12/12/2012 12:00:00 AM : DateTime
+2019-12-26 17:43:36.7389|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_Insert
+2019-12-26 17:43:36.7589|ERROR|SqlDAL.DAL.BaseDal`1|SQL Exception: Violation of UNIQUE KEY constraint 'UQ__Member__70F4A9E006600AD7'. Cannot insert duplicate key in object 'dbo.Member'. The duplicate key value is (vinej2).
+The statement has been terminated.
+2019-12-26 17:43:37.9487|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_Insert
+2019-12-26 17:43:37.9597|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Email : jyyvinet@hotmail.ca2 : NVarChar
+2019-12-26 17:43:37.9597|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Alias : vinej2 : NVarChar
+2019-12-26 17:43:37.9737|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @IsActive : True : Bit
+2019-12-26 17:43:37.9737|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Dob : 12/12/2012 12:00:00 AM : DateTime
+2019-12-26 17:43:37.9887|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_Insert
+2019-12-26 17:43:37.9887|ERROR|SqlDAL.DAL.BaseDal`1|SQL Exception: Violation of UNIQUE KEY constraint 'UQ__Member__70F4A9E006600AD7'. Cannot insert duplicate key in object 'dbo.Member'. The duplicate key value is (vinej2).
+The statement has been terminated.
+2019-12-26 17:43:40.2248|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_Insert
+2019-12-26 17:43:40.2248|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Email : jyyvinet@hotmail.ca2 : NVarChar
+2019-12-26 17:43:40.2458|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Alias : vinej2 : NVarChar
+2019-12-26 17:43:40.2567|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @IsActive : True : Bit
+2019-12-26 17:43:40.2567|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Dob : 12/12/2012 12:00:00 AM : DateTime
+2019-12-26 17:43:40.2717|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_Insert
+2019-12-26 17:43:40.2717|ERROR|SqlDAL.DAL.BaseDal`1|SQL Exception: Violation of UNIQUE KEY constraint 'UQ__Member__70F4A9E006600AD7'. Cannot insert duplicate key in object 'dbo.Member'. The duplicate key value is (vinej2).
+The statement has been terminated.
+2019-12-26 17:47:10.8656|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_Insert
+2019-12-26 17:47:10.9005|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Email : jyyvinet@hotmail.ca2 : NVarChar
+2019-12-26 17:47:10.9125|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Alias : vinej2 : NVarChar
+2019-12-26 17:47:10.9125|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @IsActive : True : Bit
+2019-12-26 17:47:10.9335|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Dob : 12/12/2012 12:00:00 AM : DateTime
+2019-12-26 17:47:10.9425|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_Insert
+2019-12-26 17:47:10.9575|ERROR|SqlDAL.DAL.BaseDal`1|SQL Exception: Violation of UNIQUE KEY constraint 'UQ__Member__70F4A9E006600AD7'. Cannot insert duplicate key in object 'dbo.Member'. The duplicate key value is (vinej2).
+The statement has been terminated.
+2019-12-26 17:47:12.4809|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_Insert
+2019-12-26 17:47:12.5049|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Email : jyyvinet@hotmail.ca2 : NVarChar
+2019-12-26 17:47:12.5229|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Alias : vinej2 : NVarChar
+2019-12-26 17:47:12.5229|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @IsActive : True : Bit
+2019-12-26 17:47:12.5398|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Dob : 12/12/2012 12:00:00 AM : DateTime
+2019-12-26 17:47:12.5498|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_Insert
+2019-12-26 17:47:12.5498|ERROR|SqlDAL.DAL.BaseDal`1|SQL Exception: Violation of UNIQUE KEY constraint 'UQ__Member__70F4A9E006600AD7'. Cannot insert duplicate key in object 'dbo.Member'. The duplicate key value is (vinej2).
+The statement has been terminated.
+2019-12-26 17:47:13.7930|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_Insert
+2019-12-26 17:47:13.7990|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Email : jyyvinet@hotmail.ca2 : NVarChar
+2019-12-26 17:47:13.7990|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Alias : vinej2 : NVarChar
+2019-12-26 17:47:13.8160|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @IsActive : True : Bit
+2019-12-26 17:47:13.8160|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Dob : 12/12/2012 12:00:00 AM : DateTime
+2019-12-26 17:47:13.8300|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_Insert
+2019-12-26 17:47:13.8300|ERROR|SqlDAL.DAL.BaseDal`1|SQL Exception: Violation of UNIQUE KEY constraint 'UQ__Member__70F4A9E006600AD7'. Cannot insert duplicate key in object 'dbo.Member'. The duplicate key value is (vinej2).
+The statement has been terminated.
+2019-12-26 17:59:31.4424|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_Insert
+2019-12-26 17:59:31.4763|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Email : jyyvinet@hotmail.ca2 : NVarChar
+2019-12-26 17:59:31.4853|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Alias : vinej2 : NVarChar
+2019-12-26 17:59:31.4853|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @IsActive : True : Bit
+2019-12-26 17:59:31.5053|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Dob : 12/12/2012 12:00:00 AM : DateTime
+2019-12-26 17:59:31.5053|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_Insert
+2019-12-26 17:59:31.5243|ERROR|SqlDAL.DAL.BaseDal`1|SQL Exception: Violation of UNIQUE KEY constraint 'UQ__Member__70F4A9E006600AD7'. Cannot insert duplicate key in object 'dbo.Member'. The duplicate key value is (vinej2).
+The statement has been terminated.
+2019-12-26 17:59:37.7868|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_Insert
+2019-12-26 17:59:37.7868|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Email : jyyvinet@hotmail.ca2 : NVarChar
+2019-12-26 17:59:37.8018|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Alias : vinej2 : NVarChar
+2019-12-26 17:59:37.8018|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @IsActive : True : Bit
+2019-12-26 17:59:37.8148|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Dob : 12/12/2012 12:00:00 AM : DateTime
+2019-12-26 17:59:37.8148|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_Insert
+2019-12-26 17:59:37.8308|ERROR|SqlDAL.DAL.BaseDal`1|SQL Exception: Violation of UNIQUE KEY constraint 'UQ__Member__70F4A9E006600AD7'. Cannot insert duplicate key in object 'dbo.Member'. The duplicate key value is (vinej2).
+The statement has been terminated.
+2019-12-26 18:01:21.4930|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_Insert
+2019-12-26 18:01:21.5300|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Email : jyyvinet@hotmail.ca2 : NVarChar
+2019-12-26 18:01:21.5380|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Alias : vinej2 : NVarChar
+2019-12-26 18:01:21.5380|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @IsActive : True : Bit
+2019-12-26 18:01:21.5530|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Dob : 12/12/2012 12:00:00 AM : DateTime
+2019-12-26 18:01:21.5530|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_Insert
+2019-12-26 18:01:21.5750|ERROR|SqlDAL.DAL.BaseDal`1|SQL Exception: Violation of UNIQUE KEY constraint 'UQ__Member__70F4A9E006600AD7'. Cannot insert duplicate key in object 'dbo.Member'. The duplicate key value is (vinej2).
+The statement has been terminated.
+2019-12-26 18:04:43.0923|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_Insert
+2019-12-26 18:04:43.1192|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Email : jyyvinet@hotmail.ca2 : NVarChar
+2019-12-26 18:04:43.1272|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Alias : vinej2 : NVarChar
+2019-12-26 18:04:43.1272|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @IsActive : True : Bit
+2019-12-26 18:04:43.1412|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Dob : 12/12/2012 12:00:00 AM : DateTime
+2019-12-26 18:04:43.1412|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_Insert
+2019-12-26 18:04:43.1572|ERROR|SqlDAL.DAL.BaseDal`1|SQL Exception: Violation of UNIQUE KEY constraint 'UQ__Member__70F4A9E006600AD7'. Cannot insert duplicate key in object 'dbo.Member'. The duplicate key value is (vinej2).
+The statement has been terminated.
+2019-12-26 18:06:13.3317|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_Insert
+2019-12-26 18:06:13.3647|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Email : jyyvinet@hotmail.ca2 : NVarChar
+2019-12-26 18:06:13.3647|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Alias : vinej2 : NVarChar
+2019-12-26 18:06:13.3797|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @IsActive : True : Bit
+2019-12-26 18:06:13.3797|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Dob : 12/12/2012 12:00:00 AM : DateTime
+2019-12-26 18:06:13.3957|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_Insert
+2019-12-26 18:06:13.4067|ERROR|SqlDAL.DAL.BaseDal`1|SQL Exception: Violation of UNIQUE KEY constraint 'UQ__Member__70F4A9E006600AD7'. Cannot insert duplicate key in object 'dbo.Member'. The duplicate key value is (vinej2).
+The statement has been terminated.
+2019-12-26 18:10:56.9753|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_Insert
+2019-12-26 18:10:57.0012|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Email : jyyvinet@hotmail.ca2 : NVarChar
+2019-12-26 18:10:57.0012|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Alias : vinej2 : NVarChar
+2019-12-26 18:10:57.0012|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @IsActive : True : Bit
+2019-12-26 18:10:57.0202|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Dob : 12/12/2012 12:00:00 AM : DateTime
+2019-12-26 18:10:57.0202|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_Insert
+2019-12-26 18:10:57.0382|ERROR|SqlDAL.DAL.BaseDal`1|SQL Exception: Violation of UNIQUE KEY constraint 'UQ__Member__70F4A9E006600AD7'. Cannot insert duplicate key in object 'dbo.Member'. The duplicate key value is (vinej2).
+The statement has been terminated.
+2019-12-26 18:10:59.7078|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_Insert
+2019-12-26 18:10:59.7078|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Email : jyyvinet@hotmail.ca2 : NVarChar
+2019-12-26 18:10:59.7288|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Alias : vinej2 : NVarChar
+2019-12-26 18:10:59.7387|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @IsActive : True : Bit
+2019-12-26 18:10:59.7387|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Dob : 12/12/2012 12:00:00 AM : DateTime
+2019-12-26 18:10:59.7537|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_Insert
+2019-12-26 18:10:59.7537|ERROR|SqlDAL.DAL.BaseDal`1|SQL Exception: Violation of UNIQUE KEY constraint 'UQ__Member__70F4A9E006600AD7'. Cannot insert duplicate key in object 'dbo.Member'. The duplicate key value is (vinej2).
+The statement has been terminated.
+2019-12-26 18:14:02.8221|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_Insert
+2019-12-26 18:14:02.8531|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Email : jyyvinet@hotmail.ca2 : NVarChar
+2019-12-26 18:14:02.8621|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Alias : vinej2 : NVarChar
+2019-12-26 18:14:02.8621|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @IsActive : True : Bit
+2019-12-26 18:14:02.8760|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Dob : 12/12/2012 12:00:00 AM : DateTime
+2019-12-26 18:14:02.8760|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_Insert
+2019-12-26 18:14:02.8950|ERROR|SqlDAL.DAL.BaseDal`1|SQL Exception: Violation of UNIQUE KEY constraint 'UQ__Member__70F4A9E006600AD7'. Cannot insert duplicate key in object 'dbo.Member'. The duplicate key value is (vinej2).
+The statement has been terminated.
+2019-12-26 18:17:48.9283|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_Insert
+2019-12-26 18:17:48.9573|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Email : jyyvinet@hotmail.ca2 : NVarChar
+2019-12-26 18:17:48.9573|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Alias : vinej2 : NVarChar
+2019-12-26 18:17:48.9712|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @IsActive : True : Bit
+2019-12-26 18:17:48.9712|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Dob : 12/12/2012 12:00:00 AM : DateTime
+2019-12-26 18:17:48.9712|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_Insert
+2019-12-26 18:17:48.9952|ERROR|SqlDAL.DAL.BaseDal`1|SQL Exception: Violation of UNIQUE KEY constraint 'UQ__Member__70F4A9E006600AD7'. Cannot insert duplicate key in object 'dbo.Member'. The duplicate key value is (vinej2).
+The statement has been terminated.

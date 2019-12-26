@@ -46,10 +46,10 @@ namespace SqlDAL.DAL
 
         private void CreateParameter(Member member, List<SqlParameter> parameters)
         {
-            parameters.Add(sqlHelper.CreateParameter("@Email", 255, member.Email, DbType.String));
-            parameters.Add(sqlHelper.CreateParameter("@Alias", 255, member.Alias, DbType.String));
-            parameters.Add(sqlHelper.CreateParameter("@IsActive", member.IsActive, DbType.Boolean));
-            parameters.Add(sqlHelper.CreateParameter("@Dob", member.Dob, DbType.DateTime));
+            parameters.Add(CreateParameter("@Email", 255, member.Email, DbType.String));
+            parameters.Add(CreateParameter("@Alias", 255, member.Alias, DbType.String));
+            parameters.Add(CreateParameter("@IsActive", member.IsActive, DbType.Boolean));
+            parameters.Add(CreateParameter("@Dob", member.Dob, DbType.DateTime));
         }
 
         public async Task<long> Insert(Member member)
@@ -57,7 +57,7 @@ namespace SqlDAL.DAL
             var parameters = new List<SqlParameter>();
             CreateParameter(member, parameters);
 
-            long lastid = await sqlHelper.InsertAsync("DAH_Member_Insert", CommandType.StoredProcedure, parameters.ToArray());
+            long lastid = await InsertAsync("DAH_Member_Insert", CommandType.StoredProcedure, parameters.ToArray());
             member.Id = lastid;
             return lastid;
         }
@@ -66,28 +66,28 @@ namespace SqlDAL.DAL
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", member.Id, DbType.Int64)
+                CreateParameter("@Id", member.Id, DbType.Int64)
             };
             CreateParameter(member, parameters);
 
-            return await sqlHelper.UpdateAsync("DAH_Member_Update", CommandType.StoredProcedure, parameters.ToArray());
+            return await UpdateAsync("DAH_Member_Update", CommandType.StoredProcedure, parameters.ToArray());
         }
 
         public async Task<long> Delete(long id)
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", id, DbType.Int64)
+                CreateParameter("@Id", id, DbType.Int64)
             };
 
-            return await sqlHelper.DeleteAsync("DAH_Member_Delete", CommandType.StoredProcedure, parameters.ToArray());
+            return await DeleteAsync("DAH_Member_Delete", CommandType.StoredProcedure, parameters.ToArray());
         }
 
         public async Task<Member> GetById(long id)
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", id, DbType.Int64)
+                CreateParameter("@Id", id, DbType.Int64)
             };
             return await ReadSingleFunc("DAH_Member_GetById", parameters, ReadMember);
         }
@@ -96,7 +96,7 @@ namespace SqlDAL.DAL
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Alias", alias, DbType.String)
+                CreateParameter("@Alias", alias, DbType.String)
             };
             return await ReadSingleFunc("DAH_Member_GetByAlias", parameters, ReadMember);
         }
@@ -110,7 +110,7 @@ namespace SqlDAL.DAL
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@IsActive", isActive, DbType.Boolean)
+                CreateParameter("@IsActive", isActive, DbType.Boolean)
             };
             return await ReadManyFunc("DAH_Member_GetByIsActive", null, ReadManyMember);
         }

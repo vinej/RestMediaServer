@@ -46,15 +46,15 @@ namespace SqlDAL.DAL
 
         private void CreateParameter(Topic topic, List<SqlParameter> parameters)
         {
-            parameters.Add(sqlHelper.CreateParameter("@Description", 255, topic.Description, DbType.String));
-            parameters.Add(sqlHelper.CreateParameter("@Dob", topic.Dob, DbType.DateTime));
+            parameters.Add(CreateParameter("@Description", 255, topic.Description, DbType.String));
+            parameters.Add(CreateParameter("@Dob", topic.Dob, DbType.DateTime));
         }
 
         public async Task<long> Insert(Topic topic)
         {
             var parameters = new List<SqlParameter>();
             CreateParameter(topic, parameters);
-            long lastId = await sqlHelper.InsertAsync("DAH_Topic_Insert", CommandType.StoredProcedure, parameters.ToArray());
+            long lastId = await InsertAsync("DAH_Topic_Insert", CommandType.StoredProcedure, parameters.ToArray());
             topic.Id = lastId;
             return lastId;
         }
@@ -63,27 +63,27 @@ namespace SqlDAL.DAL
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", topic.Id, DbType.Int64)
+                CreateParameter("@Id", topic.Id, DbType.Int64)
             };
             CreateParameter(topic, parameters);
-            return await sqlHelper.UpdateAsync("DAH_Topic_Update", CommandType.StoredProcedure, parameters.ToArray());
+            return await UpdateAsync("DAH_Topic_Update", CommandType.StoredProcedure, parameters.ToArray());
         }
 
         public async Task<long> Delete(int id)
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", id, DbType.Int64)
+                CreateParameter("@Id", id, DbType.Int64)
             };
 
-            return await sqlHelper.DeleteAsync("DAH_Topic_Delete", CommandType.StoredProcedure, parameters.ToArray());
+            return await DeleteAsync("DAH_Topic_Delete", CommandType.StoredProcedure, parameters.ToArray());
         }
 
         public async Task<Topic> GetById(int id)
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", id, DbType.Int64)
+                CreateParameter("@Id", id, DbType.Int64)
             };
             return await ReadSingleFunc("DAH_Topic_GetById", parameters, ReadTopic);
         }

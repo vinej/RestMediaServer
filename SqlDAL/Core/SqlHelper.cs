@@ -57,7 +57,14 @@ namespace SqlDAL.Core
             }
 
             logger.Info($"SQL END: {commandText}");
-            reader = await command.ExecuteReaderAsync();
+            try
+            {
+                reader = await command.ExecuteReaderAsync();
+            } catch(Exception ex)
+            {
+                logger.Error($"SQL Exception: {ex.Message}");
+                throw;
+            }
 
             return reader;
         }
@@ -95,9 +102,10 @@ namespace SqlDAL.Core
                             await command.ExecuteNonQueryAsync();
                         }
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
                         transactionScope.Rollback();
+                        logger.Error($"SQL Exception: {ex.Message}");
                         throw;
                     }
                     transactionScope.Commit();

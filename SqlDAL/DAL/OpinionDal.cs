@@ -84,9 +84,9 @@ namespace SqlDAL.DAL
 
         private void CreateParameter(Opinion Opinion, List<SqlParameter> parameters)
         {
-            parameters.Add(sqlHelper.CreateParameter("@MemberId", Opinion.Member.Id, DbType.Int64));
-            parameters.Add(sqlHelper.CreateParameter("@TopicId", Opinion.Topic.Id, DbType.Int64));
-            parameters.Add(sqlHelper.CreateParameter("@Dob", Opinion.Dob, DbType.DateTime));
+            parameters.Add(CreateParameter("@MemberId", Opinion.Member.Id, DbType.Int64));
+            parameters.Add(CreateParameter("@TopicId", Opinion.Topic.Id, DbType.Int64));
+            parameters.Add(CreateParameter("@Dob", Opinion.Dob, DbType.DateTime));
         }
 
         public async Task<long> Insert(Opinion Opinion)
@@ -94,7 +94,7 @@ namespace SqlDAL.DAL
             var parameters = new List<SqlParameter>();
             CreateParameter(Opinion, parameters);
 
-            var lastId = await sqlHelper.InsertAsync("DAH_Opinion_Insert", CommandType.StoredProcedure, parameters.ToArray());
+            var lastId = await InsertAsync("DAH_Opinion_Insert", CommandType.StoredProcedure, parameters.ToArray());
             Opinion.Id = lastId;
             return lastId;
         }
@@ -103,27 +103,27 @@ namespace SqlDAL.DAL
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", Opinion.Id, DbType.Int64)
+                CreateParameter("@Id", Opinion.Id, DbType.Int64)
             };
             CreateParameter(Opinion, parameters);
-            return await sqlHelper.UpdateAsync("DAH_Opinion_Update", CommandType.StoredProcedure, parameters.ToArray());
+            return await UpdateAsync("DAH_Opinion_Update", CommandType.StoredProcedure, parameters.ToArray());
         }
 
         public async Task<long> Delete(int id)
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", id, DbType.Int64)
+                CreateParameter("@Id", id, DbType.Int64)
             };
 
-            return await sqlHelper.DeleteAsync("DAH_Opinion_Delete", CommandType.StoredProcedure, parameters.ToArray());
+            return await DeleteAsync("DAH_Opinion_Delete", CommandType.StoredProcedure, parameters.ToArray());
         }
 
         public async Task<Opinion> GetById(int id)
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", id, DbType.Int64)
+                CreateParameter("@Id", id, DbType.Int64)
             };
             return await ReadSingleFunc("DAH_Opinion_GetById", parameters, ReadOpinion);
         }
@@ -132,7 +132,7 @@ namespace SqlDAL.DAL
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@MemberId", id, DbType.String)
+                CreateParameter("@MemberId", id, DbType.String)
             };
             return await ReadManyFunc("DAH_Opinion_GetByMember", parameters, ReadManyOpinion);
         }
@@ -141,7 +141,7 @@ namespace SqlDAL.DAL
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@MemberId", id, DbType.String)
+                CreateParameter("@MemberId", id, DbType.String)
             };
             return await ReadManyFunc("DAH_Opinion_GetByMember", parameters, ReadManyFullOpinion);
         }
@@ -150,7 +150,7 @@ namespace SqlDAL.DAL
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@TopicId", id, DbType.String)
+                CreateParameter("@TopicId", id, DbType.String)
             };
             return await ReadManyFunc("DAH_Opinion_GetByTopic", parameters, ReadManyOpinion);
         }
@@ -159,7 +159,7 @@ namespace SqlDAL.DAL
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@TopicId", id, DbType.String)
+                CreateParameter("@TopicId", id, DbType.String)
             };
             return await ReadManyFunc("DAH_Opinion_GetByTopic", parameters, ReadManyFullOpinion);
         }

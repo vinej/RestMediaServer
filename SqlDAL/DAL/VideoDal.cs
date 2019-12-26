@@ -93,9 +93,9 @@ namespace SqlDAL.DAL
 
         private void CreateParameter(Video video, List<SqlParameter> parameters)
         {
-            parameters.Add(sqlHelper.CreateParameter("@AdvertiseId", video.Advertiser.Id, DbType.String));
-            parameters.Add(sqlHelper.CreateParameter("@Url", 255, video.Url, DbType.String));
-            parameters.Add(sqlHelper.CreateParameter("@Dob", video.Dob, DbType.DateTime));
+            parameters.Add(CreateParameter("@AdvertiseId", video.Advertiser.Id, DbType.String));
+            parameters.Add(CreateParameter("@Url", 255, video.Url, DbType.String));
+            parameters.Add(CreateParameter("@Dob", video.Dob, DbType.DateTime));
         }
 
         public async Task<long> Insert(Video video)
@@ -103,7 +103,7 @@ namespace SqlDAL.DAL
             var parameters = new List<SqlParameter>();
             CreateParameter(video, parameters);
 
-            var lastId = await sqlHelper.InsertAsync("DAH_Video_Insert", CommandType.StoredProcedure, parameters.ToArray());
+            var lastId = await InsertAsync("DAH_Video_Insert", CommandType.StoredProcedure, parameters.ToArray());
             video.Id = lastId;
             return lastId;
         }
@@ -112,27 +112,27 @@ namespace SqlDAL.DAL
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", video.Id, DbType.Int64)
+                CreateParameter("@Id", video.Id, DbType.Int64)
             };
             CreateParameter(video, parameters);
-            return await sqlHelper.UpdateAsync("DAH_Video_Update", CommandType.StoredProcedure, parameters.ToArray());
+            return await UpdateAsync("DAH_Video_Update", CommandType.StoredProcedure, parameters.ToArray());
         }
 
         public async Task<long> Delete(long id)
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", id, DbType.Int64)
+                CreateParameter("@Id", id, DbType.Int64)
             };
 
-            return await sqlHelper.DeleteAsync("DAH_Video_Delete", CommandType.StoredProcedure, parameters.ToArray());
+            return await DeleteAsync("DAH_Video_Delete", CommandType.StoredProcedure, parameters.ToArray());
         }
 
         public async Task<Video> GetById(int id)
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", id, DbType.Int64)
+                CreateParameter("@Id", id, DbType.Int64)
             };
             return await ReadSingleFunc("DAH_Video_GetById", parameters, ReadVideo);
         }
@@ -141,7 +141,7 @@ namespace SqlDAL.DAL
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", id, DbType.Int64)
+                CreateParameter("@Id", id, DbType.Int64)
             };
             return await ReadSingleFunc("DAH_Video_GetByIdWithAdvertiser", parameters, ReadFullVideo);
         }
@@ -155,7 +155,7 @@ namespace SqlDAL.DAL
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", id, DbType.Int64)
+                CreateParameter("@Id", id, DbType.Int64)
             };
             return await ReadManyFunc("DAH_Video_GetAllByAdvertiser", null, ReadManyVideo);
         }

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using SqlDAL.Domain;
@@ -44,7 +46,6 @@ namespace RestMediaServer.Controllers
         public async Task<long> Post([FromBody]Member member)
         {
             return await new MemberService().Insert(member);
-           
         }
 
         // PUT api/values/5

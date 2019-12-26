@@ -44,9 +44,9 @@ namespace SqlDAL.DAL
 
         private void CreateParameter(Friend friend, List<SqlParameter> parameters)
         {
-            parameters.Add(sqlHelper.CreateParameter("@MemberId", friend.MemberId, DbType.Int64));
-            parameters.Add(sqlHelper.CreateParameter("@FriendId", friend.TFriend.Id, DbType.Int64));
-            parameters.Add(sqlHelper.CreateParameter("@Dob", friend.Dob, DbType.DateTime));
+            parameters.Add(CreateParameter("@MemberId", friend.MemberId, DbType.Int64));
+            parameters.Add(CreateParameter("@FriendId", friend.TFriend.Id, DbType.Int64));
+            parameters.Add(CreateParameter("@Dob", friend.Dob, DbType.DateTime));
         }
 
         public async Task<long> Insert(Friend friend)
@@ -54,7 +54,7 @@ namespace SqlDAL.DAL
             var parameters = new List<SqlParameter>();
             CreateParameter(friend, parameters);
 
-            long lastId = await sqlHelper.InsertAsync("DAH_Friend_Insert", CommandType.StoredProcedure, parameters.ToArray());
+            long lastId = await InsertAsync("DAH_Friend_Insert", CommandType.StoredProcedure, parameters.ToArray());
             friend.Id = lastId;
             return lastId;
         }
@@ -63,17 +63,17 @@ namespace SqlDAL.DAL
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", id, DbType.Int64)
+                CreateParameter("@Id", id, DbType.Int64)
             };
 
-            return await sqlHelper.DeleteAsync("DAH_Friend_Delete", CommandType.StoredProcedure, parameters.ToArray());
+            return await DeleteAsync("DAH_Friend_Delete", CommandType.StoredProcedure, parameters.ToArray());
         }
 
         public async Task<Friend> GetById(long id)
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", id, DbType.Int64)
+                CreateParameter("@Id", id, DbType.Int64)
             };
             return await ReadSingleFunc("DAH_Friend_GetById", parameters, ReadFriend);
         }
@@ -82,7 +82,7 @@ namespace SqlDAL.DAL
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Alias", alias, DbType.String)
+                CreateParameter("@Alias", alias, DbType.String)
             };
             return await ReadManyFunc("DAH_Friend_GetByMemberAlias", parameters, ReadManyFriend);
         }
@@ -91,7 +91,7 @@ namespace SqlDAL.DAL
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", id, DbType.Int64)
+                CreateParameter("@Id", id, DbType.Int64)
             };
             return await ReadManyFunc("DAH_Friend_GetByMemberId", parameters, ReadManyFriend);
         }
