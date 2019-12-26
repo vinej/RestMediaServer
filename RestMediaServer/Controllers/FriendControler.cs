@@ -10,15 +10,15 @@ namespace RestMediaServer.Controllers
     public class FriendController : ApiController
     {
         // GET api/friend
-        public IEnumerable<Friend> Get()
+        public async Task<IEnumerable<Friend>> Get()
         {
-            return new FriendService().GetAll();
+            return await new FriendService().GetAll();
         }
 
         // GET api/friend/id
-        public Friend Get(string id)
+        public async Task<Friend> Get(string id)
         {
-            return new FriendService().GetById(int.Parse(id));
+            return await new FriendService().GetById(long.Parse(id));
         }
 
         // GET api/friend/id/type
@@ -28,11 +28,10 @@ namespace RestMediaServer.Controllers
             {
                 case "alias":
                     // id = alias
-                    var _dal = new FriendService();
-                    return await _dal.GetByMemberAlias(id);
+                    return await new FriendService().GetByMemberAlias(id);
                 case "id":
                     // id = alias
-                    return new FriendService().GetByMemberId(Int32.Parse(id));
+                    return await new FriendService().GetByMemberId(Int64.Parse(id));
                 default:
                     return new List<Friend>();
 

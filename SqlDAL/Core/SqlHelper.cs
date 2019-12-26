@@ -9,19 +9,12 @@ namespace SqlDAL.Core
 {
     public class SqlHelper
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
         public string ConnectionString { get; set; }
 
         public SqlHelper(string connectionString)
         {
-            logger.Info($"Opening connection by {HttpContext.Current.User.Identity.Name}");
             ConnectionString = connectionString;
-        }
-
-        public void CloseConnection(SqlConnection connection)
-        {
-            logger.Info("Closing connection");
-            connection.Close();
         }
 
         public SqlParameter CreateParameter(string name, object value, DbType dbType)
@@ -65,152 +58,17 @@ namespace SqlDAL.Core
 
             logger.Info($"SQL END: {commandText}");
             reader = await command.ExecuteReaderAsync();
-            
-            return reader;
-        }
-
-        public IDataReader GetDataReader(string commandText, CommandType commandType, SqlParameter[] parameters, out SqlConnection connection)
-        {
-            IDataReader reader;
-            connection = new SqlConnection(ConnectionString);
-            connection.Open();
-
-            var command = new SqlCommand(commandText, connection)
-            {
-                CommandType = commandType
-            };
-            logger.Info($"SQL START: {commandText}");
-            if (parameters != null)
-            {
-                foreach (var parameter in parameters)
-                {
-                    logger.Info($"    Parameter: {parameter.ParameterName} : {parameter.Value} : {parameter.SqlDbType.ToString()}");
-                    command.Parameters.Add(parameter);
-                }
-            }
-
-            logger.Info($"SQL END: {commandText}");
-            reader = command.ExecuteReader();
 
             return reader;
         }
 
-        public void Delete(string commandText, CommandType commandType, SqlParameter[] parameters = null)
+        public async Task<long> CommandAsync(bool isInsert, string commandText, CommandType commandType, IsolationLevel isolationLevel, SqlParameter[] parameters)
         {
+            long newid = -1;
             using (var connection = new SqlConnection(ConnectionString))
             {
-                connection.Open();
-
-                using (var command = new SqlCommand(commandText, connection))
-                {
-                    logger.Info($"SQL START: {commandText}");
-                    command.CommandType = commandType;
-                    if (parameters != null)
-                    {
-                        foreach (var parameter in parameters)
-                        {
-                            logger.Info($"    Parameter: {parameter.ParameterName} : {parameter.Value} : {parameter.SqlDbType.ToString()}");
-                            command.Parameters.Add(parameter);
-                        }
-                    }
-
-                    logger.Info($"SQL END: {commandText}");
-                    command.ExecuteNonQuery();
-                }
-            }
-        }
-
-        public void Insert(string commandText, CommandType commandType, SqlParameter[] parameters)
-        {
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-
-                using (var command = new SqlCommand(commandText, connection))
-                {
-                    logger.Info($"SQL START: {commandText}");
-                    command.CommandType = commandType;
-                    if (parameters != null)
-                    {
-                        foreach (var parameter in parameters)
-                        {
-                            logger.Info($"    Parameter: {parameter.ParameterName} : {parameter.Value} : {parameter.SqlDbType.ToString()}");
-                            command.Parameters.Add(parameter);
-                        }
-                    }
-
-                    logger.Info($"SQL END: {commandText}");
-                    command.ExecuteNonQuery();
-                }
-            }
-        }
-
-        public int Insert(string commandText, CommandType commandType, SqlParameter[] parameters, out int lastId)
-        {
-            lastId = 0;
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-
-                using (var command = new SqlCommand(commandText, connection))
-                {
-                    logger.Info($"SQL START: {commandText}");
-                    command.CommandType = commandType;
-                    if (parameters != null)
-                    {
-                        foreach (var parameter in parameters)
-                        {
-                            logger.Info($"    Parameter: {parameter.ParameterName} : {parameter.Value} : {parameter.SqlDbType.ToString()}");
-                            command.Parameters.Add(parameter);
-                        }
-                    }
-                    logger.Info($"SQL END: {commandText}");
-
-                    object newId = command.ExecuteScalar();
-                    lastId = Convert.ToInt32(newId);
-                }
-            }
-
-            return lastId;
-        }
-
-        public long Insert(string commandText, CommandType commandType, SqlParameter[] parameters, out long lastId)
-        {
-            lastId = 0;
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-
-                using (var command = new SqlCommand(commandText, connection))
-                {
-                    logger.Info($"SQL START: {commandText}");
-                    command.CommandType = commandType;
-                    if (parameters != null)
-                    {
-                        foreach (var parameter in parameters)
-                        {
-                            logger.Info($"    Parameter: {parameter.ParameterName} : {parameter.Value} : {parameter.SqlDbType.ToString()}");
-                            command.Parameters.Add(parameter);
-                        }
-                    }
-                    logger.Info($"SQL END: {commandText}");
-
-                    object newId = command.ExecuteScalar();
-                    lastId = Convert.ToInt64(newId);
-                }
-            }
-
-            return lastId;
-        }
-
-        public void InsertWithTransaction(string commandText, CommandType commandType, SqlParameter[] parameters)
-        {
-            SqlTransaction transactionScope;
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-                transactionScope = connection.BeginTransaction();
-
+                await connection.OpenAsync();
+                using (var transactionScope = connection.BeginTransaction(isolationLevel))
                 using (var command = new SqlCommand(commandText, connection))
                 {
                     logger.Info($"SQL START: {commandText}");
@@ -227,186 +85,54 @@ namespace SqlDAL.Core
 
                     try
                     {
-                        command.ExecuteNonQuery();
-                        transactionScope.Commit();
+                        if (isInsert)
+                        {
+                            object temp = await command.ExecuteScalarAsync();
+                            newid = Convert.ToInt64(temp);
+                        }
+                        else
+                        {
+                            await command.ExecuteNonQueryAsync();
+                        }
                     }
                     catch (Exception)
                     {
                         transactionScope.Rollback();
+                        throw;
                     }
-                    finally
-                    {
-                        connection.Close();
-                    }
+                    transactionScope.Commit();
+                    return newid;
                 }
             }
         }
 
-        public void InsertWithTransaction(string commandText, CommandType commandType, IsolationLevel isolationLevel, SqlParameter[] parameters)
+        public async Task<long> DeleteAsync(string commandText, CommandType commandType, SqlParameter[] parameters)
         {
-            SqlTransaction transactionScope;
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-                transactionScope = connection.BeginTransaction(isolationLevel);
-
-                using (var command = new SqlCommand(commandText, connection))
-                {
-                    logger.Info($"SQL START: {commandText}");
-                    command.CommandType = commandType;
-                    if (parameters != null)
-                    {
-                        foreach (var parameter in parameters)
-                        {
-                            logger.Info($"    Parameter: {parameter.ParameterName} : {parameter.Value} : {parameter.SqlDbType.ToString()}");
-                            command.Parameters.Add(parameter);
-                        }
-                    }
-                    logger.Info($"SQL END: {commandText}");
-
-                    try
-                    {
-                        command.ExecuteNonQuery();
-                        transactionScope.Commit();
-                    }
-                    catch (Exception)
-                    {
-                        transactionScope.Rollback();
-                    }
-                    finally
-                    {
-                        connection.Close();
-                    }
-                }
-            }
+            return await CommandAsync(false, commandText, commandType, IsolationLevel.ReadCommitted, parameters);
+        }
+        public async Task<long> DeleteAsync(string commandText, CommandType commandType, IsolationLevel isolationLevel, SqlParameter[] parameters)
+        {
+            return await CommandAsync(false,commandText, commandType, isolationLevel, parameters);
         }
 
-        public void Update(string commandText, CommandType commandType, SqlParameter[] parameters)
+        public async Task<long> InsertAsync(string commandText, CommandType commandType, SqlParameter[] parameters)
         {
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-
-                using (var command = new SqlCommand(commandText, connection))
-                {
-                    logger.Info($"SQL START: {commandText}");
-                    command.CommandType = commandType;
-                    if (parameters != null)
-                    {
-                        foreach (var parameter in parameters)
-                        {
-                            logger.Info($"    Parameter: {parameter.ParameterName} : {parameter.Value} : {parameter.SqlDbType.ToString()}");
-                            command.Parameters.Add(parameter);
-                        }
-                    }
-                    logger.Info($"SQL END: {commandText}");
-
-                    command.ExecuteNonQuery();
-                }
-            }
+            return await CommandAsync(true,commandText, commandType, IsolationLevel.ReadCommitted, parameters);
         }
 
-        public void UpdateWithTransaction(string commandText, CommandType commandType, SqlParameter[] parameters)
+        public async Task<long> InsertAsync(string commandText, CommandType commandType, IsolationLevel isolationLevel, SqlParameter[] parameters)
         {
-            SqlTransaction transactionScope;
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-                transactionScope = connection.BeginTransaction();
-
-                using (var command = new SqlCommand(commandText, connection))
-                {
-                    logger.Info($"SQL START: {commandText}");
-                    command.CommandType = commandType;
-                    if (parameters != null)
-                    {
-                        foreach (var parameter in parameters)
-                        {
-                            logger.Info($"    Parameter: {parameter.ParameterName} : {parameter.Value} : {parameter.SqlDbType.ToString()}");
-                            command.Parameters.Add(parameter);
-                        }
-                    }
-                    logger.Info($"SQL END: {commandText}");
-
-                    try
-                    {
-                        command.ExecuteNonQuery();
-                        transactionScope.Commit();
-                    }
-                    catch (Exception)
-                    {
-                        transactionScope.Rollback();
-                    }
-                    finally
-                    {
-                        connection.Close();
-                    }
-                }
-            }
+            return await CommandAsync(true,commandText, commandType, isolationLevel, parameters);
         }
 
-        public void UpdateWithTransaction(string commandText, CommandType commandType, IsolationLevel isolationLevel, SqlParameter[] parameters)
+        public async Task<long> UpdateAsync(string commandText, CommandType commandType, SqlParameter[] parameters)
         {
-            SqlTransaction transactionScope;
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-                transactionScope = connection.BeginTransaction(isolationLevel);
-
-                using (var command = new SqlCommand(commandText, connection))
-                {
-                    logger.Info($"SQL START: {commandText}");
-                    command.CommandType = commandType;
-                    if (parameters != null)
-                    {
-                        foreach (var parameter in parameters)
-                        {
-                            logger.Info($"    Parameter: {parameter.ParameterName} : {parameter.Value} : {parameter.SqlDbType.ToString()}");
-                            command.Parameters.Add(parameter);
-                        }
-                    }
-                    logger.Info($"SQL END: {commandText}");
-
-                    try
-                    {
-                        command.ExecuteNonQuery();
-                        transactionScope.Commit();
-                    }
-                    catch (Exception)
-                    {
-                        transactionScope.Rollback();
-                    }
-                    finally
-                    {
-                        connection.Close();
-                    }
-                }
-            }
+            return await CommandAsync(false,commandText, commandType, IsolationLevel.ReadCommitted, parameters);
         }
 
-        public object GetScalarValue(string commandText, CommandType commandType, SqlParameter[] parameters= null)
+        public async Task<long> UpdateAsync(string commandText, CommandType commandType, IsolationLevel isolationLevel, SqlParameter[] parameters)
         {
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-
-                using (var command = new SqlCommand(commandText, connection))
-                {
-                    logger.Info($"SQL START: {commandText}");
-                    command.CommandType = commandType;
-                    if (parameters != null)
-                    {
-                        foreach (var parameter in parameters)
-                        {
-                            logger.Info($"    Parameter: {parameter.ParameterName} : {parameter.Value} : {parameter.SqlDbType.ToString()}");
-                            command.Parameters.Add(parameter);
-                        }
-                    }
-                    logger.Info($"SQL END: {commandText}");
-
-                    return command.ExecuteScalar();
-                }
-            }
+            return await CommandAsync(false,commandText, commandType, isolationLevel, parameters);
         }
     }
 }

@@ -3,10 +3,11 @@ using System.Data;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using SqlDAL.Domain;
+using System.Threading.Tasks;
 
 namespace SqlDAL.DAL
 {
-    public class MemberDal : BaseDal
+    public class MemberDal : BaseDal<Member>
     {
         private IEnumerable<Member> ReadManyMember(IDataReader dataReader)
         {
@@ -51,129 +52,68 @@ namespace SqlDAL.DAL
             parameters.Add(sqlHelper.CreateParameter("@Dob", member.Dob, DbType.DateTime));
         }
 
-        public int Insert(Member member)
+        public async Task<long> Insert(Member member)
         {
+
             var parameters = new List<SqlParameter>();
             CreateParameter(member, parameters);
 
-            sqlHelper.Insert("DAH_Member_Insert", CommandType.StoredProcedure, parameters.ToArray(), out int lastId);
-            member.Id = lastId;
-            return lastId;
+            long lastid = await sqlHelper.InsertAsync("DAH_Member_Insert", CommandType.StoredProcedure, parameters.ToArray());
+            member.Id = lastid;
+            return lastid;
         }
 
-        public void Update(Member member)
+        public async Task<long> Update(Member member)
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", member.Id, DbType.Int32)
+                sqlHelper.CreateParameter("@Id", member.Id, DbType.Int64)
             };
             CreateParameter(member, parameters);
-            sqlHelper.Update("DAH_Member_Update", CommandType.StoredProcedure, parameters.ToArray());
+
+            return await sqlHelper.UpdateAsync("DAH_Member_Update", CommandType.StoredProcedure, parameters.ToArray());
         }
 
-        public void Delete(int id)
+        public async Task<long> Delete(long id)
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", id, DbType.Int32)
+                sqlHelper.CreateParameter("@Id", id, DbType.Int64)
             };
 
-            sqlHelper.Delete("DAH_Member_Delete", CommandType.StoredProcedure, parameters.ToArray());
+            return await sqlHelper.DeleteAsync("DAH_Member_Delete", CommandType.StoredProcedure, parameters.ToArray());
         }
 
-        public Member GetById(int id)
+        public async Task<Member> GetById(long id)
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", id, DbType.Int32)
+                sqlHelper.CreateParameter("@Id", id, DbType.Int64)
             };
-
-            var dataReader = sqlHelper.GetDataReader("DAH_Member_GetById", CommandType.StoredProcedure, parameters.ToArray(), out connection);
-            try
-            {
-                return ReadMember(dataReader);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                dataReader.Close();
-                CloseConnection();
-            }
+            return await ReadSingleFunc("DAH_Member_GetById", parameters, ReadMember); ;
         }
 
-        public Member GetByAlias(string alias)
+        public async Task<Member> GetByAlias(string alias)
         {
             var parameters = new List<SqlParameter>
             {
                 sqlHelper.CreateParameter("@Alias", alias, DbType.String)
             };
-
-            var dataReader = sqlHelper.GetDataReader("DAH_Member_GetByAlias", CommandType.StoredProcedure, parameters.ToArray(), out connection);
-            try
-            {
-                return ReadMember(dataReader);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                dataReader.Close();
-                CloseConnection();
-            }
+            return await ReadSingleFunc("DAH_Member_GetByAlias", parameters, ReadMember);
         }
 
-        public IEnumerable<Member> GetAll()
+        public async Task<IEnumerable<Member>> GetAll()
         {
-            var dataReader = sqlHelper.GetDataReader("DAH_Member_GetAll", CommandType.StoredProcedure, null, out connection);
-
-            try
-            {
-                return ReadManyMember(dataReader);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                dataReader.Close();
-                CloseConnection();
-            }
+            return await ReadManyFunc("DAH_Member_GetAll", null, ReadManyMember);
         }
 
-        public IEnumerable<Member> GetByIsActive(bool isActive)
+        public async Task<IEnumerable<Member>> GetByIsActive(bool isActive)
         {
             var parameters = new List<SqlParameter>
             {
                 sqlHelper.CreateParameter("@IsActive", isActive, DbType.Boolean)
             };
-            var dataReader = sqlHelper.GetDataReader("DAH_Member_GetByIsActive", CommandType.StoredProcedure, parameters.ToArray(), out connection);
-
-            try
-            {
-                return ReadManyMember(dataReader);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                dataReader.Close();
-                CloseConnection();
-            }
-        }
-
-        public int GetScalarValue()
-        {
-            object scalarValue = sqlHelper.GetScalarValue("DAH_Member_Scalar", CommandType.StoredProcedure);
-
-            return Convert.ToInt32(scalarValue);
+            return await ReadManyFunc("DAH_Member_GetByIsActive", null, ReadManyMember);
         }
     }
 }

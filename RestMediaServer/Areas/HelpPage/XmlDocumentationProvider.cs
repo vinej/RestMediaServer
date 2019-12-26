@@ -139,7 +139,7 @@ namespace RestMediaServer.Areas.HelpPage
             string name = type.FullName;
             if (type.IsGenericType)
             {
-                // Format the generic type name to something like: Generic{System.Int32,System.String}
+                // Format the generic type name to something like: Generic{System.Int64,System.String}
                 Type genericType = type.GetGenericTypeDefinition();
                 Type[] genericArguments = type.GetGenericArguments();
                 string genericTypeName = genericType.FullName;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SqlDAL.DAL
 {
-    public class FriendDal : BaseDal
+    public class FriendDal : BaseDal<Friend>
     {
         private IEnumerable<Friend> ReadManyFriend(IDataReader dataReader)
         {
@@ -54,52 +54,38 @@ namespace SqlDAL.DAL
 
         private void CreateParameter(Friend friend, List<SqlParameter> parameters)
         {
-            parameters.Add(sqlHelper.CreateParameter("@MemberId", friend.MemberId, DbType.Int32));
-            parameters.Add(sqlHelper.CreateParameter("@FriendId", friend.TFriend.Id, DbType.Int32));
+            parameters.Add(sqlHelper.CreateParameter("@MemberId", friend.MemberId, DbType.Int64));
+            parameters.Add(sqlHelper.CreateParameter("@FriendId", friend.TFriend.Id, DbType.Int64));
             parameters.Add(sqlHelper.CreateParameter("@Dob", friend.Dob, DbType.DateTime));
         }
 
-        public int Insert(Friend friend)
+        public async Task<long> Insert(Friend friend)
         {
             var parameters = new List<SqlParameter>();
             CreateParameter(friend, parameters);
 
-            sqlHelper.Insert("DAH_Friend_Insert", CommandType.StoredProcedure, parameters.ToArray(), out int lastId);
+            long lastId = await sqlHelper.InsertAsync("DAH_Friend_Insert", CommandType.StoredProcedure, parameters.ToArray());
             friend.Id = lastId;
             return lastId;
         }
 
-        public void Delete(int id)
+        public async Task<long> Delete(long id)
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", id, DbType.Int32)
+                sqlHelper.CreateParameter("@Id", id, DbType.Int64)
             };
 
-            sqlHelper.Delete("DAH_Friend_Delete", CommandType.StoredProcedure, parameters.ToArray());
+            return await sqlHelper.DeleteAsync("DAH_Friend_Delete", CommandType.StoredProcedure, parameters.ToArray());
         }
 
-        public Friend GetById(int id)
+        public async Task<Friend> GetById(long id)
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", id, DbType.Int32)
+                sqlHelper.CreateParameter("@Id", id, DbType.Int64)
             };
-
-            var dataReader = sqlHelper.GetDataReader("DAH_Friend_GetById", CommandType.StoredProcedure, parameters.ToArray(), out connection);
-            try
-            {
-                return ReadFriend(dataReader);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                dataReader.Close();
-                CloseConnection();
-            }
+            return await ReadSingleFunc("DAH_Friend_GetById", parameters, ReadFriend);
         }
 
         public async Task<IEnumerable<Friend>> GetByMemberAlias(string alias)
@@ -108,72 +94,21 @@ namespace SqlDAL.DAL
             {
                 sqlHelper.CreateParameter("@Alias", alias, DbType.String)
             };
-            connection = new SqlConnection(sqlHelper.ConnectionString);
-            connection.Open();
-
-            var dataReader = await sqlHelper.GetDataReaderAsync("DAH_Friend_GetByMemberAlias", CommandType.StoredProcedure, parameters.ToArray(), connection);
-            try
-            {
-                return ReadManyFriend(dataReader);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                dataReader.Close();
-                CloseConnection();
-            }
+            return await ReadManyFunc("DAH_Friend_GetByMemberAlias", parameters, ReadManyFriend);
         }
 
-        public IEnumerable<Friend> GetByMemberId(int id)
+        public async Task<IEnumerable<Friend>> GetByMemberId(long id)
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", id, DbType.Int32)
+                sqlHelper.CreateParameter("@Id", id, DbType.Int64)
             };
-
-            var dataReader = sqlHelper.GetDataReader("DAH_Friend_GetByMemberId", CommandType.StoredProcedure, parameters.ToArray(), out connection);
-            try
-            {
-                return ReadManyFriend(dataReader);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                dataReader.Close();
-                CloseConnection();
-            }
+            return await ReadManyFunc("DAH_Friend_GetByMemberId", parameters, ReadManyFriend);
         }
 
-        public IEnumerable<Friend> GetAll()
+        public async Task<IEnumerable<Friend>> GetAll()
         {
-            var dataReader = sqlHelper.GetDataReader("DAH_Friend_GetAll", CommandType.StoredProcedure, null, out connection);
-
-            try
-            {
-                return ReadManyFriend(dataReader);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                dataReader.Close();
-                CloseConnection();
-            }
-        }
-
-        public int GetScalarValue()
-        {
-            object scalarValue = sqlHelper.GetScalarValue("DAH_Friend_Scalar", CommandType.StoredProcedure);
-
-            return Convert.ToInt32(scalarValue);
+            return await ReadManyFunc("DAH_Friend_GetAll", null, ReadManyFriend);
         }
     }
 }

@@ -5,11 +5,10 @@ namespace SqlDAL.Domain
 {
     public class Advertiser
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public bool IsAccepted { get; set; }
         public DateTime Dob { get; set; }
-        public IEnumerable<Video> Videos { get; set; }
     }
 }

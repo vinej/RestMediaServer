@@ -8,15 +8,14 @@ using System.Threading.Tasks;
 
 public class WaitToFinishMemoryCache<TItem>
 {
-    private static Logger logger = LogManager.GetCurrentClassLogger();
-    private Microsoft.Extensions.Caching.Memory.MemoryCache _cache = new Microsoft.Extensions.Caching.Memory.MemoryCache(new MemoryCacheOptions());
-    private ConcurrentDictionary<object, SemaphoreSlim> _locks = new ConcurrentDictionary<object, SemaphoreSlim>();
+    private static readonly Logger logger = LogManager.GetCurrentClassLogger();
+    private readonly Microsoft.Extensions.Caching.Memory.MemoryCache _cache = new Microsoft.Extensions.Caching.Memory.MemoryCache(new MemoryCacheOptions());
+    private readonly ConcurrentDictionary<object, SemaphoreSlim> _locks = new ConcurrentDictionary<object, SemaphoreSlim>();
 
     public async Task<TItem> GetOrCreate(object key, Func<Task<TItem>> createItem)
     {
-        TItem cacheEntry;
         bool isCache = true;
-        if (!_cache.TryGetValue(key, out cacheEntry))// Look for cache key.
+        if (!_cache.TryGetValue(key, out TItem cacheEntry))// Look for cache key.
         {
             SemaphoreSlim mylock = _locks.GetOrAdd(key, k => new SemaphoreSlim(1, 1));
 
@@ -33,7 +32,7 @@ public class WaitToFinishMemoryCache<TItem>
                         //Priority on removing when reaching size limit (memory pressure)
                         .SetPriority(Microsoft.Extensions.Caching.Memory.CacheItemPriority.Low)
                         // Keep in cache for this time, reset time if accessed.
-                        .SetSlidingExpiration(TimeSpan.FromSeconds(2))
+                        .SetSlidingExpiration(TimeSpan.FromSeconds(4))
                         // Remove from cache after this time, regardless of sliding expiration
                         .SetAbsoluteExpiration(TimeSpan.FromSeconds(10));
 

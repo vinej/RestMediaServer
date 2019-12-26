@@ -64,10 +64,10 @@ namespace RestMediaServer.Areas.HelpPage.ModelDescriptions
         private readonly IDictionary<Type, string> DefaultTypeDocumentation = new Dictionary<Type, string>
         {
             { typeof(Int16), "integer" },
-            { typeof(Int32), "integer" },
+            { typeof(Int64), "integer" },
             { typeof(Int64), "integer" },
             { typeof(UInt16), "unsigned integer" },
-            { typeof(UInt32), "unsigned integer" },
+            { typeof(UInt64), "unsigned integer" },
             { typeof(UInt64), "unsigned integer" },
             { typeof(Byte), "byte" },
             { typeof(Char), "character" },

@@ -3,22 +3,27 @@ using System.Data;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using SqlDAL.Domain;
+using System.Threading.Tasks;
 
 namespace SqlDAL.DAL
 {
-    public class TopicDal : BaseDal
+    public class TopicDal : BaseDal<Topic>
     {
         private IEnumerable<Topic> ReadManyTopic(IDataReader dataReader)
         {
             var topics = new List<Topic>();
             while (dataReader.Read())
             {
-                topics.Add(ReadBaseTopic(dataReader));
+                var topic = new Topic
+                {
+                    Id = -1
+                };
+                ReadBaseTopic(topic, dataReader);
+                topics.Add(topic);
             }
             return topics;
         }
-
-        private Topic ReadBaseTopic(IDataReader dataReader)
+        private Topic ReadTopic(IDataReader dataReader)
         {
             var topic = new Topic
             {
@@ -27,11 +32,16 @@ namespace SqlDAL.DAL
             var isData = dataReader.Read();
             if (isData)
             {
-                topic.Id = (int)dataReader["Id"];
-                topic.Description = dataReader["Description"].ToString();
-                topic.Dob = DateTime.Parse(dataReader["Dob"].ToString());
+                ReadBaseTopic(topic, dataReader);
             }
             return topic;
+        }
+
+        private void ReadBaseTopic(Topic topic,IDataReader dataReader)
+        {
+            topic.Id = (int)dataReader["Id"];
+            topic.Description = dataReader["Description"].ToString();
+            topic.Dob = DateTime.Parse(dataReader["Dob"].ToString());
         }
 
         private void CreateParameter(Topic topic, List<SqlParameter> parameters)
@@ -40,83 +50,47 @@ namespace SqlDAL.DAL
             parameters.Add(sqlHelper.CreateParameter("@Dob", topic.Dob, DbType.DateTime));
         }
 
-        public int Insert(Topic topic)
+        public async Task<long> Insert(Topic topic)
         {
             var parameters = new List<SqlParameter>();
             CreateParameter(topic, parameters);
-
-            sqlHelper.Insert("DAH_Topic_Insert", CommandType.StoredProcedure, parameters.ToArray(), out int lastId);
+            long lastId = await sqlHelper.InsertAsync("DAH_Topic_Insert", CommandType.StoredProcedure, parameters.ToArray());
             topic.Id = lastId;
             return lastId;
         }
 
-        public void Update(Topic topic)
+        public async Task<long> Update(Topic topic)
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", topic.Id, DbType.Int32)
+                sqlHelper.CreateParameter("@Id", topic.Id, DbType.Int64)
             };
             CreateParameter(topic, parameters);
-            sqlHelper.Update("DAH_Topic_Update", CommandType.StoredProcedure, parameters.ToArray());
+            return await sqlHelper.UpdateAsync("DAH_Topic_Update", CommandType.StoredProcedure, parameters.ToArray());
         }
 
-        public void Delete(int id)
+        public async Task<long> Delete(int id)
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", id, DbType.Int32)
+                sqlHelper.CreateParameter("@Id", id, DbType.Int64)
             };
 
-            sqlHelper.Delete("DAH_Topic_Delete", CommandType.StoredProcedure, parameters.ToArray());
+            return await sqlHelper.DeleteAsync("DAH_Topic_Delete", CommandType.StoredProcedure, parameters.ToArray());
         }
 
-        public Topic GetById(int id)
+        public async Task<Topic> GetById(int id)
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", id, DbType.Int32)
+                sqlHelper.CreateParameter("@Id", id, DbType.Int64)
             };
-
-            var dataReader = sqlHelper.GetDataReader("DAH_Topic_GetById", CommandType.StoredProcedure, parameters.ToArray(), out connection);
-            try
-            {
-                return ReadBaseTopic(dataReader);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                dataReader.Close();
-                CloseConnection();
-            }
+            return await ReadSingleFunc("DAH_Topic_GetById", parameters, ReadTopic);
         }
 
-        public IEnumerable<Topic> GetAll()
+        public async Task<IEnumerable<Topic>> GetAll()
         {
-            var dataReader = sqlHelper.GetDataReader("DAH_Topic_GetAll", CommandType.StoredProcedure, null, out connection);
-
-            try
-            {
-                return ReadManyTopic(dataReader);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                dataReader.Close();
-                CloseConnection();
-            }
-        }
-
-        public int GetScalarValue()
-        {
-            object scalarValue = sqlHelper.GetScalarValue("DAH_Topic_Scalar", CommandType.StoredProcedure);
-
-            return Convert.ToInt32(scalarValue);
+            return await ReadManyFunc("DAH_Friend_GetAll", null, ReadManyTopic);
         }
     }
 }

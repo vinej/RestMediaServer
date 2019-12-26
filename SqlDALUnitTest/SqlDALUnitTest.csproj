@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -9,6 +9,7 @@
   <ItemGroup>
     <Compile Remove="Generate_Schema.cs" />
     <Compile Remove="HMemberRepository.cs" />
+    <Compile Remove="MemberTest.cs" />
   </ItemGroup>
 
   <ItemGroup>

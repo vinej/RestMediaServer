@@ -413,7 +413,7 @@ namespace RestMediaServer.Areas.HelpPage
                     { typeof(Double), index => (Double)(index + 0.1) },
                     { typeof(Guid), index => Guid.NewGuid() },
                     { typeof(Int16), index => (Int16)(index % Int16.MaxValue) },
-                    { typeof(Int32), index => (Int32)(index % Int32.MaxValue) },
+                    { typeof(Int64), index => (Int64)(index % Int64.MaxValue) },
                     { typeof(Int64), index => (Int64)index },
                     { typeof(Object), index => new object() },
                     { typeof(SByte), index => (SByte)64 },
@@ -431,7 +431,7 @@ namespace RestMediaServer.Areas.HelpPage
                         }
                     },
                     { typeof(UInt16), index => (UInt16)(index % UInt16.MaxValue) },
-                    { typeof(UInt32), index => (UInt32)(index % UInt32.MaxValue) },
+                    { typeof(UInt32), index => (UInt64)(index % UInt32.MaxValue) },
                     { typeof(UInt64), index => (UInt64)index },
                     { 
                         typeof(Uri), index =>

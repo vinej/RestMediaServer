@@ -3,68 +3,33 @@ using System.Data;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using SqlDAL.Domain;
+using System.Threading.Tasks;
 
 namespace SqlDAL.DAL
 {
-    public class AdvertiseDal : BaseDal
+    public class AdvertiseDal : BaseDal<Advertiser>
     {
-        private Video ReadVideo(IDataReader dataReader)
-        {
-            var video = new Video
-            {
-                Id = (int)dataReader["VId"],
-                Url = dataReader["VUrl"].ToString(),
-                Advertiser = new Advertiser
-                {
-                    Id = (int)dataReader["VAdvertiserId"]
-                }
-            };
-            return video;
-        }
-
-
-        private IEnumerable<Advertiser> ReadManyFullAdvertiserWithVideo(IDataReader dataReader)
-        {
-            var advertisers = new List<Advertiser>();
-            int lastAdvertiserId = -1;
-            while (dataReader.Read())
-            {
-                Advertiser advertiser = null;
-                int id = (int)dataReader["Id"];
-                if (id != lastAdvertiserId)
-                {
-                    if (lastAdvertiserId != -1)
-                    {
-                        advertisers.Add(advertiser);
-                    }
-                    lastAdvertiserId = id;
-                    advertiser = new Advertiser();
-                    ReadBaseAdvertiser(advertiser, dataReader);
-                    advertiser.Videos = new List<Video>();
-                }
-                Video video = ReadVideo(dataReader);
-                video.Advertiser.Email = advertiser.Email;
-                video.Advertiser.Name = advertiser.Name;
-                video.Advertiser.Dob = advertiser.Dob;
-                video.Advertiser.IsAccepted = advertiser.IsAccepted;
-                ((List<Video>)advertiser.Videos).Add(video);
-            }
-            return advertisers;
-        }
-
         private IEnumerable<Advertiser> ReadManyAdvertiser(IDataReader dataReader)
         {
             var advertisers = new List<Advertiser>();
             while (dataReader.Read())
             {
-                advertisers.Add(ReadAdvertiser(dataReader));
+                var advertiser = new Advertiser
+                {
+                    Id = -1
+                };
+                ReadBaseAdvertiser(advertiser, dataReader);
+                advertisers.Add(advertiser);
             }
             return advertisers;
         }
 
         private Advertiser ReadAdvertiser(IDataReader dataReader)
         {
-            var advertiser = new Advertiser();
+            var advertiser = new Advertiser
+            {
+                Id = -1
+            };
             var isData = dataReader.Read();
             if (isData)
             {
@@ -90,173 +55,66 @@ namespace SqlDAL.DAL
             parameters.Add(sqlHelper.CreateParameter("@Dob", advertiser.Dob, DbType.DateTime));
         }
 
-        public int Insert(Advertiser advertiser)
+        public async Task<long> Insert(Advertiser advertiser)
         {
             var parameters = new List<SqlParameter>();
             CreateParameter(advertiser, parameters);
 
-            sqlHelper.Insert("DAH_Advertiser_Insert", CommandType.StoredProcedure, parameters.ToArray(), out int lastId);
+            var lastId = await sqlHelper.InsertAsync("DAH_Advertiser_Insert", CommandType.StoredProcedure, parameters.ToArray());
             advertiser.Id = lastId;
             return lastId;
         }
 
-        public void Update(Advertiser advertiser)
+        public async Task<long> Update(Advertiser advertiser)
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", advertiser.Id, DbType.Int32)
+                sqlHelper.CreateParameter("@Id", advertiser.Id, DbType.Int64)
             };
             CreateParameter(advertiser, parameters);
-            sqlHelper.Update("DAH_Advertiser_Update", CommandType.StoredProcedure, parameters.ToArray());
+            return await sqlHelper.UpdateAsync("DAH_Advertiser_Update", CommandType.StoredProcedure, parameters.ToArray());
         }
 
-        public void Delete(int id)
+        public async Task<long> Delete(int id)
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", id, DbType.Int32)
+                sqlHelper.CreateParameter("@Id", id, DbType.Int64)
             };
 
-            sqlHelper.Delete("DAH_Advertiser_Delete", CommandType.StoredProcedure, parameters.ToArray());
+            return await sqlHelper.DeleteAsync("DAH_Advertiser_Delete", CommandType.StoredProcedure, parameters.ToArray());
         }
 
-        public Advertiser GetById(int id)
+        public async Task<Advertiser> GetById(int id)
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Id", id, DbType.Int32)
+                sqlHelper.CreateParameter("@Id", id, DbType.Int64)
             };
-
-            var dataReader = sqlHelper.GetDataReader("DAH_Advertiser_GetById", CommandType.StoredProcedure, parameters.ToArray(), out connection);
-            try
-            {
-                return ReadAdvertiser(dataReader);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                dataReader.Close();
-                CloseConnection();
-            }
+            return await ReadSingleFunc("DAH_Advertiser_GetById", parameters, ReadAdvertiser);
         }
 
-        public Advertiser GetByEmail(string alias)
+        public async Task<Advertiser> GetByEmail(string email)
         {
             var parameters = new List<SqlParameter>
             {
-                sqlHelper.CreateParameter("@Email", alias, DbType.String)
+                sqlHelper.CreateParameter("@Email", email, DbType.String)
             };
-
-            var dataReader = sqlHelper.GetDataReader("DAH_Advertiser_GetByEmail", CommandType.StoredProcedure, parameters.ToArray(), out connection);
-            try
-            {
-                return ReadAdvertiser(dataReader);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                dataReader.Close();
-                CloseConnection();
-            }
+            return await ReadSingleFunc("DAH_Advertiser_GetByEmail", parameters, ReadAdvertiser);
         }
 
-        public IEnumerable<Advertiser> GetAll()
+        public async Task<IEnumerable<Advertiser>> GetAll()
         {
-            var dataReader = sqlHelper.GetDataReader("DAH_Advertiser_GetAll", CommandType.StoredProcedure, null, out connection);
-
-            try
-            {
-                return ReadManyAdvertiser(dataReader);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                dataReader.Close();
-                CloseConnection();
-            }
+            return await ReadManyFunc("DAH_Advertiser_GetByEmail", null, ReadManyAdvertiser);
         }
 
-        public IEnumerable<Advertiser> GetAllWithVideo()
-        {
-            var dataReader = sqlHelper.GetDataReader("DAH_Advertiser_GetAllWithVideo", CommandType.StoredProcedure, null, out connection);
-
-            try
-            {
-                return ReadManyFullAdvertiserWithVideo(dataReader);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                dataReader.Close();
-                CloseConnection();
-            }
-        }
-
-        public IEnumerable<Advertiser> GetByIsAccepted(bool isAccepted)
+        public async Task<IEnumerable<Advertiser>> GetByIsAccepted(bool isAccepted)
         {
             var parameters = new List<SqlParameter>
             {
                 sqlHelper.CreateParameter("@IsAccepted", isAccepted, DbType.Boolean)
             };
-            var dataReader = sqlHelper.GetDataReader("DAH_Advertiser_GetByIsAccepted", CommandType.StoredProcedure, parameters.ToArray(), out connection);
-
-            try
-            {
-                return ReadManyAdvertiser(dataReader);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                dataReader.Close();
-                CloseConnection();
-            }
-        }
-
-        public Advertiser GetByIdWithVideo(int id)
-        {
-            var parameters = new List<SqlParameter>
-            {
-                sqlHelper.CreateParameter("@Id", id, DbType.Int32)
-            };
-
-            var dataReader = sqlHelper.GetDataReader("DAH_Advertiser_GetByIdWithVideo", CommandType.StoredProcedure, parameters.ToArray(), out connection);
-
-            try
-            {
-                var advertisers = ReadManyFullAdvertiserWithVideo(dataReader);
-                if (((List<Advertiser>)advertisers).Count == 0)
-                {
-                    return new Advertiser() { Id = -1 };
-                }
-                else
-                {
-                    return ((List<Advertiser>)advertisers)[0];
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                dataReader.Close();
-                CloseConnection();
-            }
+            return await ReadManyFunc("DAH_Advertiser_GetByIsAccepted", parameters, ReadManyAdvertiser);
         }
     }
 }

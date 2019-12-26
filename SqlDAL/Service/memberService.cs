@@ -1,51 +1,50 @@
 ﻿using System.Collections.Generic;
 using SqlDAL.Domain;
 using SqlDAL.DAL;
+using System.Threading.Tasks;
 
 // simple service for future use 
 namespace SqlDAL.Service
 {
-    
+
     public class MemberService
     {
-        public int Insert(Member member)
+        static readonly WaitToFinishMemoryCache<IEnumerable<Member>> _memberManyCache = new WaitToFinishMemoryCache<IEnumerable<Member>>();
+        static readonly WaitToFinishMemoryCache<Member> _memberSingleCache = new WaitToFinishMemoryCache<Member>();
+
+        public async Task<long> Insert(Member member)
         {
-            return new MemberDal().Insert(member);
+            return await new MemberDal().Insert(member);
         }
 
-        public void Update(Member member)
+        public async Task<long> Update(Member member)
         {
-            new MemberDal().Update(member);
+            return await new MemberDal().Update(member);
         }
 
-        public void Delete(int id)
+        public async Task<long> Delete(long id)
         {
-            new MemberDal().Delete(id);
+            return await new MemberDal().Delete(id);
         }
 
-        public Member GetById(int id)
+        public async Task<Member> GetById(long id)
         {
-            return new MemberDal().GetById(id);
+            return await _memberSingleCache.GetOrCreate(id, async () => await new MemberDal().GetById(id));
         }
 
-        public Member GetByAlias(string alias)
+        public async Task<Member> GetByAlias(string alias)
         {
-            return new MemberDal().GetByAlias(alias);
+            return await _memberSingleCache.GetOrCreate(alias, async () => await new MemberDal().GetByAlias(alias));
         }
 
-        public IEnumerable<Member> GetAll()
+        public async Task<IEnumerable<Member>> GetAll()
         {
-            return new MemberDal().GetAll();
+            return await _memberManyCache.GetOrCreate("__all__", async () => await new MemberDal().GetAll());
         }
 
-        public IEnumerable<Member> GetByIsActive(bool isActive)
+        public async Task<IEnumerable<Member>> GetByIsActive(bool isActive)
         {
-            return new MemberDal().GetByIsActive(isActive);
-        }
-
-        public int GetScalarValue()
-        {
-            return new MemberDal().GetScalarValue();
+            return await _memberManyCache.GetOrCreate(isActive, async () => await new MemberDal().GetByIsActive(isActive));
         }
     }
 }

@@ -4,7 +4,7 @@ namespace SqlDAL.Domain
 {
     public class Like
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         public Member Member { get; set; }
 
