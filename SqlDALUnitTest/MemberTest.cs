@@ -32,7 +32,7 @@ public class MemberTest
     private static void CreateInitialData()
     {
         foreach (var member in _members) {
-            _dal.Insert(member);
+            _ = _dal.Insert(member).Result;
         }
     }
 
@@ -49,7 +49,7 @@ public class MemberTest
     {
         foreach (Member member in _members)
         {
-            _dal.Delete(member.Id);
+            _ = _dal.Delete(member.Id).Result;
         }
     }
 
@@ -57,9 +57,9 @@ public class MemberTest
     public void Can_add_new_member()
     {
         var member = new Member { Email = "Apple44", Alias = "Fruits44", IsActive = true, Dob = DateTime.Now };
-        _dal.Insert(member);
+        _ = _dal.Insert(member).Result;
 
-        var fromDb = _dal.GetById(member.Id);
+        var fromDb = _dal.GetById(member.Id).Result;
         // Test that the product was successfully inserted
         Assert.IsNotNull(fromDb);
         Assert.AreNotSame(member, fromDb);
@@ -70,28 +70,27 @@ public class MemberTest
     [TestMethod]
     public void Can_update_existing_member()
     {
-        var fromDb = _dal.GetByAlias("Fruits2");
+        var fromDb = _dal.GetByAlias("Fruits2").Result;
         fromDb.Email = "Yellow Pear";
-        _dal.Update(fromDb);
-
-        var fromDb2 = _dal.GetById(fromDb.Id);
+        _ = _dal.Update(fromDb).Result;
+        var fromDb2 = _dal.GetById(fromDb.Id).Result;
         Assert.AreEqual(fromDb.Email, fromDb2.Email);
     }
 
     [TestMethod]
     public void Can_remove_existing_member()
     {
-        var member = _dal.GetByAlias("Fruits44");
-        _dal.Delete(member.Id);
-        var fromDb = _dal.GetById(member.Id);
+        var member = _dal.GetByAlias("Fruits44").Result;
+        _ = _dal.Delete(member.Id).Result;
+        var fromDb = _dal.GetById(member.Id).Result;
         Assert.AreEqual(fromDb.Id, -1);
     }
 
     [TestMethod]
     public void Can_get_existing_member_by_id()
     {
-        var member = _dal.GetByAlias(_members[2].Alias);
-        var fromDb = _dal.GetById(member.Id);
+        var member =  _dal.GetByAlias(_members[2].Alias).Result;
+        var fromDb = _dal.GetById(member.Id).Result;
         Assert.IsNotNull(fromDb);
         Assert.AreEqual(_members[2].Email, fromDb.Email);
     }
@@ -99,7 +98,7 @@ public class MemberTest
     [TestMethod]
     public void Can_get_existing_member_by_alias()
     {
-        var fromDb = _dal.GetByAlias(_members[1].Alias);
+        var fromDb = _dal.GetByAlias(_members[1].Alias).Result;
         Assert.IsNotNull(fromDb);
         Assert.AreNotSame(_members[1], fromDb);
         Assert.AreEqual(_members[1].Alias, fromDb.Alias);

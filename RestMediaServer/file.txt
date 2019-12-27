@@ -816,3 +816,117 @@ The statement has been terminated.
 2019-12-26 23:03:45.4703|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_GetById
 2019-12-26 23:03:45.4882|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_GetById
 2019-12-26 23:03:45.4882|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-26 23:12:00.7121|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_GetById
+2019-12-26 23:12:00.7460|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-26 23:12:00.7640|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_GetById
+2019-12-26 23:12:00.7720|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Id : 33 : BigInt
+2019-12-26 23:12:00.7720|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_GetById
+2019-12-26 23:12:00.7980|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_GetById
+2019-12-26 23:12:00.7980|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-26 23:12:05.7172|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_GetById
+2019-12-26 23:12:05.7242|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-26 23:12:05.7242|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_GetById
+2019-12-26 23:12:05.7422|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Id : 1 : BigInt
+2019-12-26 23:12:05.7422|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_GetById
+2019-12-26 23:12:05.7561|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_GetById
+2019-12-26 23:12:05.7561|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-26 23:12:09.5930|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_GetAll
+2019-12-26 23:12:09.6020|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-26 23:12:09.6150|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_GetAll
+2019-12-26 23:12:09.6150|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_GetAll
+2019-12-26 23:12:09.6310|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_GetAll
+2019-12-26 23:12:09.6310|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-26 23:12:17.0304|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Friend_GetAll
+2019-12-26 23:12:17.0394|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-26 23:12:17.0494|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Friend_GetAll
+2019-12-26 23:12:17.0494|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Friend_GetAll
+2019-12-26 23:12:17.0704|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Friend_GetAll
+2019-12-26 23:12:17.0794|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-26 23:12:29.1721|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Friend_GetByMemberAlias
+2019-12-26 23:12:29.1811|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-26 23:12:29.1891|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Friend_GetByMemberAlias
+2019-12-26 23:12:29.1891|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Alias : jyv : NVarChar
+2019-12-26 23:12:29.1891|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Friend_GetByMemberAlias
+2019-12-26 23:12:29.2121|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Friend_GetByMemberAlias
+2019-12-26 23:12:29.2190|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-26 23:12:36.0542|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Friend_GetByMemberAlias
+2019-12-26 23:12:36.0652|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-26 23:12:36.0652|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Friend_GetByMemberAlias
+2019-12-26 23:12:36.0891|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Alias : vinej : NVarChar
+2019-12-26 23:12:36.0991|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Friend_GetByMemberAlias
+2019-12-26 23:12:36.1121|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Friend_GetByMemberAlias
+2019-12-26 23:12:36.1261|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-26 23:12:43.0299|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Friend_GetByMemberAlias
+2019-12-26 23:12:43.0369|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-26 23:12:43.0369|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Friend_GetByMemberAlias
+2019-12-26 23:12:43.0538|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Alias : vinej2 : NVarChar
+2019-12-26 23:12:43.0538|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Friend_GetByMemberAlias
+2019-12-26 23:12:43.0698|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Friend_GetByMemberAlias
+2019-12-26 23:12:43.0698|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-26 23:13:01.6450|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Friend_GetByMemberForTopic
+2019-12-26 23:13:01.6450|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-26 23:13:01.6640|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Friend_GetByMemberForTopic
+2019-12-26 23:13:01.6640|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @MemberId : 1 : BigInt
+2019-12-26 23:13:01.6780|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @TopicId : 1 : BigInt
+2019-12-26 23:13:01.6780|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Friend_GetByMemberForTopic
+2019-12-26 23:13:01.6969|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Friend_GetByMemberForTopic
+2019-12-26 23:13:01.6969|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-26 23:14:16.7147|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Friend_GetByMemberAlias
+2019-12-26 23:14:16.7267|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-26 23:14:16.7377|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Friend_GetByMemberAlias
+2019-12-26 23:14:16.7377|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Alias : vinej2 : NVarChar
+2019-12-26 23:14:16.7577|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Friend_GetByMemberAlias
+2019-12-26 23:14:16.7707|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Friend_GetByMemberAlias
+2019-12-26 23:14:16.7707|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-26 23:14:28.8103|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Friend_GetByMemberAlias
+2019-12-26 23:14:28.8223|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-26 23:14:28.8362|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Friend_GetByMemberAlias
+2019-12-26 23:14:28.8442|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Alias : 1|1 : NVarChar
+2019-12-26 23:14:28.8442|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Friend_GetByMemberAlias
+2019-12-26 23:14:28.8442|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Friend_GetByMemberAlias
+2019-12-26 23:14:28.8682|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-26 23:14:40.4461|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Friend_GetByMemberAlias
+2019-12-26 23:14:40.4551|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-26 23:14:40.4551|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Friend_GetByMemberAlias
+2019-12-26 23:14:40.4771|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Alias : 1,1 : NVarChar
+2019-12-26 23:14:40.4851|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Friend_GetByMemberAlias
+2019-12-26 23:14:40.4851|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Friend_GetByMemberAlias
+2019-12-26 23:14:40.5051|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-26 23:15:15.4816|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Friend_GetByMemberAlias
+2019-12-26 23:15:15.5095|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-26 23:15:15.5245|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Friend_GetByMemberAlias
+2019-12-26 23:15:15.5245|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Alias : 1,1 : NVarChar
+2019-12-26 23:15:15.5375|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Friend_GetByMemberAlias
+2019-12-26 23:15:15.5525|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Friend_GetByMemberAlias
+2019-12-26 23:15:15.5525|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-26 23:15:25.4787|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Friend_GetByMemberAlias
+2019-12-26 23:15:25.4867|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-26 23:15:25.4867|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Friend_GetByMemberAlias
+2019-12-26 23:15:25.5037|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Alias : 1|1 : NVarChar
+2019-12-26 23:15:25.5037|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Friend_GetByMemberAlias
+2019-12-26 23:15:25.5197|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Friend_GetByMemberAlias
+2019-12-26 23:15:25.5197|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-26 23:15:32.0869|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Friend_GetByMemberForTopic
+2019-12-26 23:15:32.0949|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-26 23:15:32.0949|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Friend_GetByMemberForTopic
+2019-12-26 23:15:32.1109|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @MemberId : 1 : BigInt
+2019-12-26 23:15:32.1109|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @TopicId : 1 : BigInt
+2019-12-26 23:15:32.1109|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Friend_GetByMemberForTopic
+2019-12-26 23:15:32.1359|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Friend_GetByMemberForTopic
+2019-12-26 23:15:32.1428|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-26 23:15:38.3512|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Friend_GetByMemberForTopic
+2019-12-26 23:15:38.3602|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-26 23:15:38.3602|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Friend_GetByMemberForTopic
+2019-12-26 23:15:38.3602|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @MemberId : 1 : BigInt
+2019-12-26 23:15:38.3822|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @TopicId : 1 : BigInt
+2019-12-26 23:15:38.3822|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Friend_GetByMemberForTopic
+2019-12-26 23:15:38.3982|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Friend_GetByMemberForTopic
+2019-12-26 23:15:38.3982|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-26 23:15:50.0351|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Friend_GetByMemberForTopic
+2019-12-26 23:15:50.0351|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-26 23:15:50.0531|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Friend_GetByMemberForTopic
+2019-12-26 23:15:50.0531|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @MemberId : 1 : BigInt
+2019-12-26 23:15:50.0680|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @TopicId : 2 : BigInt
+2019-12-26 23:15:50.0680|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Friend_GetByMemberForTopic
+2019-12-26 23:15:50.0880|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Friend_GetByMemberForTopic
+2019-12-26 23:15:50.0950|INFO|SqlDAL.DAL.BaseDal`1|Closing connection

@@ -19,24 +19,25 @@ namespace SqlDAL.DAL
             connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog = RestMediaServer; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False";
         }
 
-        public SqlConnection OpenConnection()
+        public async Task<long> OpenConnection()
         {
-            logger.Info($"Opening connection by {HttpContext.Current.User.Identity.Name}");
+            logger.Info($"Opening connection by {System.Security.Principal.WindowsIdentity.GetCurrent().Name}");
             connection = new SqlConnection(connectionString);
-            connection.Open();
-            return connection;
+            await connection.OpenAsync();
+            return 0;
         }
 
         public void CloseConnection()
         {
             logger.Info("Closing connection");
             connection.Close();
+            connection = null;
         }
 
         public async Task<IEnumerable<TType>> ReadManyFunc(string commandText, List<SqlParameter> parameters, Func<IDataReader, IEnumerable<TType>> readItem)
         {
             logger.Info($"SQL START: {commandText}");
-            connection = OpenConnection();
+            _ = await OpenConnection();
             var dataReader = await GetDataReaderAsync(commandText, CommandType.StoredProcedure, parameters?.ToArray(), connection);
             logger.Info($"SQL END: {commandText}");
             try
@@ -59,23 +60,24 @@ namespace SqlDAL.DAL
         public async Task<TType> ReadSingleFunc(string commandText, List<SqlParameter> parameters, Func<IDataReader, TType> readItem)
         {
             logger.Info($"SQL START: {commandText}");
-            connection = OpenConnection();
-            var dataReader = await GetDataReaderAsync(commandText, CommandType.StoredProcedure, parameters?.ToArray(), connection);
-            logger.Info($"SQL END: {commandText}");
-            try
+            _ = await OpenConnection();
+            using (var dataReader = await GetDataReaderAsync(commandText, CommandType.StoredProcedure, parameters?.ToArray(), connection))
             {
-                return readItem(dataReader);
-            }
-            catch (Exception ex)
-            {
-                logger.Error($"SQL Exception: {ex.Message}");
-                SqlException(ex.Message);
-                throw;
-            }
-            finally
-            {
-                dataReader.Close();
-                CloseConnection();
+                logger.Info($"SQL END: {commandText}");
+                try
+                {
+                    return readItem(dataReader);
+                }
+                catch (Exception ex)
+                {
+                    logger.Error($"SQL Exception: {ex.Message}");
+                    SqlException(ex.Message);
+                    throw;
+                }
+                finally
+                {
+                    CloseConnection();
+                }
             }
         }
 
@@ -129,16 +131,14 @@ namespace SqlDAL.DAL
                 SqlException(ex.Message);
                 throw;
             }
-
             return reader;
         }
 
         public async Task<long> CommandAsync(bool isInsert, string commandText, CommandType commandType, IsolationLevel isolationLevel, SqlParameter[] parameters)
         {
             long newid = -1;
-            using (var connection = new SqlConnection(connectionString))
-            {
-                await connection.OpenAsync();
+            _ = await OpenConnection();
+            try {
                 using (var transactionScope = connection.BeginTransaction(isolationLevel))
                 using (var command = new SqlCommand(commandText, connection, transactionScope))
                 {
@@ -172,9 +172,15 @@ namespace SqlDAL.DAL
                         logger.Error($"SQL Exception: {ex.Message}");
                         SqlException(ex.Message);
                     }
-                    transactionScope.Commit();
+                    finally
+                    {
+                        transactionScope.Commit();
+                    }
                     return newid;
                 }
+            } finally
+            {
+                CloseConnection();
             }
         }
 
