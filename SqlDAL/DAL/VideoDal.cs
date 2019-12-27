@@ -75,7 +75,7 @@ namespace SqlDAL.DAL
             video.Id = (long)dataReader["Id"];
             video.Advertiser = new Advertiser
             {
-                Id = (long)dataReader["AdvertiseId"]
+                Id = (long)dataReader["AdvertiserId"]
             };
             video.Url = dataReader["Url"].ToString();
             video.Dob = DateTime.Parse(dataReader["Dob"].ToString());
@@ -85,15 +85,15 @@ namespace SqlDAL.DAL
         {
             if (video.Id != -1)
             {
-                video.Advertiser.Name = dataReader["AName"].ToString();
-                video.Advertiser.Email = dataReader["AEmail"].ToString();
-                video.Advertiser.Dob = DateTime.Parse(dataReader["ADob"].ToString());
+                video.Advertiser.Name = (string)dataReader["AName"];
+                video.Advertiser.Email = (string)dataReader["AEmail"];
+                video.Advertiser.Dob = (DateTime)dataReader["ADob"];
             }
         }
 
         private void CreateParameter(Video video, List<SqlParameter> parameters)
         {
-            parameters.Add(CreateParameter("@AdvertiseId", video.Advertiser.Id, DbType.String));
+            parameters.Add(CreateParameter("@AdvertiserId", video.Advertiser.Id, DbType.Int64));
             parameters.Add(CreateParameter("@Url", 255, video.Url, DbType.String));
             parameters.Add(CreateParameter("@Dob", video.Dob, DbType.DateTime));
         }
@@ -128,7 +128,7 @@ namespace SqlDAL.DAL
             return await DeleteAsync("DAH_Video_Delete", CommandType.StoredProcedure, parameters.ToArray());
         }
 
-        public async Task<Video> GetById(int id)
+        public async Task<Video> GetById(long id)
         {
             var parameters = new List<SqlParameter>
             {
@@ -137,7 +137,7 @@ namespace SqlDAL.DAL
             return await ReadSingleFunc("DAH_Video_GetById", parameters, ReadVideo);
         }
 
-        public async Task<Video> GetByIdWithAdvertiser(int id)
+        public async Task<Video> GetByIdWithAdvertiser(long id)
         {
             var parameters = new List<SqlParameter>
             {

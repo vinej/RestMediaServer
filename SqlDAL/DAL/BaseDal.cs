@@ -188,12 +188,14 @@ namespace SqlDAL.DAL
         {
             var message = new System.Net.Http.HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
             string error;
-            if (exception.Contains("Violation of UNIQUE KEY constraint"))
-            {
+            if (exception.Contains("Violation of UNIQUE KEY constraint")) {
                 error =  "DAL : Duplicate key";
-            } else
-            {
+            } else 
+            if (exception.Contains("String was not recognized as a valid DateTime")) {
+                error = "DAL : DateTime invalid format";
+            } else {
                 error = "DAL : Unknown error";
+
             }
             message.Content = new System.Net.Http.StringContent(error);
             throw new System.Web.Http.HttpResponseException(message);

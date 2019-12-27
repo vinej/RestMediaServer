@@ -40,8 +40,8 @@ namespace SqlDAL.DAL
         private void ReadBaseTopic(Topic topic,IDataReader dataReader)
         {
             topic.Id = (long)dataReader["Id"];
-            topic.Description = dataReader["Description"].ToString();
-            topic.Dob = DateTime.Parse(dataReader["Dob"].ToString());
+            topic.Description = (string)dataReader["Description"];
+            topic.Dob = (DateTime)dataReader["Dob"];
         }
 
         private void CreateParameter(Topic topic, List<SqlParameter> parameters)
@@ -69,7 +69,7 @@ namespace SqlDAL.DAL
             return await UpdateAsync("DAH_Topic_Update", CommandType.StoredProcedure, parameters.ToArray());
         }
 
-        public async Task<long> Delete(int id)
+        public async Task<long> Delete(long id)
         {
             var parameters = new List<SqlParameter>
             {
@@ -79,7 +79,7 @@ namespace SqlDAL.DAL
             return await DeleteAsync("DAH_Topic_Delete", CommandType.StoredProcedure, parameters.ToArray());
         }
 
-        public async Task<Topic> GetById(int id)
+        public async Task<Topic> GetById(long id)
         {
             var parameters = new List<SqlParameter>
             {
@@ -90,7 +90,7 @@ namespace SqlDAL.DAL
 
         public async Task<IEnumerable<Topic>> GetAll()
         {
-            return await ReadManyFunc("DAH_Friend_GetAll", null, ReadManyTopic);
+            return await ReadManyFunc("DAH_Topic_GetAll", null, ReadManyTopic);
         }
     }
 }

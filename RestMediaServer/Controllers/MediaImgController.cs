@@ -40,7 +40,7 @@ namespace RestMediaServer.Controllers
         }
     }
 
-    public class ImgController : ApiController
+    public class MediaImgController : ApiController
     {
         [System.Web.Http.HttpGet]
         public HttpResponseMessage Get(string id, string type)
@@ -51,33 +51,43 @@ namespace RestMediaServer.Controllers
                 try
                 {
                     FileStream ms = new FileStream(imgInfo.FullPath, FileMode.Open, FileAccess.Read, FileShare.Read, 4096);
-                    HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
-                    response.Content = new StreamContent(ms);
+                    HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK)
+                    {
+                        Content = new StreamContent(ms)
+                    };
                     response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(imgInfo.Type);
                     return response;
                 } catch(Exception ex)
                 {
-                    HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.InternalServerError);
-                    response.ReasonPhrase = ex.Message;
+                    HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.InternalServerError)
+                    {
+                        ReasonPhrase = ex.Message
+                    };
                     return response;
                 }
             } else
             {
                 if (imgInfo.Error)
                 {
-                    HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.InternalServerError);
-                    response.ReasonPhrase = imgInfo.Exception;
+                    HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.InternalServerError)
+                    {
+                        ReasonPhrase = imgInfo.Exception
+                    };
                     return response;
                 }
                 else if (!imgInfo.Exists)
                 {
-                    HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.NotFound);
-                    response.ReasonPhrase = id + " NotFound";
+                    HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.NotFound)
+                    {
+                        ReasonPhrase = id + " NotFound"
+                    };
                     return response;
                 } else
                 {
-                    HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.InternalServerError);
-                    response.ReasonPhrase = "Unknown Error";
+                    HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.InternalServerError)
+                    {
+                        ReasonPhrase = "Unknown Error"
+                    };
                     return response;
                 }
             }

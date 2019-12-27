@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SqlDAL.DAL
 {
-    public class AdvertiseDal : BaseDal<Advertiser>
+    public class AdvertiserDal : BaseDal<Advertiser>
     {
         private IEnumerable<Advertiser> ReadManyAdvertiser(IDataReader dataReader)
         {
@@ -41,10 +41,10 @@ namespace SqlDAL.DAL
         private void ReadBaseAdvertiser(Advertiser advertiser, IDataReader dataReader)
         {
             advertiser.Id = (long)dataReader["Id"];
-            advertiser.Email = dataReader["Email"].ToString();
-            advertiser.Name = dataReader["Name"].ToString();
+            advertiser.Email = (string)dataReader["Email"];
+            advertiser.Name = (string)dataReader["Name"];
             advertiser.IsAccepted = (bool)dataReader["IsAccepted"];
-            advertiser.Dob = DateTime.Parse(dataReader["Dob"].ToString());
+            advertiser.Dob = (DateTime)dataReader["Dob"];
         }
 
         private void CreateParameter(Advertiser advertiser, List<SqlParameter> parameters)
@@ -75,7 +75,7 @@ namespace SqlDAL.DAL
             return await UpdateAsync("DAH_Advertiser_Update", CommandType.StoredProcedure, parameters.ToArray());
         }
 
-        public async Task<long> Delete(int id)
+        public async Task<long> Delete(long id)
         {
             var parameters = new List<SqlParameter>
             {
@@ -85,7 +85,7 @@ namespace SqlDAL.DAL
             return await DeleteAsync("DAH_Advertiser_Delete", CommandType.StoredProcedure, parameters.ToArray());
         }
 
-        public async Task<Advertiser> GetById(int id)
+        public async Task<Advertiser> GetById(long id)
         {
             var parameters = new List<SqlParameter>
             {
@@ -105,7 +105,7 @@ namespace SqlDAL.DAL
 
         public async Task<IEnumerable<Advertiser>> GetAll()
         {
-            return await ReadManyFunc("DAH_Advertiser_GetByEmail", null, ReadManyAdvertiser);
+            return await ReadManyFunc("DAH_Advertiser_GetAll", null, ReadManyAdvertiser);
         }
 
         public async Task<IEnumerable<Advertiser>> GetByIsAccepted(bool isAccepted)

@@ -141,6 +141,11 @@
     <Compile Include="Domain\Like.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\Member.cs" />
+    <Compile Include="Service\AdvertiserService.cs" />
+    <Compile Include="Service\TopicService.cs" />
+    <Compile Include="Service\OpinionService.cs" />
+    <Compile Include="Service\LikeService.cs" />
+    <Compile Include="Service\VideoService.cs" />
     <Compile Include="Service\MemberService.cs" />
   </ItemGroup>
   <ItemGroup>

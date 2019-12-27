@@ -27,7 +27,7 @@ namespace SqlDAL.DAL
         }
         */
 
-        /*
+        
         private IEnumerable<Like> ReadManyLike(IDataReader dataReader)
         {
             var Likes = new List<Like>();
@@ -42,7 +42,7 @@ namespace SqlDAL.DAL
             }
             return Likes;
         }
-        */
+        
 
         private Like ReadLike(IDataReader dataReader)
         {
@@ -68,7 +68,7 @@ namespace SqlDAL.DAL
             {
                 Id = (long)dataReader["OpinionId"]
             };
-            Like.Dob = DateTime.Parse(dataReader["Dob"].ToString());
+            Like.Dob = (DateTime)dataReader["Dob"];
         }
 
         /*
@@ -114,7 +114,7 @@ namespace SqlDAL.DAL
             return await UpdateAsync("DAH_Like_Update", CommandType.StoredProcedure, parameters.ToArray());
         }
 
-        public async Task<long> Delete(int id)
+        public async Task<long> Delete(long id)
         {
             var parameters = new List<SqlParameter>
             {
@@ -124,7 +124,7 @@ namespace SqlDAL.DAL
             return await DeleteAsync("DAH_Like_Delete", CommandType.StoredProcedure, parameters.ToArray());
         }
 
-        public async Task<Like> GetById(int id)
+        public async Task<Like> GetById(long id)
         {
             var parameters = new List<SqlParameter>
             {
@@ -132,5 +132,11 @@ namespace SqlDAL.DAL
             };
             return await ReadSingleFunc("DAH_Like_GetById", parameters, ReadLike);
         }
+
+        public async Task<IEnumerable<Like>> GetAll()
+        {
+            return await ReadManyFunc("DAH_Like_GetAll", null, ReadManyLike);
+        }
+
     }
 }
