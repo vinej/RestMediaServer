@@ -4,7 +4,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 using System.Web;
-//using System.Web.Http;
 using NLog;
 
 namespace SqlDAL.DAL
@@ -38,7 +37,7 @@ namespace SqlDAL.DAL
         {
             logger.Info($"SQL START: {commandText}");
             connection = OpenConnection();
-            var dataReader = await GetDataReaderAsync(commandText, CommandType.StoredProcedure, parameters.ToArray(), connection);
+            var dataReader = await GetDataReaderAsync(commandText, CommandType.StoredProcedure, parameters?.ToArray(), connection);
             logger.Info($"SQL END: {commandText}");
             try
             {
@@ -61,7 +60,7 @@ namespace SqlDAL.DAL
         {
             logger.Info($"SQL START: {commandText}");
             connection = OpenConnection();
-            var dataReader = await GetDataReaderAsync(commandText, CommandType.StoredProcedure, parameters.ToArray(), connection);
+            var dataReader = await GetDataReaderAsync(commandText, CommandType.StoredProcedure, parameters?.ToArray(), connection);
             logger.Info($"SQL END: {commandText}");
             try
             {
@@ -185,10 +184,10 @@ namespace SqlDAL.DAL
             string error;
             if (exception.Contains("Violation of UNIQUE KEY constraint"))
             {
-                error =  "500 : Duplicate key";
+                error =  "DAL : Duplicate key";
             } else
             {
-                error = "500 : Unknown error";
+                error = "DAL : Unknown error";
             }
             message.Content = new System.Net.Http.StringContent(error);
             throw new System.Web.Http.HttpResponseException(message);

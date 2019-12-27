@@ -157,7 +157,7 @@ namespace SqlDAL.DAL
             {
                 CreateParameter("@Id", id, DbType.Int64)
             };
-            return await ReadManyFunc("DAH_Video_GetAllByAdvertiser", null, ReadManyVideo);
+            return await ReadManyFunc("DAH_Video_GetAllByAdvertiser", parameters, ReadManyVideo);
         }
 
 

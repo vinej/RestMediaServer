@@ -122,9 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\BaseDal.cs" />
-    <Compile Include="DAL\HttpResponseMessage.cs" />
     <Compile Include="DAL\LikeDal.cs" />
-    <Compile Include="DAL\StringContent.cs" />
     <Compile Include="Service\Cache.cs" />
     <Compile Include="Service\FriendService.cs" />
     <Compile Include="DAL\FriendDal.cs" />
@@ -133,7 +131,7 @@
     <Compile Include="DAL\OpinionDal.cs" />
     <Compile Include="DAL\VideoDal.cs" />
     <Compile Include="DAL\MemberDal.cs" />
-    <Compile Include="Domain\Friend.cs" />
+    <Compile Include="Domain\MemberFriend.cs" />
     <Compile Include="Domain\Video.cs" />
     <Compile Include="Domain\Advertiser.cs" />
     <Compile Include="Domain\Opinion.cs" />

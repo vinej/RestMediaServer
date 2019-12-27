@@ -19,8 +19,10 @@ namespace RestMediaServer.Controllers
         // GET api/member/id
         public async Task<Member> Get(string id)
         {
-            return await new MemberService().GetById(long.Parse(id));
-        }
+            return long.TryParse(id, out long longId)
+                ? await new MemberService().GetById(longId)
+                : await new MemberService().GetByAlias(id);
+        }            
 
         // GET api/member/id/type
         public async Task<IEnumerable<Member>> Get(string id, string type)

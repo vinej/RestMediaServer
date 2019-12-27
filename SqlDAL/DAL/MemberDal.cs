@@ -38,10 +38,10 @@ namespace SqlDAL.DAL
         private void ReadBaseMember(Member member,IDataReader dataReader)
         {
             member.Id = (long)dataReader["Id"];
-            member.Email = dataReader["Email"].ToString();
-            member.Alias = dataReader["Alias"].ToString();
+            member.Email = (string)dataReader["Email"];
+            member.Alias = (string)dataReader["Alias"];
             member.IsActive = (bool)dataReader["IsActive"];
-            member.Dob = DateTime.Parse(dataReader["Dob"].ToString());
+            member.Dob = (DateTime)dataReader["Dob"];
         }
 
         private void CreateParameter(Member member, List<SqlParameter> parameters)
@@ -112,7 +112,7 @@ namespace SqlDAL.DAL
             {
                 CreateParameter("@IsActive", isActive, DbType.Boolean)
             };
-            return await ReadManyFunc("DAH_Member_GetByIsActive", null, ReadManyMember);
+            return await ReadManyFunc("DAH_Member_GetByIsActive", parameters, ReadManyMember);
         }
     }
 }

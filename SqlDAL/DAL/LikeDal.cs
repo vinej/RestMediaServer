@@ -9,6 +9,7 @@ namespace SqlDAL.DAL
 {
     public class LikeDal : BaseDal<Like>
     {
+        /*
         private IEnumerable<Like> ReadManyFullLike(IDataReader dataReader)
         {
             var Likes = new List<Like>();
@@ -24,7 +25,9 @@ namespace SqlDAL.DAL
             }
             return Likes;
         }
+        */
 
+        /*
         private IEnumerable<Like> ReadManyLike(IDataReader dataReader)
         {
             var Likes = new List<Like>();
@@ -39,6 +42,7 @@ namespace SqlDAL.DAL
             }
             return Likes;
         }
+        */
 
         private Like ReadLike(IDataReader dataReader)
         {
@@ -67,6 +71,7 @@ namespace SqlDAL.DAL
             Like.Dob = DateTime.Parse(dataReader["Dob"].ToString());
         }
 
+        /*
         private void ReadBaseFullLike(Like Like, IDataReader dataReader)
         {
             if (Like.Id != -1)
@@ -80,6 +85,7 @@ namespace SqlDAL.DAL
                 Like.Opinion.Dob = DateTime.Parse(dataReader["ODob"].ToString());
             }
         }
+        */
 
         private void CreateParameter(Like Like, List<SqlParameter> parameters)
         {

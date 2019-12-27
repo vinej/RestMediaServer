@@ -287,6 +287,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\FriendControler.cs" />
     <Compile Include="Controllers\MemberControler.cs" />
+    <Compile Include="Controllers\Tool.cs" />
     <Compile Include="Controllers\VideoController.cs" />
     <Compile Include="Controllers\ImgController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
