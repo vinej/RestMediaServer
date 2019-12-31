@@ -2,25 +2,28 @@
 using System.Web.Http;
 using SqlDAL.Domain;
 using SqlDAL.Service;
-using Microsoft.AspNetCore.Authorization;
+using WebApi.Jwt.Filters;
 
 namespace RestMediaServer.Controllers
 {
     public class FriendController : ApiController
     {
         // GET api/friend
+        [JwtAuthentication]
         public IEnumerable<MemberFriend> Get()
         {
             return  new FriendService().GetAll();
         }
 
         // GET api/friend/id
+        [JwtAuthentication]
         public MemberFriend Get(long id)
         {
             return  new FriendService().GetById(id);
         }
 
         // GET api/friend/id/type
+        [JwtAuthentication]
         public IEnumerable<MemberFriend> Get(string id, string type)
         {
             switch(type)

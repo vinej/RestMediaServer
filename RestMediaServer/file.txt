@@ -1188,3 +1188,88 @@ The statement has been terminated.
 2019-12-30 22:03:39.7541|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Video_GetAll
 2019-12-30 22:03:39.7541|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Video_GetAll
 2019-12-30 22:03:39.7711|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-31 10:32:54.7669|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_GetByEamil
+2019-12-31 10:32:54.8148|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-31 10:32:54.8358|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_GetByEamil
+2019-12-31 10:32:54.8428|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Eamil : t@t : NVarChar
+2019-12-31 10:32:54.8428|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_GetByEamil
+2019-12-31 10:32:54.8778|ERROR|SqlDAL.DAL.BaseDal`1|SQL Exception: Could not find stored procedure 'DAH_Member_GetByEamil'.
+2019-12-31 10:38:13.6643|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_GetByEamil
+2019-12-31 10:38:13.6733|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-31 10:38:13.7442|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_GetByEamil
+2019-12-31 10:38:13.7512|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Eamil : t@t.t : NVarChar
+2019-12-31 10:38:13.7512|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_GetByEamil
+2019-12-31 10:38:13.7682|ERROR|SqlDAL.DAL.BaseDal`1|SQL Exception: Procedure or function 'DAH_Member_GetByEamil' expects parameter '@Email', which was not supplied.
+2019-12-31 10:39:06.6050|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_GetByEamil
+2019-12-31 10:39:06.6450|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-31 10:39:06.7109|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_GetByEamil
+2019-12-31 10:39:06.7109|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Eamil : t@t.t : NVarChar
+2019-12-31 10:39:06.7309|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_GetByEamil
+2019-12-31 10:39:06.8968|ERROR|SqlDAL.DAL.BaseDal`1|SQL Exception: Procedure or function 'DAH_Member_GetByEamil' expects parameter '@Email', which was not supplied.
+2019-12-31 10:41:28.5469|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_GetByEamil
+2019-12-31 10:41:28.5849|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-31 10:41:28.6098|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_GetByEamil
+2019-12-31 10:41:28.6098|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Email : t@t : NVarChar
+2019-12-31 10:41:28.6098|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_GetByEamil
+2019-12-31 10:41:28.6318|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_GetByEamil
+2019-12-31 10:41:28.6318|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-31 10:42:29.0179|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_GetByEamil
+2019-12-31 10:42:29.0608|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-31 10:42:29.1488|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_GetByEamil
+2019-12-31 10:42:29.1558|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Email : t@t : NVarChar
+2019-12-31 10:42:29.1558|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_GetByEamil
+2019-12-31 10:42:29.2197|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_GetByEamil
+2019-12-31 10:42:29.2197|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-31 10:43:37.6038|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_GetByEamil
+2019-12-31 10:43:37.6647|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-31 10:43:37.6987|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_GetByEamil
+2019-12-31 10:43:37.7057|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Email : t@t : NVarChar
+2019-12-31 10:43:37.7057|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_GetByEamil
+2019-12-31 10:43:37.7696|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_GetByEamil
+2019-12-31 10:43:37.7696|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-31 10:44:10.2569|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_GetByEamil
+2019-12-31 10:44:10.2709|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-31 10:44:10.2709|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_GetByEamil
+2019-12-31 10:44:10.2869|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Email : t@t : NVarChar
+2019-12-31 10:44:10.2869|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_GetByEamil
+2019-12-31 10:44:10.3420|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_GetByEamil
+2019-12-31 10:44:10.3490|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-31 10:44:11.9581|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_GetByAlias
+2019-12-31 10:44:11.9711|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-31 10:44:11.9871|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_GetByAlias
+2019-12-31 10:44:11.9871|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Alias : zz : NVarChar
+2019-12-31 10:44:12.0041|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_GetByAlias
+2019-12-31 10:44:12.0520|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_GetByAlias
+2019-12-31 10:44:12.0520|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-31 10:44:16.3131|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-31 10:44:16.3391|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_Insert
+2019-12-31 10:44:16.3471|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Email : t@t : NVarChar
+2019-12-31 10:44:16.3471|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Alias : zz : NVarChar
+2019-12-31 10:44:16.3611|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @HashPassword : $MYHASH$V1$10000$Ahxf6ZQii6OkMqEAX1MWuWOcbbKFjJaigAKQqx5xvIXGsbFO : NVarChar
+2019-12-31 10:44:16.3611|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @IsActive : True : Bit
+2019-12-31 10:44:16.3750|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Dob : 12/31/2019 10:44:14 AM : DateTime
+2019-12-31 10:44:16.3750|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_Insert
+2019-12-31 10:44:16.5243|ERROR|SqlDAL.DAL.BaseDal`1|SQL Exception: Procedure or function DAH_Member_Insert has too many arguments specified.
+2019-12-31 10:50:15.5665|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_GetByEamil
+2019-12-31 10:50:15.6354|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-31 10:50:15.6684|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_GetByEamil
+2019-12-31 10:50:15.6824|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Email : t@t : NVarChar
+2019-12-31 10:50:15.6914|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_GetByEamil
+2019-12-31 10:50:15.7453|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_GetByEamil
+2019-12-31 10:50:15.7523|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-31 10:50:17.0586|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_GetByAlias
+2019-12-31 10:50:17.0836|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-31 10:50:17.0836|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_GetByAlias
+2019-12-31 10:50:17.0986|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Alias : zz : NVarChar
+2019-12-31 10:50:17.0986|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_GetByAlias
+2019-12-31 10:50:17.1533|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_GetByAlias
+2019-12-31 10:50:17.1593|INFO|SqlDAL.DAL.BaseDal`1|Closing connection
+2019-12-31 10:50:19.2338|INFO|SqlDAL.DAL.BaseDal`1|Opening connection by DESKTOP-IPK8MKF\jyv
+2019-12-31 10:50:19.2338|INFO|SqlDAL.DAL.BaseDal`1|SQL START: DAH_Member_Insert
+2019-12-31 10:50:19.2508|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Email : t@t : NVarChar
+2019-12-31 10:50:19.2508|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Alias : zz : NVarChar
+2019-12-31 10:50:19.2658|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @HashPassword : $MYHASH$V1$10000$hB9gn0N3DEarby2JHPeo6I1QbVha71V2JltpJ+JOL0hUpDAT : NVarChar
+2019-12-31 10:50:19.2658|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @IsActive : True : Bit
+2019-12-31 10:50:19.2808|INFO|SqlDAL.DAL.BaseDal`1|    Parameter: @Dob : 12/31/2019 10:50:18 AM : DateTime
+2019-12-31 10:50:19.2808|INFO|SqlDAL.DAL.BaseDal`1|SQL END: DAH_Member_Insert
+2019-12-31 10:50:19.3397|INFO|SqlDAL.DAL.BaseDal`1|Closing connection

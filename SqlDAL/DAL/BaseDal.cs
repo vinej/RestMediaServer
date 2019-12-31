@@ -14,7 +14,7 @@ namespace SqlDAL.DAL
 
         public BaseDal()
         {
-            connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog = RestMediaServer; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False";
+            connectionString = @"Data Source=DESKTOP-IPK8MKF\SQLEXPRESS;Initial Catalog=RestMediaServer;Integrated Security=True";
         }
 
         public long OpenConnection()
@@ -186,12 +186,24 @@ namespace SqlDAL.DAL
         {
             var message = new System.Net.Http.HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
             string error;
-            if (exception.Contains("Violation of UNIQUE KEY constraint")) {
-                error =  "DAL : Duplicate key";
-            } else 
-            if (exception.Contains("String was not recognized as a valid DateTime")) {
+            if (exception.Contains("has too many arguments specified"))
+            {
+                error = "DAL : Too many parameter";
+            }
+            else if (exception.Contains("expects parameter"))
+            {
+                error = "DAL : Missing parameter";
+            }
+            else if (exception.Contains("Violation of UNIQUE KEY constraint"))
+            {
+                error = "DAL : Duplicate key";
+            }
+            else if (exception.Contains("String was not recognized as a valid DateTime"))
+            {
                 error = "DAL : DateTime invalid format";
-            } else {
+            }
+            else
+            {
                 error = "DAL : Unknown error";
 
             }

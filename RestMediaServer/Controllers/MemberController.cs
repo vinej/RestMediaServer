@@ -1,30 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using SqlDAL.Domain;
 using SqlDAL.Service;
+using WebApi.Jwt.Filters;
 
 namespace RestMediaServer.Controllers
 {
     public class MemberController : ApiController
     {
         // GET api/member
+        [JwtAuthentication]
         public IEnumerable<Member> Get()
         {
             return  new MemberService().GetAll();
         }
 
         // GET api/member/id
+        [JwtAuthentication]
         public Member Get(string id)
         {
             return long.TryParse(id, out long longId)
                 ?  new MemberService().GetById(longId)
                 :  new MemberService().GetByAlias(id);
-        }            
+        }
 
         // GET api/member/id/type
+        [JwtAuthentication]
         public IEnumerable<Member> Get(string id, string type)
         {
             switch(type)
@@ -45,6 +46,7 @@ namespace RestMediaServer.Controllers
             }
         }
 
+        [JwtAuthentication]
         public static long Post([FromBody]Member member)
         {
             //  /api/member
@@ -55,12 +57,14 @@ namespace RestMediaServer.Controllers
         }
 
         // PUT api/values/5
+        [JwtAuthentication]
         public static long Put([FromBody]Member member)
         {
             return  new MemberService().Update(member);
         }
 
         // DELETE api/values/5
+        [JwtAuthentication]
         public static long Delete(long id)
         {
             return  new MemberService().Delete(id);

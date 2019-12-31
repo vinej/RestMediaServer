@@ -304,8 +304,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\FriendController.cs" />
     <Compile Include="Controllers\AdvertiserController.cs" />
+    <Compile Include="Controllers\JwtManager.cs" />
     <Compile Include="Controllers\SecurePasswordHasher.cs" />
-    <Compile Include="Controllers\UserService.cs" />
     <Compile Include="Controllers\LikeController.cs" />
     <Compile Include="Controllers\OpinionController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
@@ -316,6 +316,10 @@
     <Compile Include="Controllers\MediaVideoController.cs" />
     <Compile Include="Controllers\MediaImgController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Filters\AddChallengeOnUnauthorizedResult.cs" />
+    <Compile Include="Filters\AuthenticationFailureResult.cs" />
+    <Compile Include="Filters\HttpAuthenticationChallengeContextExtensions.cs" />
+    <Compile Include="Filters\JwtAuthenticationAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

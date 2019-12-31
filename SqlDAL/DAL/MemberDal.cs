@@ -48,7 +48,7 @@ namespace SqlDAL.DAL
         private void CreateParameter(Member member, List<SqlParameter> parameters)
         {
             parameters.Add(CreateParameter("@Email", 255, member.Email, DbType.String));
-            parameters.Add(CreateParameter("@Alias", 255, member.Alias, DbType.String));
+            parameters.Add(CreateParameter("@Alias", 50, member.Alias, DbType.String));
             parameters.Add(CreateParameter("@HashPassword", 100, member.HashPassword, DbType.String));
             parameters.Add(CreateParameter("@IsActive", member.IsActive, DbType.Boolean));
             parameters.Add(CreateParameter("@Dob", member.Dob, DbType.DateTime));
@@ -107,7 +107,7 @@ namespace SqlDAL.DAL
         {
             var parameters = new List<SqlParameter>
             {
-                CreateParameter("@Eamil", email, DbType.String)
+                CreateParameter("@Email", email, DbType.String)
             };
             return ReadSingleFunc("DAH_Member_GetByEamil", parameters, ReadMember);
         }
