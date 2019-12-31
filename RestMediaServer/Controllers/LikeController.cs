@@ -11,32 +11,32 @@ namespace RestMediaServer.Controllers
     public class LikeController : ApiController
     {
         // GET api/Like
-        public async Task<IEnumerable<Like>> Get()
+        public IEnumerable<Like> Get()
         {
-            return await new LikeService().GetAll();
+            return  new LikeService().GetAll();
         }
 
         // GET api/Like/id
-        public async Task<Like> Get(long id)
+        public Like Get(long id)
         {
-            return await new LikeService().GetById(id);
+            return  new LikeService().GetById(id);
         }            
 
-        public async Task<long> Post([FromBody]Like Like)
+        public long Post([FromBody]Like Like)
         {
-            return await new LikeService().Insert(Like);
+            return  new LikeService().Insert(Like);
         }
 
         // PUT api/values/5
-        public async Task<long> Put([FromBody]Like Like)
+        public long Put([FromBody]Like Like)
         {
-            return await new LikeService().Update(Like);
+            return  new LikeService().Update(Like);
         }
 
         // DELETE api/values/5
-        public async Task<long> Delete(long id)
+        public long Delete(long id)
         {
-            return await new LikeService().Delete(id);
+            return  new LikeService().Delete(id);
         }
 
     }

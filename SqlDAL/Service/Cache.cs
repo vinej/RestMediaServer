@@ -12,21 +12,21 @@ public class WaitToFinishMemoryCache<TItem>
     private readonly Microsoft.Extensions.Caching.Memory.MemoryCache _cache = new Microsoft.Extensions.Caching.Memory.MemoryCache(new MemoryCacheOptions());
     private readonly ConcurrentDictionary<object, SemaphoreSlim> _locks = new ConcurrentDictionary<object, SemaphoreSlim>();
 
-    public async Task<TItem> GetOrCreate(object key, Func<Task<TItem>> createItem)
+    public TItem GetOrCreate(object key, Func<TItem> createItem)
     {
         bool isCache = true;
         if (!_cache.TryGetValue(key, out TItem cacheEntry))// Look for cache key.
         {
             SemaphoreSlim mylock = _locks.GetOrAdd(key, k => new SemaphoreSlim(1, 1));
 
-            await mylock.WaitAsync();
+            mylock.Wait();
             try
             {
                 if (!_cache.TryGetValue(key, out cacheEntry))
                 {
                     // Key not in cache, so get data.
                     isCache = false;
-                    cacheEntry = await createItem();
+                    cacheEntry =  createItem();
                     var cacheEntryOptions = new MemoryCacheEntryOptions()
                         .SetSize(1)//Size amount
                         //Priority on removing when reaching size limit (memory pressure)

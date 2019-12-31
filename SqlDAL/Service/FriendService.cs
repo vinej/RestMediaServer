@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using SqlDAL.Domain;
 using SqlDAL.DAL;
-using System.Threading.Tasks;
 
 namespace SqlDAL.Service
 {
@@ -10,39 +9,39 @@ namespace SqlDAL.Service
         static readonly WaitToFinishMemoryCache<IEnumerable<MemberFriend>> _friendManyCache = new WaitToFinishMemoryCache<IEnumerable<MemberFriend>>();
         static readonly WaitToFinishMemoryCache<MemberFriend> _friendSingleCache = new WaitToFinishMemoryCache<MemberFriend>();
 
-        public async Task<long> Insert(MemberFriend friend)
+        public  long Insert(MemberFriend friend)
         {
-            return await new FriendDal().Insert(friend);
+            return  new FriendDal().Insert(friend);
         }
 
-        public async Task<long> Delete(long id)
+        public  long Delete(long id)
         {
-            return await new FriendDal().Delete(id);
+            return  new FriendDal().Delete(id);
         }
 
-        public async Task<MemberFriend> GetById(long id)
+        public MemberFriend GetById(long id)
         {
-            return await _friendSingleCache.GetOrCreate(id, async () => await new FriendDal().GetById(id));
+            return  _friendSingleCache.GetOrCreate(id,  () =>  new FriendDal().GetById(id));
         }
 
-        public async Task<IEnumerable<MemberFriend>> GetByMemberAlias(string alias)
+        public IEnumerable<MemberFriend> GetByMemberAlias(string alias)
         {
-            return await _friendManyCache.GetOrCreate(alias, async () => await new FriendDal().GetByMemberAlias(alias));
+            return  _friendManyCache.GetOrCreate(alias,  () =>  new FriendDal().GetByMemberAlias(alias));
         }
 
-        public async Task<IEnumerable<MemberFriend>> GetByMemberForTopic(long memberId, long topicId)
+        public IEnumerable<MemberFriend> GetByMemberForTopic(long memberId, long topicId)
         {
-            return await _friendManyCache.GetOrCreate($"{memberId}:{topicId}", async () => await new FriendDal().GetByMemberForTopic(memberId, topicId));
+            return  _friendManyCache.GetOrCreate($"{memberId}:{topicId}",  () =>  new FriendDal().GetByMemberForTopic(memberId, topicId));
         }
 
-        public async Task<IEnumerable<MemberFriend>> GetByMemberId(long id)
+        public IEnumerable<MemberFriend> GetByMemberId(long id)
         {
-            return await _friendManyCache.GetOrCreate(id, async () => await new FriendDal().GetByMemberId(id));
+            return  _friendManyCache.GetOrCreate(id,  () =>  new FriendDal().GetByMemberId(id));
         }
 
-        public async Task<IEnumerable<MemberFriend>> GetAll()
+        public IEnumerable<MemberFriend> GetAll()
         {
-            return await _friendManyCache.GetOrCreate("__all__", async () => await new FriendDal().GetAll());
+            return  _friendManyCache.GetOrCreate("__all__",  () =>  new FriendDal().GetAll());
         }
     }
 }

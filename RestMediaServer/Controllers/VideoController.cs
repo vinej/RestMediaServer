@@ -11,32 +11,32 @@ namespace RestMediaServer.Controllers
     public class VideoController : ApiController
     {
         // GET api/Video
-        public async Task<IEnumerable<Video>> Get()
+        public IEnumerable<Video> Get()
         {
-            return await new VideoService().GetAll();
+            return  new VideoService().GetAll();
         }
 
         // GET api/Video/id
-        public async Task<Video> Get(long id)
+        public Video Get(long id)
         {
-            return await new VideoService().GetById(id);
+            return  new VideoService().GetById(id);
         }            
 
-        public async Task<long> Post([FromBody]Video Video)
+        public long Post([FromBody]Video Video)
         {
-            return await new VideoService().Insert(Video);
+            return  new VideoService().Insert(Video);
         }
 
         // PUT api/values/5
-        public async Task<long> Put([FromBody]Video Video)
+        public long Put([FromBody]Video Video)
         {
-            return await new VideoService().Update(Video);
+            return  new VideoService().Update(Video);
         }
 
         // DELETE api/values/5
-        public async Task<long> Delete(long id)
+        public long Delete(long id)
         {
-            return await new VideoService().Delete(id);
+            return  new VideoService().Delete(id);
         }
 
     }

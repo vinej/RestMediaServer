@@ -11,32 +11,32 @@ namespace RestMediaServer.Controllers
     public class AdvertiserController : ApiController
     {
         // GET api/Advertiser
-        public async Task<IEnumerable<Advertiser>> Get()
+        public IEnumerable<Advertiser> Get()
         {
-            return await new AdvertiserService().GetAll();
+            return  new AdvertiserService().GetAll();
         }
 
         // GET api/Advertiser/id
-        public async Task<Advertiser> Get(long id)
+        public Advertiser Get(long id)
         {
-            return await new AdvertiserService().GetById(id);
+            return  new AdvertiserService().GetById(id);
         }            
 
-        public async Task<long> Post([FromBody]Advertiser Advertiser)
+        public long Post([FromBody]Advertiser Advertiser)
         {
-            return await new AdvertiserService().Insert(Advertiser);
+            return  new AdvertiserService().Insert(Advertiser);
         }
 
         // PUT api/values/5
-        public async Task<long> Put([FromBody]Advertiser Advertiser)
+        public long Put([FromBody]Advertiser Advertiser)
         {
-            return await new AdvertiserService().Update(Advertiser);
+            return  new AdvertiserService().Update(Advertiser);
         }
 
         // DELETE api/values/5
-        public async Task<long> Delete(long id)
+        public long Delete(long id)
         {
-            return await new AdvertiserService().Delete(id);
+            return  new AdvertiserService().Delete(id);
         }
 
     }

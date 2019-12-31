@@ -55,66 +55,66 @@ namespace SqlDAL.DAL
             parameters.Add(CreateParameter("@Dob", advertiser.Dob, DbType.DateTime));
         }
 
-        public async Task<long> Insert(Advertiser advertiser)
+        public  long Insert(Advertiser advertiser)
         {
             var parameters = new List<SqlParameter>();
             CreateParameter(advertiser, parameters);
 
-            var lastId = await InsertAsync("DAH_Advertiser_Insert", CommandType.StoredProcedure, parameters.ToArray());
+            var lastId =  Insert("DAH_Advertiser_Insert", CommandType.StoredProcedure, parameters.ToArray());
             advertiser.Id = lastId;
             return lastId;
         }
 
-        public async Task<long> Update(Advertiser advertiser)
+        public  long Update(Advertiser advertiser)
         {
             var parameters = new List<SqlParameter>
             {
                 CreateParameter("@Id", advertiser.Id, DbType.Int64)
             };
             CreateParameter(advertiser, parameters);
-            return await UpdateAsync("DAH_Advertiser_Update", CommandType.StoredProcedure, parameters.ToArray());
+            return  Update("DAH_Advertiser_Update", CommandType.StoredProcedure, parameters.ToArray());
         }
 
-        public async Task<long> Delete(long id)
+        public  long Delete(long id)
         {
             var parameters = new List<SqlParameter>
             {
                 CreateParameter("@Id", id, DbType.Int64)
             };
 
-            return await DeleteAsync("DAH_Advertiser_Delete", CommandType.StoredProcedure, parameters.ToArray());
+            return  Delete("DAH_Advertiser_Delete", CommandType.StoredProcedure, parameters.ToArray());
         }
 
-        public async Task<Advertiser> GetById(long id)
+        public Advertiser GetById(long id)
         {
             var parameters = new List<SqlParameter>
             {
                 CreateParameter("@Id", id, DbType.Int64)
             };
-            return await ReadSingleFunc("DAH_Advertiser_GetById", parameters, ReadAdvertiser);
+            return  ReadSingleFunc("DAH_Advertiser_GetById", parameters, ReadAdvertiser);
         }
 
-        public async Task<Advertiser> GetByEmail(string email)
+        public Advertiser GetByEmail(string email)
         {
             var parameters = new List<SqlParameter>
             {
                 CreateParameter("@Email", email, DbType.String)
             };
-            return await ReadSingleFunc("DAH_Advertiser_GetByEmail", parameters, ReadAdvertiser);
+            return ReadSingleFunc("DAH_Advertiser_GetByEmail", parameters, ReadAdvertiser);
         }
 
-        public async Task<IEnumerable<Advertiser>> GetAll()
+        public IEnumerable<Advertiser> GetAll()
         {
-            return await ReadManyFunc("DAH_Advertiser_GetAll", null, ReadManyAdvertiser);
+            return  ReadManyFunc("DAH_Advertiser_GetAll", null, ReadManyAdvertiser);
         }
 
-        public async Task<IEnumerable<Advertiser>> GetByIsAccepted(bool isAccepted)
+        public IEnumerable<Advertiser> GetByIsAccepted(bool isAccepted)
         {
             var parameters = new List<SqlParameter>
             {
                 CreateParameter("@IsAccepted", isAccepted, DbType.Boolean)
             };
-            return await ReadManyFunc("DAH_Advertiser_GetByIsAccepted", parameters, ReadManyAdvertiser);
+            return  ReadManyFunc("DAH_Advertiser_GetByIsAccepted", parameters, ReadManyAdvertiser);
         }
     }
 }

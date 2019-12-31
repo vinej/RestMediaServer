@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Threading.Tasks;
-using System.Web;
 using NLog;
 
 namespace SqlDAL.DAL
@@ -19,11 +17,11 @@ namespace SqlDAL.DAL
             connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog = RestMediaServer; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False";
         }
 
-        public async Task<long> OpenConnection()
+        public long OpenConnection()
         {
             logger.Info($"Opening connection by {System.Security.Principal.WindowsIdentity.GetCurrent().Name}");
             connection = new SqlConnection(connectionString);
-            await connection.OpenAsync();
+             connection.Open();
             return 0;
         }
 
@@ -34,11 +32,11 @@ namespace SqlDAL.DAL
             connection = null;
         }
 
-        public async Task<IEnumerable<TType>> ReadManyFunc(string commandText, List<SqlParameter> parameters, Func<IDataReader, IEnumerable<TType>> readItem)
+        public IEnumerable<TType> ReadManyFunc(string commandText, List<SqlParameter> parameters, Func<IDataReader, IEnumerable<TType>> readItem)
         {
             logger.Info($"SQL START: {commandText}");
-            _ = await OpenConnection();
-            var dataReader = await GetDataReaderAsync(commandText, CommandType.StoredProcedure, parameters?.ToArray(), connection);
+            _ =  OpenConnection();
+            var dataReader =  GetDataReader(commandText, CommandType.StoredProcedure, parameters?.ToArray(), connection);
             logger.Info($"SQL END: {commandText}");
             try
             {
@@ -57,11 +55,11 @@ namespace SqlDAL.DAL
             }
         }
 
-        public async Task<TType> ReadSingleFunc(string commandText, List<SqlParameter> parameters, Func<IDataReader, TType> readItem)
+        public TType ReadSingleFunc(string commandText, List<SqlParameter> parameters, Func<IDataReader, TType> readItem)
         {
             logger.Info($"SQL START: {commandText}");
-            _ = await OpenConnection();
-            using (var dataReader = await GetDataReaderAsync(commandText, CommandType.StoredProcedure, parameters?.ToArray(), connection))
+            _ =  OpenConnection();
+            using (var dataReader =  GetDataReader(commandText, CommandType.StoredProcedure, parameters?.ToArray(), connection))
             {
                 logger.Info($"SQL END: {commandText}");
                 try
@@ -103,7 +101,7 @@ namespace SqlDAL.DAL
             };
         }
 
-        public async Task<IDataReader> GetDataReaderAsync(string commandText, CommandType commandType, SqlParameter[] parameters, SqlConnection connection)
+        public IDataReader GetDataReader(string commandText, CommandType commandType, SqlParameter[] parameters, SqlConnection connection)
         {
             IDataReader reader;
             var command = new SqlCommand(commandText, connection)
@@ -123,7 +121,7 @@ namespace SqlDAL.DAL
             logger.Info($"SQL END: {commandText}");
             try
             {
-                reader = await command.ExecuteReaderAsync();
+                reader =  command.ExecuteReader();
             }
             catch (Exception ex)
             {
@@ -134,10 +132,10 @@ namespace SqlDAL.DAL
             return reader;
         }
 
-        public async Task<long> CommandAsync(bool isInsert, string commandText, CommandType commandType, IsolationLevel isolationLevel, SqlParameter[] parameters)
+        public long Command(bool isInsert, string commandText, CommandType commandType, IsolationLevel isolationLevel, SqlParameter[] parameters)
         {
             long newid = -1;
-            _ = await OpenConnection();
+            _ =  OpenConnection();
             try {
                 using (var transactionScope = connection.BeginTransaction(isolationLevel))
                 using (var command = new SqlCommand(commandText, connection, transactionScope))
@@ -158,12 +156,12 @@ namespace SqlDAL.DAL
                     {
                         if (isInsert)
                         {
-                            object temp = await command.ExecuteScalarAsync();
+                            object temp = command.ExecuteScalar();
                             newid = Convert.ToInt64(temp);
                         }
                         else
                         {
-                            await command.ExecuteNonQueryAsync();
+                            command.ExecuteNonQuery();
                         }
                     }
                     catch (Exception ex)
@@ -201,33 +199,33 @@ namespace SqlDAL.DAL
             throw new System.Web.Http.HttpResponseException(message);
         }
 
-        public async Task<long> DeleteAsync(string commandText, CommandType commandType, SqlParameter[] parameters)
+        public  long Delete(string commandText, CommandType commandType, SqlParameter[] parameters)
         {
-            return await CommandAsync(false, commandText, commandType, IsolationLevel.ReadCommitted, parameters);
+            return  Command(false, commandText, commandType, IsolationLevel.ReadCommitted, parameters);
         }
-        public async Task<long> DeleteAsync(string commandText, CommandType commandType, IsolationLevel isolationLevel, SqlParameter[] parameters)
+        public  long Delete(string commandText, CommandType commandType, IsolationLevel isolationLevel, SqlParameter[] parameters)
         {
-            return await CommandAsync(false, commandText, commandType, isolationLevel, parameters);
-        }
-
-        public async Task<long> InsertAsync(string commandText, CommandType commandType, SqlParameter[] parameters)
-        {
-            return await CommandAsync(true, commandText, commandType, IsolationLevel.ReadCommitted, parameters);
+            return  Command(false, commandText, commandType, isolationLevel, parameters);
         }
 
-        public async Task<long> InsertAsync(string commandText, CommandType commandType, IsolationLevel isolationLevel, SqlParameter[] parameters)
+        public  long Insert(string commandText, CommandType commandType, SqlParameter[] parameters)
         {
-            return await CommandAsync(true, commandText, commandType, isolationLevel, parameters);
+            return  Command(true, commandText, commandType, IsolationLevel.ReadCommitted, parameters);
         }
 
-        public async Task<long> UpdateAsync(string commandText, CommandType commandType, SqlParameter[] parameters)
+        public  long Insert(string commandText, CommandType commandType, IsolationLevel isolationLevel, SqlParameter[] parameters)
         {
-            return await CommandAsync(false, commandText, commandType, IsolationLevel.ReadCommitted, parameters);
+            return  Command(true, commandText, commandType, isolationLevel, parameters);
         }
 
-        public async Task<long> UpdateAsync(string commandText, CommandType commandType, IsolationLevel isolationLevel, SqlParameter[] parameters)
+        public  long Update(string commandText, CommandType commandType, SqlParameter[] parameters)
         {
-            return await CommandAsync(false, commandText, commandType, isolationLevel, parameters);
+            return  Command(false, commandText, commandType, IsolationLevel.ReadCommitted, parameters);
+        }
+
+        public  long Update(string commandText, CommandType commandType, IsolationLevel isolationLevel, SqlParameter[] parameters)
+        {
+            return  Command(false, commandText, commandType, isolationLevel, parameters);
         }
     }
 }

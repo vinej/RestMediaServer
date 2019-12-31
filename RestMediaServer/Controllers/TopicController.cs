@@ -11,32 +11,32 @@ namespace RestMediaServer.Controllers
     public class TopicController : ApiController
     {
         // GET api/Topic
-        public async Task<IEnumerable<Topic>> Get()
+        public IEnumerable<Topic> Get()
         {
-            return await new TopicService().GetAll();
+            return  new TopicService().GetAll();
         }
 
         // GET api/Topic/id
-        public async Task<Topic> Get(long id)
+        public Topic Get(long id)
         {
-            return await new TopicService().GetById(id);
+            return  new TopicService().GetById(id);
         }            
 
-        public async Task<long> Post([FromBody]Topic Topic)
+        public long Post([FromBody]Topic Topic)
         {
-            return await new TopicService().Insert(Topic);
+            return  new TopicService().Insert(Topic);
         }
 
         // PUT api/values/5
-        public async Task<long> Put([FromBody]Topic Topic)
+        public long Put([FromBody]Topic Topic)
         {
-            return await new TopicService().Update(Topic);
+            return  new TopicService().Update(Topic);
         }
 
         // DELETE api/values/5
-        public async Task<long> Delete(long id)
+        public long Delete(long id)
         {
-            return await new TopicService().Delete(id);
+            return  new TopicService().Delete(id);
         }
 
     }

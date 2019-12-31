@@ -1,5 +1,4 @@
 ﻿using System;
-using System;
 using System.Data;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -98,72 +97,72 @@ namespace SqlDAL.DAL
             parameters.Add(CreateParameter("@Dob", video.Dob, DbType.DateTime));
         }
 
-        public async Task<long> Insert(Video video)
+        public  long Insert(Video video)
         {
             var parameters = new List<SqlParameter>();
             CreateParameter(video, parameters);
 
-            var lastId = await InsertAsync("DAH_Video_Insert", CommandType.StoredProcedure, parameters.ToArray());
+            var lastId =  Insert("DAH_Video_Insert", CommandType.StoredProcedure, parameters.ToArray());
             video.Id = lastId;
             return lastId;
         }
 
-        public async Task<long> Update(Video video)
+        public  long Update(Video video)
         {
             var parameters = new List<SqlParameter>
             {
                 CreateParameter("@Id", video.Id, DbType.Int64)
             };
             CreateParameter(video, parameters);
-            return await UpdateAsync("DAH_Video_Update", CommandType.StoredProcedure, parameters.ToArray());
+            return  Update("DAH_Video_Update", CommandType.StoredProcedure, parameters.ToArray());
         }
 
-        public async Task<long> Delete(long id)
+        public  long Delete(long id)
         {
             var parameters = new List<SqlParameter>
             {
                 CreateParameter("@Id", id, DbType.Int64)
             };
 
-            return await DeleteAsync("DAH_Video_Delete", CommandType.StoredProcedure, parameters.ToArray());
+            return  Delete("DAH_Video_Delete", CommandType.StoredProcedure, parameters.ToArray());
         }
 
-        public async Task<Video> GetById(long id)
+        public Video GetById(long id)
         {
             var parameters = new List<SqlParameter>
             {
                 CreateParameter("@Id", id, DbType.Int64)
             };
-            return await ReadSingleFunc("DAH_Video_GetById", parameters, ReadVideo);
+            return  ReadSingleFunc("DAH_Video_GetById", parameters, ReadVideo);
         }
 
-        public async Task<Video> GetByIdWithAdvertiser(long id)
+        public Video GetByIdWithAdvertiser(long id)
         {
             var parameters = new List<SqlParameter>
             {
                 CreateParameter("@Id", id, DbType.Int64)
             };
-            return await ReadSingleFunc("DAH_Video_GetByIdWithAdvertiser", parameters, ReadFullVideo);
+            return  ReadSingleFunc("DAH_Video_GetByIdWithAdvertiser", parameters, ReadFullVideo);
         }
 
-        public async Task<IEnumerable<Video>> GetAll()
+        public IEnumerable<Video> GetAll()
         {
-            return await ReadManyFunc("DAH_Video_GetAll", null, ReadManyVideo);
+            return  ReadManyFunc("DAH_Video_GetAll", null, ReadManyVideo);
         }
 
-        public async Task<IEnumerable<Video>> GetAllByAdvertiser(int id)
+        public IEnumerable<Video> GetAllByAdvertiser(int id)
         {
             var parameters = new List<SqlParameter>
             {
                 CreateParameter("@Id", id, DbType.Int64)
             };
-            return await ReadManyFunc("DAH_Video_GetAllByAdvertiser", parameters, ReadManyVideo);
+            return  ReadManyFunc("DAH_Video_GetAllByAdvertiser", parameters, ReadManyVideo);
         }
 
 
-        public async Task<IEnumerable<Video>> GetAllWithAdvertiser()
+        public IEnumerable<Video> GetAllWithAdvertiser()
         {
-            return await ReadManyFunc("DAH_Video_GetAllWithAdvertiser", null, ReadManyFullVideo);
+            return  ReadManyFunc("DAH_Video_GetAllWithAdvertiser", null, ReadManyFullVideo);
         }
     }
 }

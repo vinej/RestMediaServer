@@ -7,7 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestMediaServer", "RestMedi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlDAL", "SqlDAL\SqlDAL.csproj", "{F8E4808D-B8F5-4C1B-A094-141905D80768}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlDALUnitTest", "SqlDALUnitTest\SqlDALUnitTest.csproj", "{C18966D7-97F6-4C39-8AE7-A21C8CF55ADD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlDALUnitTest", "SqlDALUnitTest\SqlDALUnitTest.csproj", "{C18966D7-97F6-4C39-8AE7-A21C8CF55ADD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9C328B81-D0B6-4866-BF4F-A1CFE9C49083}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

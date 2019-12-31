@@ -1,0 +1,31 @@
+﻿[*.cs]
+
+# CA1305: Specify IFormatProvider
+dotnet_diagnostic.CA1305.severity = silent
+
+# CA1507: Use nameof to express symbol names
+dotnet_diagnostic.CA1507.severity = silent
+
+# CA3147: Mark Verb Handlers With Validate Antiforgery Token
+dotnet_diagnostic.CA3147.severity = silent
+
+# CA3075: Insecure DTD processing in XML
+dotnet_diagnostic.CA3075.severity = silent
+
+# CA5372: Use XmlReader For XPathDocument
+dotnet_diagnostic.CA5372.severity = silent
+
+# CA1062: Validate arguments of public methods
+dotnet_diagnostic.CA1062.severity = silent
+
+# CA1707: Identifiers should not contain underscores
+dotnet_diagnostic.CA1707.severity = silent
+
+# IDE0055: Fix formatting
+dotnet_diagnostic.IDE0055.severity = silent
+
+# CA1031: Do not catch general exception types
+dotnet_diagnostic.CA1031.severity = silent
+
+# CA1052: Static holder types should be Static or NotInheritable
+dotnet_diagnostic.CA1052.severity = silent

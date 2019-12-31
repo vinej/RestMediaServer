@@ -89,90 +89,90 @@ namespace SqlDAL.DAL
             parameters.Add(CreateParameter("@Dob", Opinion.Dob, DbType.DateTime));
         }
 
-        public async Task<long> Insert(Opinion Opinion)
+        public  long Insert(Opinion Opinion)
         {
             var parameters = new List<SqlParameter>();
             CreateParameter(Opinion, parameters);
 
-            var lastId = await InsertAsync("DAH_Opinion_Insert", CommandType.StoredProcedure, parameters.ToArray());
+            var lastId =  Insert("DAH_Opinion_Insert", CommandType.StoredProcedure, parameters.ToArray());
             Opinion.Id = lastId;
             return lastId;
         }
 
-        public async Task<long> Update(Opinion Opinion)
+        public  long Update(Opinion Opinion)
         {
             var parameters = new List<SqlParameter>
             {
                 CreateParameter("@Id", Opinion.Id, DbType.Int64)
             };
             CreateParameter(Opinion, parameters);
-            return await UpdateAsync("DAH_Opinion_Update", CommandType.StoredProcedure, parameters.ToArray());
+            return  Update("DAH_Opinion_Update", CommandType.StoredProcedure, parameters.ToArray());
         }
 
-        public async Task<long> Delete(long id)
+        public  long Delete(long id)
         {
             var parameters = new List<SqlParameter>
             {
                 CreateParameter("@Id", id, DbType.Int64)
             };
 
-            return await DeleteAsync("DAH_Opinion_Delete", CommandType.StoredProcedure, parameters.ToArray());
+            return  Delete("DAH_Opinion_Delete", CommandType.StoredProcedure, parameters.ToArray());
         }
 
-        public async Task<Opinion> GetById(long id)
+        public Opinion GetById(long id)
         {
             var parameters = new List<SqlParameter>
             {
                 CreateParameter("@Id", id, DbType.Int64)
             };
-            return await ReadSingleFunc("DAH_Opinion_GetById", parameters, ReadOpinion);
+            return  ReadSingleFunc("DAH_Opinion_GetById", parameters, ReadOpinion);
         }
 
-        public async Task<IEnumerable<Opinion>> GetByMember(long id)
+        public IEnumerable<Opinion> GetByMember(long id)
         {
             var parameters = new List<SqlParameter>
             {
                 CreateParameter("@MemberId", id, DbType.Int64)
             };
-            return await ReadManyFunc("DAH_Opinion_GetByMember", parameters, ReadManyOpinion);
+            return  ReadManyFunc("DAH_Opinion_GetByMember", parameters, ReadManyOpinion);
         }
 
-        public async Task<IEnumerable<Opinion>> GetByFullMember(long id)
+        public IEnumerable<Opinion> GetByFullMember(long id)
         {
             var parameters = new List<SqlParameter>
             {
                 CreateParameter("@MemberId", id, DbType.String)
             };
-            return await ReadManyFunc("DAH_Opinion_GetByFullMember", parameters, ReadManyFullOpinion);
+            return  ReadManyFunc("DAH_Opinion_GetByFullMember", parameters, ReadManyFullOpinion);
         }
 
-        public async Task<IEnumerable<Opinion>> GetByTopic(long id)
+        public IEnumerable<Opinion> GetByTopic(long id)
         {
             var parameters = new List<SqlParameter>
             {
                 CreateParameter("@TopicId", id, DbType.Int64)
             };
-            return await ReadManyFunc("DAH_Opinion_GetByTopic", parameters, ReadManyOpinion);
+            return  ReadManyFunc("DAH_Opinion_GetByTopic", parameters, ReadManyOpinion);
         }
 
-        public async Task<IEnumerable<Opinion>> GetByFullTopic(long id)
+        public IEnumerable<Opinion> GetByFullTopic(long id)
         {
             var parameters = new List<SqlParameter>
             {
                 CreateParameter("@TopicId", id, DbType.Int64)
             };
-            return await ReadManyFunc("DAH_Opinion_GetByFullTopic", parameters, ReadManyFullOpinion);
+            return  ReadManyFunc("DAH_Opinion_GetByFullTopic", parameters, ReadManyFullOpinion);
         }
 
-        public async Task<IEnumerable<Opinion>> GetAll()
+        public IEnumerable<Opinion> GetAll()
         {
-            return await ReadManyFunc("DAH_Opinion_GetAll", null, ReadManyOpinion);
+            return  ReadManyFunc("DAH_Opinion_GetAll", null, ReadManyOpinion);
         }
 
 
-        public async Task<IEnumerable<Opinion>> GetAllFull()
+        public IEnumerable<Opinion> GetAllFull()
         {
-            return await ReadManyFunc("DAH_Opinion_GetAllFull", null, ReadManyFullOpinion);
+            return  ReadManyFunc("DAH_Opinion_GetAllFull", null, ReadManyFullOpinion);
         }
 
     }

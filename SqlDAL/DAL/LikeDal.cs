@@ -94,48 +94,48 @@ namespace SqlDAL.DAL
             parameters.Add(CreateParameter("@Dob", Like.Dob, DbType.DateTime));
         }
 
-        public async Task<long> Insert(Like Like)
+        public  long Insert(Like Like)
         {
             var parameters = new List<SqlParameter>();
             CreateParameter(Like, parameters);
 
-            var lastId = await InsertAsync("DAH_Like_Insert", CommandType.StoredProcedure, parameters.ToArray());
+            var lastId =  Insert("DAH_Like_Insert", CommandType.StoredProcedure, parameters.ToArray());
             Like.Id = lastId;
             return lastId;
         }
 
-        public async Task<long> Update(Like Like)
+        public  long Update(Like Like)
         {
             var parameters = new List<SqlParameter>
             {
                 CreateParameter("@Id", Like.Id, DbType.Int64)
             };
             CreateParameter(Like, parameters);
-            return await UpdateAsync("DAH_Like_Update", CommandType.StoredProcedure, parameters.ToArray());
+            return  Update("DAH_Like_Update", CommandType.StoredProcedure, parameters.ToArray());
         }
 
-        public async Task<long> Delete(long id)
+        public  long Delete(long id)
         {
             var parameters = new List<SqlParameter>
             {
                 CreateParameter("@Id", id, DbType.Int64)
             };
 
-            return await DeleteAsync("DAH_Like_Delete", CommandType.StoredProcedure, parameters.ToArray());
+            return  Delete("DAH_Like_Delete", CommandType.StoredProcedure, parameters.ToArray());
         }
 
-        public async Task<Like> GetById(long id)
+        public Like GetById(long id)
         {
             var parameters = new List<SqlParameter>
             {
                 CreateParameter("@Id", id, DbType.Int64)
             };
-            return await ReadSingleFunc("DAH_Like_GetById", parameters, ReadLike);
+            return  ReadSingleFunc("DAH_Like_GetById", parameters, ReadLike);
         }
 
-        public async Task<IEnumerable<Like>> GetAll()
+        public IEnumerable<Like> GetAll()
         {
-            return await ReadManyFunc("DAH_Like_GetAll", null, ReadManyLike);
+            return  ReadManyFunc("DAH_Like_GetAll", null, ReadManyLike);
         }
 
     }

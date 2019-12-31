@@ -149,6 +149,9 @@
     <Compile Include="Service\MemberService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="App.config" />
     <None Include="nlog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

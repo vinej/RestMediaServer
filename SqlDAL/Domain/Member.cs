@@ -12,6 +12,8 @@ namespace SqlDAL.Domain
 
         public string Alias { get; set; }
 
+        public string HashPassword { get; set; }
+
         public DateTime Dob { get; set; }
 
         public bool IsActive { get; set; }
