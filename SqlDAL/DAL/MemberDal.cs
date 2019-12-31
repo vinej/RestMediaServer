@@ -103,6 +103,15 @@ namespace SqlDAL.DAL
             return  ReadSingleFunc("DAH_Member_GetByAlias", parameters, ReadMember);
         }
 
+        public Member GetByEamil(string email)
+        {
+            var parameters = new List<SqlParameter>
+            {
+                CreateParameter("@Eamil", email, DbType.String)
+            };
+            return ReadSingleFunc("DAH_Member_GetByEamil", parameters, ReadMember);
+        }
+
         public IEnumerable<Member> GetAll()
         {
             return  ReadManyFunc("DAH_Member_GetAll", null, ReadManyMember);

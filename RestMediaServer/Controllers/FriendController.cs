@@ -2,6 +2,7 @@
 using System.Web.Http;
 using SqlDAL.Domain;
 using SqlDAL.Service;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RestMediaServer.Controllers
 {
@@ -41,5 +42,6 @@ namespace RestMediaServer.Controllers
 
             }
         }
+
     }
 }

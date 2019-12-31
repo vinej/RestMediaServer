@@ -47,6 +47,10 @@ namespace RestMediaServer.Controllers
 
         public static long Post([FromBody]Member member)
         {
+            //  /api/member
+            // need to register the member and generate a token
+            // hash the password before inserting it into the database
+            member.HashPassword = SecurePasswordHasher.Hash(member.HashPassword);
             return  new MemberService().Insert(member);
         }
 

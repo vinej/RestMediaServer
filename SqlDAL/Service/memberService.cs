@@ -36,7 +36,12 @@ namespace SqlDAL.Service
             return  _memberSingleCache.GetOrCreate(alias,  () =>  new MemberDal().GetByAlias(alias));
         }
 
-        public  IEnumerable<Member> GetAll()
+        public Member GetByEmail(string email)
+        {
+            return _memberSingleCache.GetOrCreate(email, () => new MemberDal().GetByEamil(email));
+        }
+
+        public IEnumerable<Member> GetAll()
         {
             return  _memberManyCache.GetOrCreate("__all__",  () =>  new MemberDal().GetAll());
         }

@@ -13,6 +13,8 @@ namespace SqlDAL.Domain
         public string Alias { get; set; }
 
         public string HashPassword { get; set; }
+        public string Token { get; set; }
+
 
         public DateTime Dob { get; set; }
 
