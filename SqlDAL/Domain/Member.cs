@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 
@@ -12,10 +13,11 @@ namespace SqlDAL.Domain
 
         public string Alias { get; set; }
 
+        [JsonIgnore]
         public string HashPassword { get; set; }
+
         public string Token { get; set; }
-
-
+        
         public DateTime Dob { get; set; }
 
         public bool IsActive { get; set; }

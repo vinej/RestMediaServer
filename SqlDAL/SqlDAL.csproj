@@ -125,6 +125,9 @@
   <ItemGroup>
     <Compile Include="DAL\BaseDal.cs" />
     <Compile Include="DAL\LikeDal.cs" />
+    <Compile Include="DAL\TodDal.cs" />
+    <Compile Include="Domain\Todo.cs" />
+    <Compile Include="Domain\MemberToken.cs" />
     <Compile Include="Service\Cache.cs" />
     <Compile Include="Service\FriendService.cs" />
     <Compile Include="DAL\FriendDal.cs" />
@@ -142,6 +145,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\Member.cs" />
     <Compile Include="Service\AdvertiserService.cs" />
+    <Compile Include="Service\TodoService.cs" />
     <Compile Include="Service\TopicService.cs" />
     <Compile Include="Service\OpinionService.cs" />
     <Compile Include="Service\LikeService.cs" />

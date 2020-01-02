@@ -11,18 +11,25 @@ public class TokenController : ApiController
     // This is naive endpoint for demo, it should use Basic authentication
     // to provide token or POST request
     [AllowAnonymous]
-    public string Get(string email, string password)
+    public MemberToken Get(string email, string password)
     {
         if (CheckUser(email, password))
         {
-            return JwtManager.GenerateToken(email);
-        }
+            var service = new MemberService();
+            var member = service.GetByEmail(email);
+            var token = new MemberToken()
+            {
+                Alias = member.Alias,
+                Token = JwtManager.GenerateToken(email)
+            };
 
+            return token;
+        }
         throw new HttpResponseException(HttpStatusCode.Unauthorized);
     }
 
     [AllowAnonymous]
-    public string Get(string alias, string email, string password)
+    public MemberToken Get(string alias, string email, string password)
     {
         var service = new MemberService();
         var member = service.GetByEmail(email);
@@ -50,7 +57,14 @@ public class TokenController : ApiController
         {
             throw new HttpResponseException(HttpStatusCode.BadRequest);
         }
-        return JwtManager.GenerateToken(email);
+
+        var token = new MemberToken()
+        {
+            Alias = alias,
+            Token = JwtManager.GenerateToken(email)
+        };
+
+        return token;
     }
 
     public static bool CheckUser(string email, string password)

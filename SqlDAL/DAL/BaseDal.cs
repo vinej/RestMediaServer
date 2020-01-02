@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using NLog;
@@ -14,7 +15,8 @@ namespace SqlDAL.DAL
 
         public BaseDal()
         {
-            connectionString = @"Data Source=DESKTOP-IPK8MKF\SQLEXPRESS;Initial Catalog=RestMediaServer;Integrated Security=True";
+            connectionString = ConfigurationManager.AppSettings["connection"];
+            //@"Data Source=DESKTOP-RNU4G5O\win10;Initial Catalog=RestMediaServer;Integrated Security=True";
         }
 
         public long OpenConnection()

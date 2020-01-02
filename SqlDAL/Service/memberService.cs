@@ -38,7 +38,7 @@ namespace SqlDAL.Service
 
         public Member GetByEmail(string email)
         {
-            return _memberSingleCache.GetOrCreate(email, () => new MemberDal().GetByEamil(email));
+            return _memberSingleCache.GetOrCreate(email, () => new MemberDal().GetByEmail(email));
         }
 
         public IEnumerable<Member> GetAll()
