@@ -63,6 +63,12 @@ namespace WebApi.Jwt.Filters
             return true;
         }
 
+        public static bool ValidateOneToken(string token)
+        {
+            var isValid = ValidateToken(token,out _);
+            return isValid;
+        }
+
         protected Task<IPrincipal> AuthenticateJwtToken(string token)
         {
             string username;

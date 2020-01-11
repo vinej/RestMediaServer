@@ -43,9 +43,8 @@ namespace WebApi.Jwt
             try
             {
                 var tokenHandler = new JwtSecurityTokenHandler();
-                var jwtToken = tokenHandler.ReadToken(token) as JwtSecurityToken;
 
-                if (jwtToken == null)
+                if (!(tokenHandler.ReadToken(token) is JwtSecurityToken jwtToken))
                     return null;
 
                 var symmetricKey = Convert.FromBase64String(Secret);
@@ -58,8 +57,7 @@ namespace WebApi.Jwt
                    IssuerSigningKey = new SymmetricSecurityKey(symmetricKey)
                 };
 
-                SecurityToken securityToken;
-                var principal = tokenHandler.ValidateToken(token, validationParameters, out securityToken);
+                var principal = tokenHandler.ValidateToken(token, validationParameters, out SecurityToken securityToken);
 
                 return principal;
             }

@@ -5,6 +5,7 @@ using SqlDAL.Service;
 using SqlDAL.Domain;
 using WebApi.Jwt;
 using System;
+using WebApi.Jwt.Filters;
 
 public class TokenController : ApiController
 {
@@ -26,6 +27,12 @@ public class TokenController : ApiController
             return token;
         }
         throw new HttpResponseException(HttpStatusCode.Unauthorized);
+    }
+
+    [AllowAnonymous]
+    public bool Get(string token)
+    {
+        return JwtAuthenticationAttribute.ValidateOneToken(token);
     }
 
     [AllowAnonymous]
