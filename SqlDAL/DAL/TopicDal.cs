@@ -52,7 +52,7 @@ namespace SqlDAL.DAL
             parameters.Add(CreateParameter("@StartDate", topic.StartDate, DbType.DateTime));
             parameters.Add(CreateParameter("@EndDate", topic.EndDate, DbType.DateTime));
             parameters.Add(CreateParameter("@IsActivated", topic.IsActivated, DbType.Boolean));
-            parameters.Add(CreateParameter("@Dob", topic.Dob, DbType.DateTime));
+            parameters.Add(CreateParameter("@Dob", DateTime.Now, DbType.DateTime));
         }
 
         public  long Insert(Topic topic)
@@ -71,6 +71,7 @@ namespace SqlDAL.DAL
                 CreateParameter("@Id", topic.Id, DbType.Int64)
             };
             CreateParameter(topic, parameters);
+
             return  Update("DAH_Topic_Update", CommandType.StoredProcedure, parameters.ToArray());
         }
 

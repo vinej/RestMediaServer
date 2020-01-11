@@ -21,6 +21,9 @@ namespace RestMediaServer
 
             config.Formatters.Remove(GlobalConfiguration.Configuration.Formatters.XmlFormatter);
             config.Formatters.Add(GlobalConfiguration.Configuration.Formatters.JsonFormatter);
+
+            var json = config.Formatters.JsonFormatter;
+            json.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Local;
         }
     }
 }

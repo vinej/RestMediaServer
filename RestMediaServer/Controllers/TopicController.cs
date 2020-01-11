@@ -24,9 +24,9 @@ namespace RestMediaServer.Controllers
 
         // GET api/Topic/id
         [JwtAuthentication]
-        public Topic Get(long id, string action)
+        public Topic Get(string id, string type)
         {
-            if (action == "current")
+            if (type == "current")
             {
                 return new TopicService().GetCurrent();
             } else
