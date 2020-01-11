@@ -3,7 +3,6 @@ using System.Data;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using SqlDAL.Domain;
-using System.Threading.Tasks;
 
 namespace SqlDAL.DAL
 {
@@ -41,12 +40,18 @@ namespace SqlDAL.DAL
         {
             topic.Id = (long)dataReader["Id"];
             topic.Description = (string)dataReader["Description"];
+            topic.StartDate = (DateTime)dataReader["StartDate"];
+            topic.EndDate = (DateTime)dataReader["EndDate"];
+            topic.IsActivated = (bool)dataReader["IsActivated"];
             topic.Dob = (DateTime)dataReader["Dob"];
         }
 
         private void CreateParameter(Topic topic, List<SqlParameter> parameters)
         {
             parameters.Add(CreateParameter("@Description", 255, topic.Description, DbType.String));
+            parameters.Add(CreateParameter("@StartDate", topic.StartDate, DbType.DateTime));
+            parameters.Add(CreateParameter("@EndDate", topic.EndDate, DbType.DateTime));
+            parameters.Add(CreateParameter("@IsActivated", topic.IsActivated, DbType.Boolean));
             parameters.Add(CreateParameter("@Dob", topic.Dob, DbType.DateTime));
         }
 
@@ -92,5 +97,11 @@ namespace SqlDAL.DAL
         {
             return  ReadManyFunc("DAH_Topic_GetAll", null, ReadManyTopic);
         }
+
+        public Topic GetCurrent()
+        {
+            return ReadSingleFunc("DAH_Topic_GetCurrent", null, ReadTopic);
+        }
+
     }
 }

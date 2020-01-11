@@ -22,6 +22,19 @@ namespace RestMediaServer.Controllers
             return  new TopicService().GetById(id);
         }
 
+        // GET api/Topic/id
+        [JwtAuthentication]
+        public Topic Get(long id, string action)
+        {
+            if (action == "current")
+            {
+                return new TopicService().GetCurrent();
+            } else
+            {
+                return null;
+            }
+        }
+
         [JwtAuthentication]
         public long Post([FromBody]Topic Topic)
         {

@@ -34,5 +34,10 @@ namespace SqlDAL.Service
         {
             return  _TopicManyCache.GetOrCreate("__all__",  () =>  new TopicDal().GetAll());
         }
+
+        public Topic GetCurrent()
+        {
+            return _TopicSingleCache.GetOrCreate("__current__", () => new TopicDal().GetCurrent());
+        }
     }
 }
