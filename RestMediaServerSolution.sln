@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRClient", "SignalRClient\SignalRClient.csproj", "{BC8FC228-E7AB-453F-AB54-B10AF476E092}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{C18966D7-97F6-4C39-8AE7-A21C8CF55ADD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C18966D7-97F6-4C39-8AE7-A21C8CF55ADD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C18966D7-97F6-4C39-8AE7-A21C8CF55ADD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC8FC228-E7AB-453F-AB54-B10AF476E092}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC8FC228-E7AB-453F-AB54-B10AF476E092}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC8FC228-E7AB-453F-AB54-B10AF476E092}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC8FC228-E7AB-453F-AB54-B10AF476E092}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

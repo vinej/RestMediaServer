@@ -6,7 +6,7 @@ using WebApi.Jwt.Filters;
 
 namespace RestMediaServer.Controllers
 {
-    public class TopicController : ApiController
+    public class TopicController : ApiControllerWithHub<NotificationHub>
     {
         // GET api/Topic
         [JwtAuthentication]
@@ -28,6 +28,7 @@ namespace RestMediaServer.Controllers
         {
             if (type == "current")
             {
+                Hub.Clients.All.Notification("update:current");
                 return new TopicService().GetCurrent();
             } else
             {
@@ -36,16 +37,19 @@ namespace RestMediaServer.Controllers
         }
 
         [JwtAuthentication]
-        public long Post([FromBody]Topic Topic)
+        public long Post([FromBody]Topic topic)
         {
-            return  new TopicService().Insert(Topic);
+            return  new TopicService().Insert(topic);
         }
 
         // PUT api/values/5
         [JwtAuthentication]
-        public long Put([FromBody]Topic Topic)
+        public long Put([FromBody]Topic topic)
         {
-            return  new TopicService().Update(Topic);
+            // Notify the connected clients
+            long id = new TopicService().Update(topic);
+            Hub.Clients.All.Say("update");
+            return id;
         }
 
         // DELETE api/values/5
