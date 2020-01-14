@@ -2,6 +2,7 @@
 using Microsoft.AspNet.SignalR.Hubs;
 using System.Threading.Tasks;
 using NLog;
+using WebApi.Jwt.Filters;
 
 namespace RestMediaServer
 {
@@ -10,10 +11,11 @@ namespace RestMediaServer
     {
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
+        [JwtAuthentication]
         public void Say(string message)
         {
             logger.Info(message);
-            this.Clients.All.Say("bonjour a vous");
+            this.Clients.Others.Say(message);
         }
 
         public override Task OnConnected()
