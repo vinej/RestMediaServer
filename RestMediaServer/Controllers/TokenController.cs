@@ -29,10 +29,12 @@ public class TokenController : ApiController
         throw new HttpResponseException(HttpStatusCode.Unauthorized);
     }
 
-    [AllowAnonymous]
+    [JwtAuthentication]
     public bool Get(string token)
     {
-        return JwtAuthenticationAttribute.ValidateOneToken(token);
+        // if the token is valid, it will return true
+        // if not, 401 will be returned
+        return true;
     }
 
     [AllowAnonymous]
